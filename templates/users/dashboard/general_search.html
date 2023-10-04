@@ -1,0 +1,108 @@
+{% extends "users/dashboard/base.html" %}
+{% load static %}
+{% block dash-styles %}
+<style>
+    .bg-success-c{
+        color: white;
+        background: #002023;
+    }
+    .result-heading{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        & span:nth-child(1){
+            justify-content: start;
+        }
+        & span:nth-child(2){
+            justify-content: end;
+        }
+    }
+</style>
+{% endblock  %}
+
+{% block dashContent %}
+<div class="container">
+    <div class="row" hidden>
+        {% for i in  '123' %}
+        <div class="col-md-4 mx-auto">
+            <div class="card-container country-card shadow">
+                <div class="row w-100 mx-auto">
+                    <div class="py-5 shadow bg-light">
+                        <div class="text">
+                            {{i}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row justify-content-between">
+        <div class="col-10 mx-auto">
+            <div class="result-heading">
+                <span class="text-start fw-bold">Results:</span>
+                <span class="text-end fw-bold">Duration: {{elapsed_time | truncatechars:7}}S</span>
+            </div>
+            {% if queryset %}
+            <ul class="list-group result-ul">
+                {% for data in queryset %}
+                <li class="list-group-item px-5 my-2 bg-success-c py-5 rounded">
+                    <div class="row">
+                        <div class="col-md-9 g-4">
+                            <h5 class="result-title">{{forloop.counter}}) {{ data.title }}</h5>
+                            <p class="fw-bold h6">
+                                <span class="text-danger">{{ data.institution }}</span>
+                            </p>
+                            <p>Author(s): {{ data.author }}</p>
+                            <p>Publisher: {{ data.publisher }}</p>
+                            <p>Year: {{ data.year_published }}</p>
+                            <p>Series: {{ data.series }}</p>
+                            <a class="btn btn-sm bg-success rounded-0 py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalId{{data.pk}}">Send Request</a>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="result-img-box">
+                                <img class="img-fluid" src="" />
+                            </div>
+                            <!-- Add any additional content on the right side -->
+                        </div>
+                    </div>
+                </li>
+                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                <div class="modal fade" id="modalId{{data.pk}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modalTitleId">Request Material</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>{{data.title |truncatechars:50}}</h6>
+                                <form id="request_book">
+                                    <div class="form-group mt-3 shadow">
+                                        <textarea class="form-control" name="message" id="message" cols="10" rows="2" placeholder="Type request message here..."></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger rounded-0" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success-c rounded-0">Send</button>
+                                    </div>        
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+
+</script>
+
+{% endblock  %}

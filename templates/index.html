@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Naija Catalog: A Comprehensive Resource for Nigerian Universities</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="../plugins/static/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../plugins/static/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../plugins/static/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="../plugins/static/images/favicon/site.webmanifest">
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="../plugins/static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../plugins/static/css/styles.css">
+
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top py-3">
+                <div class="container-fluid nav-section">
+                    <div class="d-flex w-50">
+                        <a class="navbar-brand fw-bold" href="#">NC</a>
+                        <form class="d-flex my-lg-0" method="GET" action="index.html">
+                            <input class="form-control me-sm-2" type="text" placeholder="Search Article">
+                            <input type="submit" class="btn btn-primary" value="Search" hidden>
+                        </form>
+                    </div>
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#signin" type="button">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#signup">Sign Up</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mt-2 mt-lg-0" hidden>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item text" href="#">Student Portal</a>
+                                    <a class="dropdown-item text" href="#">University Portal</a>
+                                </div>
+                            </li>   
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container position-fixed">
+                <div class="row">
+                    <div class="col d-flex justify-content-end">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>Holy guacamole!</strong> Welcome
+                        </div>    
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-container">
+                <div class="image-container">
+                    <span>
+                        <h4>NAIJA CATALOG</h4>
+                        <p>
+                            Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+                            Universities Library Collections.
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+          
+            <div class="d-flex mt-5">
+                <h5 class="mt-0 text mx-2 py-4 py-md-1">Country: </h5>
+                <p class="mx-2 my-1">
+                    This is some content from a media component. 
+                    You can replace this with any con
+                    tent and adjust it as needed.
+                </p>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-md-4 mx-auto">
+                    <div class="card-container country-card shadow">
+                        <div class="row w-100 mx-auto">
+                            <div class="py-5 shadow bg-light">
+                                <div class="text">
+                                    NIGERIA
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="card-container country-card shadow">
+                        <div class="row w-100 mx-auto">
+                            <div class="py-5 shadow bg-light">
+                                <div class="text">
+                                    NIGERIA
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="card-container country-card shadow">
+                        <div class="row w-100 mx-auto">
+                            <div class="py-5 shadow bg-light">
+                                <div class="text">
+                                    NIGERIA
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+            <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">New Task</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="index.html" method="post">
+                                <small id="helpId" class="text-muted mb-2">Create new task</small>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" name="task" id="task" placeholder="">
+                                  <label for="task">Task</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+                                  <label for="message">Note</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="category" class="form-label text-muted mx-2">destination</label>
+                                    <select class="form-select form-select-lg" name="destination" id="destination">
+                                        <option selected>Select one</option>
+                                        <option value="">New Delhi</option>
+                                        <option value="">Istanbul</option>
+                                        <option value="">Jakarta</option>
+                                    </select>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Email Reminder</label>
+                                </div>
+                               
+                                <div class="form-group mt-4">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn bg-secondary-c">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sign in Modal.-->
+            <div class="modal fade" id="signin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="modalTitleId">Welcome Back</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="index.html" method="post">
+                                <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate for undergraduates.</small>
+                                <div class="form-floating my-3">
+                                  <input type="email" class="form-control" name="email" id="email" placeholder="">
+                                  <label for="email">Email Address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="">
+                                    <label for="email">Password</label>
+                                </div>                               
+                                <div class="form-group mt-4">
+                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sign Up Modal.-->
+            <div class="modal fade" id="signup" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="modalTitleId">Sign Up</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="index.html" method="GET">
+                                <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate for undergraduates.</small>                        
+                                <div class="form-floating my-3 text-dark">
+                                  <input type="email" class="form-control" name="signup_email" id="signup_email" placeholder="">
+                                  <label for="signup_email">Email Address</label>
+                                </div>
+                                <div class="mb-3 text-dark">
+                                    <label for="category" class="form-label text-muted mx-2">User Type</label>
+                                    <select class="form-select form-select-md" name="category" id="category">
+                                        <option>Select Account Type</option>
+                                        <option value="Student">Student</option>
+                                        <option value="Institution">Institution</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex d-none my-3 justify-content-between" id="institution_div">
+                                    <div class="form-floating text-dark">
+                                        <input type="text" class="form-control" list="institutions" name="Institution" id="institution" placeholder="" required>
+                                        <label for="institution">Name of University</label>
+                                    </div>
+                                    <div class="form-floating text-dark">
+                                        <input type="text" class="form-control" name="studentID" id="studentID" placeholder="" required>
+                                        <label for="studentID">Matric ID</label>
+                                    </div>
+                                </div>
+                                <datalist id="institutions">
+                                    <option value="Augustine University Ilara Epe">
+                                    <option value="Caleb University">
+                                    <option value="Covenant University">
+                                    <option value="Lagos State University">
+                                </datalist>
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="password" class="form-control" name="signup_password" id="signup_password" placeholder="" required>
+                                    <label for="signup_password">Password</label>
+                                </div>
+                                <div class="form-check form-switch text-dark">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Newsletter</label>
+                                </div>
+                                <div class="form-group mt-4">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-md-stretch my-5">
+                <div class="col-md-4">
+                    <div
+                        class="h-100 p-5 text-white bg-secondary-c border rounded-3">
+                        <h2>Change the background</h2>
+                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                            mix and match with additional component themes and more.</p>
+                        <button class="btn btn-success" type="button">Example button</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div
+                        class="h-100 p-5 bg-secondary-c border rounded-3">
+                        <h2>Add borders</h2>
+                        <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
+                            to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
+                            column's content for equal-height.</p>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div
+                        class="h-100 p-5 text-white bg-secondary-c border rounded-3">
+                        <h2>Change the background</h2>
+                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                            mix and match with additional component themes and more.</p>
+                        <button class="btn btn-success" type="button">Example button</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List group -->
+            <div class="list-group mb-4" id="myList" role="tablist">
+              <a id="list" class="list-group-item list-group-item-action" data-toggle="services" href="#services" role="tab">Services</a>
+              <a id="list" class="list-group-item list-group-item-action" data-toggle="acadmicTeam" href="#acadmicTeam" role="tab">Academic Team</a>
+              <a id="list" class="list-group-item list-group-item-action active" data-toggle="technicalTeam" href="#technicalTeam" role="tab">Technical Team</a>
+              <a id="list" class="list-group-item list-group-item-action" data-toggle="settings" href="#settings" role="tab">Settings</a>
+            </div>
+            <!-- Tab panes -->
+            <div class="tab-content px-2 my-5">
+                <div class="tab-pane" id="services" role="tabpanel">
+                    <p class="text-muted text-center fw-bold">Services</p>
+                    <div class="row align-items-md-stretch">
+                        <div class="col-10 mx-auto col-md-4">
+                            <div
+                                class="h-100 p-5 text-white bg-secondary-c rounded-3">
+                                <h2>Library Integration</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 mx-auto col-md-4 my-3 my-md-0">
+                            <div
+                                class="h-100 p-5 bg-secondary-c rounded-3">
+                                <h2>Library Automation</h2>
+                                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
+                                    to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
+                                    column's content for equal-height.</p>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 mx-auto col-md-4">
+                            <div
+                                class="h-100 p-5 text-white bg-secondary-c rounded-3">
+                                <h2>Library</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success" type="button">Example button</button>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                <!-- Academic Team -->
+                <div class="tab-pane" id="acadmicTeam" role="tabpanel">
+                    <p class="text-muted text-center fw-bold">Profile</p>
+                    <div class="row align-items-md-stretch">
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div
+                                class="h-100 p-5 text-white bg-warning rounded-3">
+                                <h2>Change the background</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto my-3 my-md-0">
+                            <div
+                                class="h-100 p-5 bg-warning rounded-3">
+                                <h2>Add borders</h2>
+                                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
+                                    to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
+                                    column's content for equal-height.</p>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div
+                                class="h-100 p-5 text-white bg-warning rounded-3">
+                                <h2>Change the background</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success" type="button">Example button</button>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                <!-- Technical Team -->
+                <div class="tab-pane active" id="technicalTeam" role="tabpanel">
+                    <p class="text-muted text-center fw-bold">Technical Team</p>
+                    <div class="row align-items-md-stretch">
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div class="p-5 text-white bg-secondary-c rounded-3">
+                                <p class="row">
+                                    <div class="col">
+                                        <h2>IGWESI Emmanuel</h2>
+                                        <ul>
+                                            <li>Project Manager</li>
+                                            <li>Software Engineer</li>
+                                        </ul>    
+                                    </div>
+                                    <div class="col">
+                                        <div class="team-pic-container">
+                                            <img draggable="false" class="img-fluid" src="../plugins/static/images/pngwing.com(1).png" alt="" srcset="../plugins/static/images/pngwing.com(1).png">
+                                        </div>
+                                    </div>
+                                </p>
+                                <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto my-3 my-md-0">
+                            <div class="p-5 bg-secondary-c rounded-3">
+                                <p class="row">
+                                    <div class="col">
+                                        <h2>UDEGBE Ikechukwu</h2>
+                                        <ul>
+                                            <li>Frontend Designer</li>
+                                            <li>Usability Tester</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <div class="team-pic-container">
+                                            <img draggable="false" class="img-fluid" src="../plugins/static/images/pngwing.com(1).png" alt="" srcset="../plugins/static/images/pngwing.com(1).png">
+                                        </div>
+                                    </div>
+                                </p>
+                                <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div
+                                class="p-5 text-white bg-secondary-c rounded-3">
+                                <h2>OGUNBAWO Kehinde</h2>
+                                <p class="row">
+                                    <div class="col">
+                                        <ul>
+                                            <li>Graphics Designer</li>
+                                            <li>Usability Tester</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <div class="team-pic-container">
+                                            <img draggable="false" class="img-fluid" src="../plugins/static/images/pngwing.com(1).png" alt="" srcset="../plugins/static/images/pngwing.com(1).png">
+                                        </div>
+                                    </div>
+                                </p>
+                                <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                <!-- Settings -->
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <p class="text-muted text-center">Settings</p>
+                    <div class="row align-items-md-stretch">
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div
+                                class="h-100 p-5 text-white bg-success rounded-3">
+                                <h2>Change the background</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success-c" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto my-3 my-md-0">
+                            <div
+                                class="h-100 p-5 text-white bg-success-dark-c rounded-3">
+                                <h2>Add borders</h2>
+                                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
+                                    to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
+                                    column's content for equal-height.</p>
+                                <button class="btn btn-success-c" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-4 mx-sm-auto">
+                            <div
+                                class="h-100 p-5 text-white bg-success rounded-3">
+                                <h2>Change the background</h2>
+                                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
+                                    mix and match with additional component themes and more.</p>
+                                <button class="btn btn-success-c" data-bs-toggle="modal" data-bs-target="#modalId" type="button">Example button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shadow  p-3 mb-5 bg-secondary-c rounded"></div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover bg-secondary-c align-middle">
+                    <thead class="table-light text-light">
+                        <caption>Catalogue Collections</caption>
+                        <tr>
+                            <th class="text-light text-muted">#</th>
+                            <th class="text-light">Institution</th>
+                            <th class="text-light">collections</th>
+                            <th class="text-light">Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-success" >
+                            <td scope="row">1</td>
+                            <td>Augustine University</td>
+                            <td>135,892</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="table-dark" >
+                            <td scope="row">2</td>
+                            <td>Covenant University</td>
+                            <td>132,502</td>
+                            <td>2</td>
+                        </tr>
+                        <tr class="table-success" >
+                            <td scope="row">3</td>
+                            <td>Caleb University</td>
+                            <td>125,892</td>
+                            <td>3</td>
+                        </tr>
+                        <tr class="table-dark" >
+                            <td scope="row">4</td>
+                            <td>Babcock University</td>
+                            <td>132,502</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                            
+                    </tfoot>
+                </table>
+            </div>
+            
+        </main>
+    
+        <footer>
+            <div class="container">
+                <div class="row mx-auto">
+                    <div class="col col-md-7 mx-auto">
+                        <div class="container">
+                            <div class="header">Naija Catalog</div>
+                            <p class="footer-p">
+                                Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+                                Universities Library Collections.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col col-md">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="container">
+                                        <div class="header">Important Links</div>
+                                        <ul class="footer-nav-item">
+                                            <li><a class="nav-link" href="#">Homepage</a></li>
+                                            <li><a class="nav-link" href="#">General Search</a></li>
+                                            <li><a class="nav-link" href="#">Advanced Search</a></li>
+                                        </ul>        
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 d-none d-md-block">
+                                    <div class="container">
+                                        <div class="header">Sitemap</div>
+                                        <ul class="footer-nav-item">
+                                            <li><a class="nav-link" href="#">About</a></li>
+                                            <li><a class="nav-link" href="#">Catalog</a></li>
+                                            <li><a class="nav-link" href="#">News</a></li>
+                                        </ul>
+                                    </div>            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- place footer here -->
+            <div class="row py-2 bg-light mt-5 w-100">
+                <div class="col-12 mx-auto">
+                    <div class="text-center text-dark">
+                        Copyright @ NaijaCatalog
+                    </div>
+                </div>
+            </div>    
+        </footer>
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- Optional: Place to the bottom of scripts -->
+        <script type="module" src="../plugins/static/js/custom.js"></script>
+        <script type="module" src="../plugins/static/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

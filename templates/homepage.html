@@ -1,0 +1,471 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extrahead %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+            <div class="container">
+                <div class="d-flex">
+                    <p class="mx-2 my-1 text">
+                        Search for materials with ease by entering book title, author or subject.
+                    </p>
+                </div>
+                <form class="form" method="GET" action="{% url 'search' %}">
+                    <div class="form-group d-flex search-div">
+                        <input type="search" class="form-control" id="search" name="article" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required/>
+                        <button type="submit" class="btn btn-md bg-secondary-c rounded-0 rounded-end">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for i in  '123' %}
+                    <div class="col-md-4 mx-auto">
+                        <div class="card-container country-card shadow">
+                            <div class="row w-100 mx-auto">
+                                <div class="py-5 shadow bg-light">
+                                    <div class="text">
+                                        NIGERIA
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="shadow  p-3 bg-secondary-c mt-5 rounded-top">
+                    <div class="text-center">
+                        <marquee direction="left" behavior="alternate">
+                            Know more by click the items below
+                        </marquee>
+                    </div>
+                </div>
+
+                <!-- List group -->
+                <div class="list-group mb-4 rounded-0" id="myList" role="tablist">
+                  <a id="list" class="list-group-item list-group-item-action active" data-toggle="services" href="#services" role="tab">Services</a>
+                  <a id="list" class="list-group-item list-group-item-action" data-toggle="acadmicTeam" href="#acadmicTeam" role="tab">Academic Team</a>
+                  <a id="list" class="list-group-item list-group-item-action" data-toggle="technicalTeam" href="#technicalTeam" role="tab">Technical Team</a>
+                  <a id="list" class="list-group-item list-group-item-action" data-toggle="settings" href="#settings" role="tab">Project Advisers</a>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="services" role="tabpanel" data-wow-delay="0.4s">
+                        <p class="text-muted text-center fw-bold">Services</p>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-12 mx-auto col-md-4">
+                                <div
+                                    class="h-100 p-5 text-white bg-secondary-c rounded-3">
+                                    <h4>ONLINE PUBLIC ACCESS CATALOGUE</h4>
+                                    <p class="text-justify w-100">
+                                        An electronic platform that proffers access to the bibliographic details of all
+                                        library materials via a defined network / platform.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-auto col-md-4 my-3 my-md-0">
+                                <div
+                                    class="h-100 p-5 bg-secondary-c rounded-3">
+                                    <h4>VIRTUAL UNION CATALOGUE</h4>
+                                    <p class="text-justify w-100">
+                                        An Electronic Library Platform that
+                                        hosts the catalogue entries of all participating Libraries and Information Centres in Nigeria. 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-auto col-md-4">
+                                <div
+                                    class="h-100 p-5 text-white bg-secondary-c rounded-3">
+                                    <h4>Non-Web-based</h4>
+                                    <p class="text-justify w-100">
+                                        We proposes a solution that helps to effectively manage access and use of electronic resources. 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-auto col-md-4 my-3">
+                                <div
+                                    class="h-100 p-5 bg-secondary-c rounded-3">
+                                    <h4>VIRTUAL UNION CATALOGUE</h4>
+                                    <p class="text-justify w-100">
+                                        An Electronic Library Platform that
+                                        hosts the catalogue entries of all participating Libraries and Information Centres in Nigeria. 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-auto col-md-4 my-3">
+                                <div
+                                    class="h-100 p-5 bg-secondary-c rounded-3">
+                                    <h4>DATABASE ACCESS MANAGEMENT PLATFORM</h4>
+                                    <p class="text-justify">
+                                        Here, we simply manages your access to the world of digital collections. 
+                                        Currently, we proffer access to 35 databases that are both subscription base and open access.
+                                        <ul>
+                                            <li>AGORA</li>
+                                            <li>JSTOR</li>
+                                            <li>DOAJ</li>
+                                            <li>EBSCO</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-auto col-md-4 my-3">
+                                <div
+                                    class="h-100 p-5 bg-secondary-c rounded-3">
+                                    <h4>CONSULTANCY /  TRAINING</h4>
+                                    <p class="text-justify w-100">
+                                        We are into consultancy and training of staff for effective service delivery in Library and Information Centers
+                                    </p>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                    <!-- Academic Team -->
+                    <div class="tab-pane" id="acadmicTeam" role="tabpanel" data-wow-delay="0.5s">
+                        <p class="text-muted text-center fw-bold">Meet Our Academic Team</p>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div class="px-5 py-4 text-white bg-secondary-c rounded">
+                                    <p class="row">
+                                        <div class="col">
+                                            <h2>OSHILALU Adeyinka</h2>
+                                            <ul>
+                                                <li>Project Manager</li>
+                                                <li>Software Engineer</li>
+                                            </ul>    
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false"  loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto my-3 my-md-0">
+                                <div class="px-5 py-4 bg-secondary-c rounded">
+                                    <p class="row">
+                                        <div class="col">
+                                            <h2>UDEGBE Ikechukwu</h2>
+                                            <ul>
+                                                <li>Frontend Designer</li>
+                                                <li>Usability Tester</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false" loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div
+                                    class="px-5 py-4 text-white bg-secondary-c rounded">
+                                    <h2>OGUNBAWO Kehinde</h2>
+                                    <p class="row">
+                                        <div class="col">
+                                            <ul>
+                                                <li>Graphics Designer</li>
+                                                <li>Usability Tester</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false" loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                    <!-- Technical Team -->
+                    <div class="tab-pane" id="technicalTeam" role="tabpanel" data-wow-delay="0.4s">
+                        <p class="text-muted text-center fw-bold">Meet Our Technical Team</p>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div class="px-5 py-4 text-white bg-secondary-c rounded">
+                                    <p class="row">
+                                        <div class="col">
+                                            <h2>IGWESI Emmanuel</h2>
+                                            <ul>
+                                                <li>Project Manager</li>
+                                                <li>Software Engineer</li>
+                                            </ul>    
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false"  loading="lazy" class="img-fluid animate__animated animate__bounce animate__infinite infinite" src="{% static 'images/pngwing.com(1).png' %}" alt="" srcset="{% static 'images/pngwing.com(1).png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                    <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto my-3 my-md-0">
+                                <div class="px-5 py-4 bg-secondary-c rounded">
+                                    <p class="row">
+                                        <div class="col">
+                                            <h2>UDEGBE Ikechukwu</h2>
+                                            <ul>
+                                                <li>Frontend Designer</li>
+                                                <li>Usability Tester</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false" loading="lazy" class="img-fluid animate__animated animate__bounce animate__infinite infinite" src="{% static 'images/pngwing.com(1).png' %}" alt="" srcset="{% static 'images/pngwing.com(1).png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                    <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div
+                                    class="px-5 py-4 text-white bg-secondary-c rounded">
+                                    <h2>OGUNBAWO Kehinde</h2>
+                                    <p class="row">
+                                        <div class="col">
+                                            <ul>
+                                                <li>Graphics Designer</li>
+                                                <li>Usability Tester</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <div class="team-pic-container">
+                                                <img draggable="false" loading="lazy" class="img-fluid animate__animated animate__bounce animate__infinite infinite" src="{% static 'images/pngwing.com(1).png' %}" alt="" srcset="{% static 'images/pngwing.com(1).png' %}">
+                                            </div>
+                                        </div>
+                                    </p>
+                                    <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                    <!-- Settings -->
+                    <div class="tab-pane" id="settings" role="tabpanel">
+                        <p class="text-muted text-center">Project Advisers</p>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div
+                                    class="h-100 p-5 text-white bg-success-dark-c rounded-3">
+                                    <h4>Prof. Niran Adetoro</h4>
+                                    <p>
+                                        Taye  Solaria University of Education Ijagun.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto my-3 my-md-0">
+                                <div
+                                    class="h-100 p-5 text-white bg-success-dark-c rounded-3">
+                                    <h4>Abdulsalam Abubakar</h4>
+                                    <p>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 mx-auto">
+                                <div
+                                    class="h-100 p-5 text-white bg-success-dark-c rounded-3">
+                                    <h4>Prof Chinwe</h4>
+                                    <p>
+                                        National Librarian
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shadow my-2 p-3 mb-5 bg-secondary-c rounded-bottom"></div>
+
+                {% if books %}
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-dark align-middle shadow-lg">
+                        <thead class="text-light">
+                            <caption>Catalogue Collections</caption>
+                            <tr>
+                                <th class="text-light">#</th>
+                                <th class="text-light">Institution</th>
+                                <th class="text-light d-flex justify-content-end">Total Materials</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr class="table-success" >
+                                <td scope="row">1</td>
+                                <td>Augustine University</td>
+                                <td class="d-flex justify-content-end">135,892</td>
+                            </tr>
+                            <tr class="table-dark" >
+                                <td scope="row">2</td>
+                                <td>Covenant University</td>
+                                <td class="d-flex justify-content-end">132,502</td>
+                            </tr>
+                            <tr class="table-success" >
+                                <td scope="row">3</td>
+                                <td>Caleb University</td>
+                                <td class="d-flex justify-content-end">125,892</td>
+                            </tr>
+                            <tr class="table-dark" >
+                                <td scope="row">4</td>
+                                <td>Babcock University</td>
+                                <td class="d-flex justify-content-end">132,502</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-dark align-middle shadow-lg">
+                        <thead class="text-light">
+                            <caption>Updated 20th October, 2023</caption>
+                            <tr>
+                                <th class="text-light">#</th>
+                                <th class="text-light">Title</th>
+                                <th class="text-light">Author(s)</th>
+                                <th class="text-light">Publisher</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            {% for book in books  %}
+                            <tr class="table-success" >
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.author}}</td>
+                                <td>{{book.publisher}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                                
+                        </tfoot>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Sign in Modal.-->
+            <div class="modal fade" id="signin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-secondary-c">
+                            <h5 class="modal-title" id="modalTitleId">Welcome Back</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'signin' %}" method="POST">{% csrf_token %}
+                                <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate for undergraduates.</small>
+                                <div class="form-floating my-3 text-dark">
+                                  <input type="email" class="form-control" name="signin_email" id="signin_email" placeholder="">
+                                  <label for="signin_email">Email Address</label>
+                                </div>
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="password" class="form-control" name="signin_password" id="signin_password" placeholder="">
+                                    <label for="signin_password">Password</label>
+                                </div>                               
+                                <div class="form-group mt-4">
+                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sign Up Modal.-->
+            <div class="modal fade" id="signup" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-secondary-c">
+                            <h5 class="modal-title" id="modalTitleId">
+                                <span>Join the Knowledge Revolution:</span><br>
+                                <span class="text-muted" style="font-size: 13px;">Sign up for an Interative Research journey!</span>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'signup' %}" method="POST">{% csrf_token %}
+                                <small id="helpId" class="text-muted">
+                                    Unlock the Power of Collaboration with Our Undergraduate-Driven Union Catalogue.
+                                </small>                    
+
+                                <div class="form-floating my-3 text-dark">
+                                    <input type="email" class="form-control" name="signup_email" id="signup_email" placeholder="">
+                                    <label for="signup_email">Email Address</label>
+                                </div>
+
+                                <div class="row my-3">
+                                    <div class="text-dark">
+                                        <select class="form-select form-select-md form-control" name="category" id="category">
+                                            <option>Choose Account</option>
+                                            <option value="Student">Student</option>
+                                            <option value="Institution">Institution</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex d-none my-3 justify-content-between" id="institution_div">
+                                    <div class="form-floating text-dark">
+                                        <input type="text" class="form-control" list="institutions" name="Institution" id="institution" placeholder="" required>
+                                        <label for="institution">Name of University</label>
+                                    </div>
+                                    <div class="form-floating text-dark">
+                                        <input type="text" class="form-control" name="studentID" id="studentID" placeholder="" required>
+                                        <label for="studentID">Matric ID</label>
+                                    </div>
+                                </div>
+                                <datalist id="institutions">
+                                    <option value="Augustine University Ilara Epe">
+                                    <option value="Caleb University">
+                                    <option value="Covenant University">
+                                    <option value="Lagos State University">
+                                </datalist>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="password" class="form-control" name="signup_password" id="signup_password" placeholder="" required>
+                                    <label for="signup_password">Password</label>
+                                </div>
+                                
+                                <div class="form-check form-switch text-dark">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Newsletter</label>
+                                </div>
+                                
+                                <div class="form-group mt-4">
+                                    <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                var Category = document.getElementById('category');
+                var selectedOption; 
+                const institutionDiv = document.getElementById('institution_div');
+
+                Category.addEventListener("click", e=>{  
+                    selectedOption = Category.value;
+                    if(selectedOption == 'Student'){
+                        institutionDiv.classList.remove('d-none');
+                    }
+                    else{
+                        if(institutionDiv.classList.contains('d-none')){
+                        }
+                        else{
+                            institutionDiv.classList.add('d-none');
+                        }
+                    }
+                    console.log(selectedOption);
+                })
+            </script>
+{% endblock %}

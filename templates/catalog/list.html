@@ -1,0 +1,38 @@
+{% extends "users/dashboard/base.html" %}
+{% load static %}
+
+{% block dash-styles %}
+
+<style>
+    .errorlist{
+        color:red;
+    }
+    .small{
+        font-size: 13px;
+        list-style-type: none;
+    }
+</style>
+{% endblock  %}
+
+{% block dashContent %}
+<div class="row">
+    <div class="col-12 col-md-10 mx-auto vh-100">
+        <div class="container">
+            {% for data in catalog %}
+            <div class="card p-3 mb-3 shadow-lg">
+                <div class="card-body">
+                    <div class="row">
+                        {{data.title}}
+                    </div>
+                    <div class="row">
+                        <ul class="small">
+                            <li><span>by</span> <span>{{data.author}}</span></li>
+                        </ul>    
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> 
+</div>
+{% endblock %}

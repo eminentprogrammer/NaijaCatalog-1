@@ -1,0 +1,16 @@
+{% if messages %}
+    <div class="" id="django_message">
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                {% for message in messages  %}
+                <div class="alert alert-success alert-dismissible fade show animate__animated animate__fadeInDown animate__repeat repeat-2 " role="alert">
+                    <p class="text my-auto">
+                        {{message}}
+                    </p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>    
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}    

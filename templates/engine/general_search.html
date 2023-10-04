@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<style>
+    .search-div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &:hover input[type='search']{
+            position: absolute;
+            outline: 10px 10px #014949;
+            left: 2vw;
+            right: 2vw;
+            width: 96vw;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            box-shadow: 5px 3px 5px 1px black;
+        }
+    }
+    .shadow-c:hover,
+    .list-group-item:hover{
+        box-shadow: 2px 3px 3px #014949;
+    }
+    .search-div input:nth-child(1){
+        width: 90%;
+        &:hover{
+            border: 10px black;
+        }
+    }
+    .search-div input:nth-child(2){
+        width: 10%;
+    }
+    .searchResult{
+        height: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+    .result-ul{
+        list-style:none;
+    }
+    .result-title{
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    .message-chat{
+        background: white;
+        height: 200px;
+        overflow: hidden;
+    }
+    @media only screen and (max-width: 500px){
+        .search-div{
+            justify-content: space-between;
+        }
+        .search-div input:nth-child(1){
+            width: 80%;
+        }
+        .search-div input:nth-child(2){
+            width: 20%;
+        }
+        .search-div input{
+            width: 100%;
+            outline:none;
+            &:after{
+                outline:none;
+            }
+        }
+    }
+    /* Custom styles for the right-side content */
+    .result-img-box{
+        display: flex;
+        flex-direction: row;
+        align-items:center;
+        justify-content:center;
+        height: 100%;
+        object-fit: contain;
+    }
+    .result-img-box > img{
+        min-width: 100%;
+        min-height: 70%;
+        background: linear-gradient(145deg, #232a39 80%, whitesmoke 100%) ;
+        border-radius: 10px;
+    }
+    /* Results */
+    /* Chat container styles */
+    .chat-container {
+        padding-top: 20px;
+        padding-inline: 10px;
+        border: 2px solid #ddd;
+        border-radius: 30px 30px 10px 10px;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form class="" method="GET" action="{% url 'search' %}">
+        <div class="form-group search-div">
+            <input type="search" value="{{query}}" class="form-control rounded-0" id="search" name="article" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required />
+            <input type="submit" class="btn btn-success-c rounded-0 rounded-end" value="Search">
+        </div>
+    </form>
+</div>
+
+<div class="container my-5 text-dark searchResult">
+    {% if gscholar %}
+    <div class="row">
+        <span class="h6">{{gscholar.title}}</span>
+        <ul>
+            <li>Authors: {{gscholar.author}}</li>
+            <li>Journal: {{gscholar.journal}}</li>
+            <li>Volume: {{gscholar.volume}}</li>
+            <li>No: {{gscholar.number}}</li>
+            <li>Pages: {{gscholar.pages}}</li>
+            <li>Year: {{gscholar.year}}</li>
+            <li>Publisher: {{gscholar.publisher}}</li>
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div class="row justify-content-between">
+        <div class="col-12 mx-auto">            
+            {% if querysets %}
+            <ul class="list-group result-ul">
+                {% for data in querysets %}
+                <li class="list-group-item my-4 rounded-3 shadow-c">
+                    <div class="row">
+                        <div class="col-md-9 g-4">
+                            <h5 class="result-title">{{ data.title }}</h5>
+                            <p class="text-danger fw-bold">{{ data.institution }}</p>
+                            <p>{{ data.author }}</p>
+                            <p>Series: {{ data.series }}</p>
+                            <p>Publisher: {{ data.publisher }}</p>
+                            <p>Year: {{ data.year_published }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="result-img-box">
+                                <img class="img-fluid" src="" />
+                            </div>
+                            <!-- Add any additional content on the right side -->
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<script>
+    // Select elements
+    const messageInput = document.getElementById("gpt_chat");
+    const sendBtn = document.getElementById("send");
+    const messageBox = document.getElementById("message_chat");
+
+    // Function to create the typing indicator element
+    function createTypingElement() {
+        const typingElement = document.createElement("div");
+        typingElement.classList.add("my-2", "bg-secondary-c", "border", "rounded", "animate__animated", "animate__fadeInUp");
+        return typingElement;
+    }
+
+    // Function to create a message element
+    function createMessageElement(message) {
+        const messageElement = document.createElement("p");
+        messageElement.classList.add("px-3", "my-2");
+        messageElement.style.textAlign = "end";
+        messageElement.textContent = message;        
+        return messageElement;
+    }
+
+    // Function to send a message
+    function sendMessage(e) {
+        const message = messageInput.value;
+        if (message) {
+            // Create typing indicator element
+            const typing = createTypingElement();
+
+            // Create a new message element
+            const messageElement = createMessageElement(message);
+
+            // Add the message to the Typing                        
+            typing.appendChild(messageElement);
+
+            // Add the message to the message box            
+            messageBox.appendChild(typing);
+            
+            // Clear the input field
+            messageInput.value = '';
+        }
+    }
+    // Add click event listener to the send button
+    sendBtn.addEventListener("click", sendMessage);   
+</script>
+{% endblock %}

@@ -1,0 +1,183 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="daPie6NisqEEdRi1JF7f116OTq1jXMeCpJ6Y5zpJaAM"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Naija Catalog: A Comprehensive Resource for Nigerian Universities</title>
+  <meta name="keywords" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
+  <meta name="description" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Allow web app to be run in full-screen mode - iOS. -->
+  <!-- Apple -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="green">
+  <meta name="apple-mobile-web-app-title" content="Naija Catalog">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  {% block extrahead %}{% endblock %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate/animate.css' %}">
+  
+  <style>
+    .dropdown-item{
+      font-size: 13px !important;
+    }
+    #django_message{
+      width: 40%;
+      display: flex;
+      position: absolute;
+      top: 100px;
+      right: 30px;
+      font-size: 13px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      transition: all ease-in-out .5s;
+    }
+    .text-justify{
+      margin-top: 0 !important;
+      text-align: justify !important;
+      margin-bottom: 1rem !important;
+      text-align-last: justify !important;
+    }
+    .show{}
+
+    /* Input container styles */
+    .input {
+        padding: 10px;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+    }
+    /* Input field styles */
+    .form-control {
+        border-radius: 0;
+        border: none;
+        outline:none;
+        border-bottom: 2px solid #014949;
+        box-shadow: none;
+    }
+    .form-control:focus {
+        border: none;
+        box-shadow: none;
+    }
+    /* Send button styles */
+    .btn-primary {
+        border-radius: 0;
+        border: none;
+    }
+    .back-to-top{
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-light p-0">
+    <!-- Spinner Start -->
+    <!--<div id="spinner" class="show bg-light position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div> -->
+    <!-- Spinner End -->
+    <header>
+      {% include "components/header.html" %}
+      <div class="hero-container">
+        <div class="image-container">
+          <span>
+            <h4 class="animate__animated animate__bounce">NAIJA CATALOG</h4>
+            <p class="">
+              Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+              Universities Library Collections.
+            </p>
+          </span>
+        </div>
+      </div>
+      {% include "components/message.html" %}
+    </header>
+
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="row mx-auto">
+          <div class="col col-md-7 mx-auto">
+            <div class="container">
+              <div class="header">Naija Catalog</div>
+              <p class="footer-p">
+                Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+                Universities Library Collections.
+              </p>
+            </div>
+        </div>
+
+        <div class="col col-md">
+          <div class="container">
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="container">
+                  <div class="header">Important Links</div>
+                  <ul class="footer-nav-item">
+                    <li><a class="nav-link" href="#">Homepage</a></li>
+                    <li><a class="nav-link" href="#">General Search</a></li>
+                    <li><a class="nav-link" href="#">Advanced Search</a></li>
+                  </ul>        
+                </div>
+              </div>
+              <div class="col-12 col-md-6 d-none d-md-block">
+                <div class="container">
+                  <div class="header">Sitemap</div>
+                    <ul class="footer-nav-item">
+                      <li><a class="nav-link" href="#">About</a></li>
+                      <li><a class="nav-link" href="#">Catalog</a></li>
+                      <li><a class="nav-link" href="#">News</a></li>
+                    </ul>
+                  </div>            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- place footer here -->
+      <div class="row py-2 bg-light mt-5 w-100">
+        <div class="col-12 mx-auto">
+          <div class="text-center text-dark">
+            Copyright @ NaijaCatalog
+          </div>
+        </div>
+      </div>    
+    </footer>
+    <a href="#" class="btn btn-sm btn-success back-to-top"><i class="bi bi-arrow-up"></i></a>
+  </div>
+
+  <!-- Bootstrap JavaScript Libraries -->
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+  <script type="module" src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

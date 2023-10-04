@@ -1,0 +1,262 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<style>
+    #app{
+        color:black !important;
+    }
+    #dashMain{
+        min-height: 100pc;
+        margin-top: 100px;
+        margin-bottom: 400px;
+    }
+    #app .row{
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+        transition: all ease-in-out .4s;
+    }
+    #left_side{
+        max-width:5%;
+        position: fixed;
+        background: #014949;
+        transition: all ease-in-out .2s;
+        &.active{
+            max-width: 0%;
+        }
+    }
+    #right_side{
+        position: absolute;
+        right: 0;
+        max-width: 95%;
+        min-height: 100vh;
+        transition: all ease-in-out .2s;
+        &.active{
+            max-width: 85%;
+            content-visibility:hidden;
+        }
+    }
+    #offcanvasNavbar{
+        width: 15%;
+        inset-inline: auto;
+        font-variant-caps: small-caps;
+    }
+    .fixed-top-c {
+        position: fixed;
+        top: 0;
+        width: 95%;
+        right: 0;
+        z-index: 1030;
+    }
+    .search-div{
+        justify-content: space-between;
+    }
+    .search-div input[type='search']{
+        width: 100%;
+    }
+    .search-div button{
+        width: 20%;
+    }
+    .searchResult{
+        height: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+    .result-ul{
+        list-style:none;
+        font-size: .8pc;
+    }
+    .result-title{
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 2pc;
+    }
+    .message-chat{
+        background: white;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    /* Custom styles for the right-side content */
+    .result-img-box{
+        display: flex;
+        flex-direction: row;
+        align-items:center;
+        justify-content:center;
+        height: 100%;
+        object-fit: contain;
+    }
+    .result-img-box > img{
+        min-width: 100%;
+        min-height: 70%;
+        background: linear-gradient(90deg, #002023 45%, whitesmoke 100%) ;
+        border-radius: 10px;
+    }
+
+    @media screen and (width < 1000px) {
+        #left_side{
+            transition: all ease-in-out .2s;
+            &.active{
+                max-width: 40%;
+            }
+        }
+        #right_side{
+            transition: all ease-in-out .2s;
+            &.active{
+                max-width: 60%;
+            }
+        }
+        #offcanvasNavbar {
+            width: 40% !important;
+        }   
+    }
+
+    /* Results */
+    @media screen and (width <= 600px){
+        #left_side{
+            transition: all ease-in-out .2s;
+            &.active{
+                max-width: 40%;
+            }
+        }
+        #right_side{
+            transition: all ease-in-out .2s;
+            &.active{
+                max-width: 60%;
+            }
+        }
+        #offcanvasNavbar {
+            width: 40% !important;
+        }
+        .search-div{
+            justify-content: space-between;
+            flex-direction: column;
+        }
+        .search-div input{
+            width: 100%;
+            outline:none;
+            &:after{
+                outline:none;
+            }
+        }
+        .search-div button{
+            margin-top: 10px;
+            width:20%;
+        }
+    }
+</style>
+{% block dash-styles %}{% endblock  %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid text-dark" id="app">
+    <div class="row">
+        <div class="col vh-100" id="left_side">
+            <div class="container mt-5">
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text" id="offcanvasNavbarLabel">Ncatalog</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="navbarBtn"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">History</a>
+                                <div class="dropdown-menu bg-success" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" href="#"></a>
+                                    <a class="dropdown-item" href="#">Upload Excel</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">Catalog</a>
+                                <div class="dropdown-menu bg-success" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" href="{% url 'catalog:create_book' %}">Add Catalog</a>
+                                    <a class="dropdown-item" href="{% url 'catalog:list' %}">List Catalog</a>
+                                    <a class="dropdown-item" href="#">Upload Catalog</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                                <div class="dropdown-menu bg-success" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="#">Edit Profile</a>
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col vh-100 right-side" id="right_side">
+            <div class="row">
+                <nav class="navbar navbar-light bg-light fixed-top-c shadow">
+                    <div class="container">
+                        <a class="navbar-brand text" href="{% url 'dashboard' %}">NC <i class="bi bi-home"></i></a>
+                        <form class="d-flex my-lg-0 w-50 search-div" method="GET" action="{% url 'dashboard_search' %}">
+                            <input class="form-control me-sm-2" name="search" type="search" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" value="{{query}}" autofocus required>
+                            <input type="submit" class="btn btn-primary" value="Search" hidden>
+                        </form>
+                        <div class="btn-group">
+                            <div class="dropdown mx-4 mx-md-5">
+                                <button class="btn btn-sm bg-secondary-c position-relative" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Inbox 
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill btn btn-warning">
+                                        99+
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" href="#">{{'Action' | truncatechars:7}}</a>
+                                    <a class="dropdown-item" href="#">{{'Disabled'|truncatechars:7}}</a>
+                                    <a class="dropdown-item" href="#">{{'Action'| truncatechars:7}}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">View More</a>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-sm btn-warning rounded" type="button" id="navbarBtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>    
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="row" id="dashMain">{% block dashContent %}{% endblock %}</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const navbarBtn = document.querySelectorAll("#navbarBtn");
+    const leftSide = document.getElementById("left_side");
+    const rightSide = document.getElementById("right_side");
+
+    navbarBtn.forEach((btn)=>{
+        btn.addEventListener("click", e=>{
+            if(e.target.classList.contains("active")){
+                rightSide.classList.remove("active");
+                leftSide.classList.remove("active");
+                navbarBtn.forEach((btn)=>{
+                    btn.classList.remove("active");
+                })
+            }else{
+                navbarBtn.forEach((btn)=>{
+                    btn.classList.add("active")
+                })
+                rightSide.classList.add("active");
+                leftSide.classList.add("active");
+            }
+        });
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+asgiref==3.7.2
+backports.zoneinfo==0.2.1
+Django==4.2.5
+django-environ==0.11.2
+django-filter==23.3
+djangorestframework==3.14.0
+importlib-metadata==6.8.0
+Markdown==3.4.4
+Pillow==10.0.1
+psycopg2-binary==2.9.7
+pyscopg2==66.0.2
+pytz==2023.3.post1
+sqlparse==0.4.4
+typing_extensions==4.8.0
+zipp==3.17.0
+
+
+django-import-export
+django-jazzmin
+gunicorn
+# pandas
+# whitenoise
+Pillow
+# django-allauth
+# cloudinary
+# django-cloudinary-storage
+# django-cors-headers
