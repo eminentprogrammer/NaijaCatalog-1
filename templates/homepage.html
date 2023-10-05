@@ -351,6 +351,8 @@
                 </div>
                 {% endif %}
             </div>
+            
+            {% if not request.user.is_authenticated %}
             <!-- Sign in Modal.-->
             <div class="modal fade" id="signin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
@@ -468,4 +470,5 @@
                     console.log(selectedOption);
                 })
             </script>
+            {% endif %}
 {% endblock %}

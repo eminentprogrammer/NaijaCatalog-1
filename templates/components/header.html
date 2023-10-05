@@ -32,13 +32,8 @@
                     </div>
                 </li>
                 {% else %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" type="button" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#signin" type="button">Sign In</a>
-                        <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#signup">Sign Up</a>
-                    </div>
-                </li>   
+                <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#signin" type="button">Sign In</a>
+                <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#signup">Sign Up</a>
                 {% endif %}
             </ul>
         </div>

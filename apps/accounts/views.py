@@ -98,6 +98,7 @@ def signUp(request):
             return redirect("login_view")
         else:
             messages.error(request, "Form validation error")
+            return redirect("/")        
 
         data = {
             'token':token,
@@ -126,8 +127,9 @@ def signIn(request):
             return redirect("homepage")
         else:
             messages.error(request,  "Incorrect username or password")
-            print("User does not exist")        
+            print("User does not exist")
 
+            return redirect("/")        
         data = {
             'token':token,
             'email': email,
