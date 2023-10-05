@@ -12,6 +12,31 @@
   <meta name="description" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Naija Catalog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Naija Catalog"/>
+  <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities"/>
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}" />
+  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}" />
+  <meta property="og:image:width" content="612"/>
+  <meta property="og:image:height" content="288"/>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <!-- Allow web app to be run in full-screen mode - iOS. -->
+
+  <meta id="twitter:card" name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NaijaCatalog">
+  <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
+  <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
+  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}">
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="green">
+  <meta name="apple-mobile-web-app-title" content="Naija Catalog">
+
   <!-- Allow web app to be run in full-screen mode - iOS. -->
   <!-- Apple -->
   <meta name="mobile-web-app-capable" content="yes">
