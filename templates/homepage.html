@@ -365,7 +365,7 @@
                             <form action="{% url 'signin' %}" method="POST">{% csrf_token %}
                                 <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate for undergraduates.</small>
                                 <div class="form-floating my-3 text-dark">
-                                  <input type="email" class="form-control" name="signin_email" id="signin_email" placeholder="">
+                                  <input type="email" class="form-control" name="signin_email" id="signin_email" placeholder="" required>
                                   <label for="signin_email">Email Address</label>
                                 </div>
                                 <div class="form-floating mb-3 text-dark">
@@ -373,6 +373,7 @@
                                     <label for="signin_password">Password</label>
                                 </div>                               
                                 <div class="form-group mt-4">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn bg-secondary-c">Continue</button>
                                 </div>
                             </form>
@@ -440,7 +441,7 @@
                                 </div>
                                 
                                 <div class="form-group mt-4">
-                                    <button type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn bg-secondary-c">Continue</button>
                                 </div>
 
