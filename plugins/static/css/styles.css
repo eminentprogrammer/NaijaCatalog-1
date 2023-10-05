@@ -1,6 +1,8 @@
 *{
     --bg-primary: #fbfbfb;
+    --bg-primary-t: #66d24b;
     --bg-secondary: #014949;
+    --bg-secondary: #021818;
     --bg-success: #112e21;
     --text-white-50:gainsboro;
     --text-white-100: whitesmoke;
@@ -11,7 +13,7 @@
 
 .bg-secondary-c,
 .bg-secondary-c:hover{
-    color: var(--bg-primary) !important;
+    color: var(--bg-primary-t) !important;
     background: var(--bg-secondary) !important;
 }
 .bg-success-dark-c{
@@ -42,7 +44,8 @@ body::-webkit-scrollbar{
 
 /* NAVBAR */
 .navbar{
-    background: rgb(1, 73, 73)
+    background: #000000;
+    border-bottom: 4px solid #66d24b;
 }
 .navbar .container-fluid{
     width: 80%;
@@ -72,14 +75,45 @@ body::-webkit-scrollbar{
     height: 50vh;
 }
 .hero-container{
-    height: 50vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: darkslategray;
+    background: black;
+    background-color: rgba(0, 0, 0, 0.911);
+    background-image: url('https://images.unsplash.com/photo-1525358180237-7399f908a1d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60');
+    background-size: cover;
+    object-fit: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode:darken;
     overflow: hidden;
+    color: #66d24b !important;
+}
+.heading-text{
+    color: #66d24b !important;
+}
+.sign-in-btn{
+    background: #66d24b;
+}
+.sign-in-btn:hover{
+    background: #66d24bcd !important;
+    opacity: .9 !important;
+    color: black !important;
+    font-size: bolder;
+    & span{
+        color: white;
+    }
+}
+
+.text-content, p{
+    font-size: 17px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    font-weight: 400;
+    line-height: 32px;
 }
 
 .image-container{
@@ -188,6 +222,12 @@ footer{
     color: var(--text-white-50);
     bottom: 0px;
 }
+.back-to-top{
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    background: #66d24b;
+}
 footer .container .row .col{
     display: flex;
     flex-direction: row;
@@ -223,7 +263,7 @@ footer .container .row .col{
 
 @media only screen and (min-width: 1000px){
     .hero-container{
-        height: 80vh;
+        height: 100vh;
     }
     .image-container{
         height: 200px;

@@ -81,34 +81,34 @@
       text-align-last: justify !important;
     }
     .show{}
-
     /* Input container styles */
     .input {
-        padding: 10px;
-        background-color: #fff;
-        border-top: 1px solid #ddd;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
     }
     /* Input field styles */
     .form-control {
-        border-radius: 0;
-        border: none;
-        outline:none;
-        border-bottom: 2px solid #014949;
-        box-shadow: none;
+      border-radius: 0;
+      border: none;
+      outline:none;
+      border-bottom: 2px solid #014949;
+      box-shadow: none;
     }
     .form-control:focus {
-        border: none;
-        box-shadow: none;
+      border: none;
+      box-shadow: none;
     }
     /* Send button styles */
     .btn-primary {
-        border-radius: 0;
-        border: none;
+      border-radius: 0;
+      border: none;
     }
     .back-to-top{
       position: fixed;
       bottom: 50px;
       right: 10px;
+      background: #66d24b;
     }
   </style>
 </head>
@@ -127,11 +127,29 @@
       <div class="hero-container">
         <div class="image-container">
           <span>
-            <h4 class="animate__animated animate__bounce">NAIJA CATALOG</h4>
-            <p class="">
+            <h4 class="animate__animated animate__bounce heading-text">NAIJA CATALOG</h4>
+            <p class="tex">
               Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
               Universities Library Collections.
             </p>
+            {% if not request.user.is_authenticated %}
+            <div class="row">
+              <div class="col-10 col-md mx-auto text-center my-2">
+                <a class="btn sign-in-btn w-50" type="button" data-bs-toggle="modal" data-bs-target="#signup">
+                  Register <i class="fa fa-user"></i>
+                </a>                  
+              </div>
+
+              <div class="my-2 col-10 col-md mx-auto text-center">
+                <a class="btn sign-in-btn w-50" type="button" data-bs-toggle="modal" data-bs-target="#signin">
+                  Login 
+                  <span class="float-right pl-2" style="padding-top: 5px;">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC5SURBVHgB7ZS9DcIwEIXf2QhaTxC5AsoIMQCZgBUYhQ1YgQ0YISswgkcILRI+nAKJCCwnvpT+Chf26b37kQ8oFKQQMqnWuzOBjvR8Nc7du1icQiZK+SuIDS91a21tYnHZFfTYbW2ZVQumLlaJyGCMidggZbL4Dqw2+wuYzUR9eB8yJbiQ7oFX+haums/bcMiMB6QwBgnO2CIdWoSfFs005P/iYoOUuMhgjHhP9k+GV6dwutSqKBTkvAFBK2wy62tKzwAAAABJRU5ErkJggg==">
+                  </span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
           </span>
         </div>
       </div>
@@ -193,7 +211,7 @@
         </div>
       </div>    
     </footer>
-    <a href="#" class="btn btn-sm btn-success back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-sm back-to-top"><i class="bi bi-arrow-up"></i></a>
   </div>
 
   <!-- Bootstrap JavaScript Libraries -->
