@@ -309,3 +309,58 @@ footer .container .row .col{
         }
     }
 }
+
+
+
+
+.dropdown-item{
+    font-size: 13px !important;
+  }
+  #django_message{
+    width: 40%;
+    display: flex;
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    font-size: 13px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out .5s;
+  }
+  .text-justify{
+    margin-top: 0 !important;
+    text-align: justify !important;
+    margin-bottom: 1rem !important;
+    text-align-last: justify !important;
+  }
+  .show{}
+  /* Input container styles */
+  .input {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+  }
+  /* Input field styles */
+  .form-control {
+    border-radius: 0;
+    border: none;
+    outline:none;
+    border-bottom: 2px solid #014949;
+    box-shadow: none;
+  }
+  .form-control:focus {
+    border: none;
+    box-shadow: none;
+  }
+  /* Send button styles */
+  .btn-primary {
+    border-radius: 0;
+    border: none;
+  }
+  .back-to-top{
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    background: #66d24b;
+  }

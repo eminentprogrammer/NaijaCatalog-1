@@ -10,16 +10,16 @@
   <meta name="keywords" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
   <meta name="description" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Naija Catalog" />
-  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Naija Catalog"/>
+  <meta property="og:type" content="website"/>
   <meta property="og:title" content="Naija Catalog"/>
   <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities"/>
   <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
-  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}" />
-  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}" />
-  <meta property="og:image:width" content="612"/>
-  <meta property="og:image:height" content="288"/>
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+  <meta property="og:image:width" content="750"/>
+  <meta property="og:image:height" content="400"/>
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <!-- Allow web app to be run in full-screen mode - iOS. -->
@@ -28,7 +28,7 @@
   <meta name="twitter:site" content="@NaijaCatalog">
   <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
   <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
-  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}">
+  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}">
   <!-- Apple -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="green">
@@ -53,60 +53,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'css/animate/animate.css' %}">
-  
-  <style>
-    .dropdown-item{
-      font-size: 13px !important;
-    }
-    #django_message{
-      width: 40%;
-      display: flex;
-      position: absolute;
-      top: 100px;
-      right: 30px;
-      font-size: 13px;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      transition: all ease-in-out .5s;
-    }
-    .text-justify{
-      margin-top: 0 !important;
-      text-align: justify !important;
-      margin-bottom: 1rem !important;
-      text-align-last: justify !important;
-    }
-    .show{}
-    /* Input container styles */
-    .input {
-      padding: 10px;
-      background-color: #fff;
-      border-top: 1px solid #ddd;
-    }
-    /* Input field styles */
-    .form-control {
-      border-radius: 0;
-      border: none;
-      outline:none;
-      border-bottom: 2px solid #014949;
-      box-shadow: none;
-    }
-    .form-control:focus {
-      border: none;
-      box-shadow: none;
-    }
-    /* Send button styles */
-    .btn-primary {
-      border-radius: 0;
-      border: none;
-    }
-    .back-to-top{
-      position: fixed;
-      bottom: 50px;
-      right: 10px;
-      background: #66d24b;
-    }
-  </style>
 </head>
 
 <body>
