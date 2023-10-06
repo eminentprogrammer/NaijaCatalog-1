@@ -1,7 +1,6 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -11,18 +10,16 @@
   <meta name="keywords" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
   <meta name="description" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Naija Catalog" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Naija Catalog"/>
   <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities"/>
   <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
-  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}" />
-  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}" />
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}" />
+  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}" />
   <meta property="og:image:width" content="612"/>
   <meta property="og:image:height" content="288"/>
-
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <!-- Allow web app to be run in full-screen mode - iOS. -->
@@ -31,7 +28,7 @@
   <meta name="twitter:site" content="@NaijaCatalog">
   <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
   <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
-  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/favicon/apple-touch-icon.png' %}">
+  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/library.png' %}">
   <!-- Apple -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="green">
@@ -43,7 +40,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="green">
   <meta name="apple-mobile-web-app-title" content="Naija Catalog">
-
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
@@ -144,7 +140,7 @@
                 <a class="btn sign-in-btn w-50" type="button" data-bs-toggle="modal" data-bs-target="#signin">
                   Login 
                   <span class="float-right pl-2" style="padding-top: 5px;">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC5SURBVHgB7ZS9DcIwEIXf2QhaTxC5AsoIMQCZgBUYhQ1YgQ0YISswgkcILRI+nAKJCCwnvpT+Chf26b37kQ8oFKQQMqnWuzOBjvR8Nc7du1icQiZK+SuIDS91a21tYnHZFfTYbW2ZVQumLlaJyGCMidggZbL4Dqw2+wuYzUR9eB8yJbiQ7oFX+haums/bcMiMB6QwBgnO2CIdWoSfFs005P/iYoOUuMhgjHhP9k+GV6dwutSqKBTkvAFBK2wy62tKzwAAAABJRU5ErkJggg==">
+                    <img alt="login" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC5SURBVHgB7ZS9DcIwEIXf2QhaTxC5AsoIMQCZgBUYhQ1YgQ0YISswgkcILRI+nAKJCCwnvpT+Chf26b37kQ8oFKQQMqnWuzOBjvR8Nc7du1icQiZK+SuIDS91a21tYnHZFfTYbW2ZVQumLlaJyGCMidggZbL4Dqw2+wuYzUR9eB8yJbiQ7oFX+haums/bcMiMB6QwBgnO2CIdWoSfFs005P/iYoOUuMhgjHhP9k+GV6dwutSqKBTkvAFBK2wy62tKzwAAAABJRU5ErkJggg==">
                   </span>
                 </a>
               </div>
@@ -173,7 +169,7 @@
             </div>
         </div>
 
-        <div class="col col-md">
+        <div class="row">
           <div class="container">
             <div class="row">
               <div class="col col-md-6">
@@ -211,10 +207,8 @@
         </div>
       </div>    
     </footer>
-    <a href="#" class="btn btn-sm back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-sm back-to-top" id="toUp"><i class="bi bi-arrow-up"></i></a>
   </div>
-
-  <!-- Bootstrap JavaScript Libraries -->
 
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
