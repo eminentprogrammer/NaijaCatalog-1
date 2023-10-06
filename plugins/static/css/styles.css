@@ -83,7 +83,7 @@ body::-webkit-scrollbar{
     justify-content: center;
     background: black;
     background-color: rgba(0, 0, 0, 0.911);
-    background-image: url('https://images.unsplash.com/photo-1525358180237-7399f908a1d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60');
+    background-image: url('../images/library.png');
     background-size: cover;
     object-fit: contain;
     background-position: center;

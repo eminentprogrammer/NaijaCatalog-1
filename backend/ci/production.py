@@ -1,18 +1,13 @@
 from .base import *
 
-
 # ALLOWED HOST
 RENDER_EXTERNAL_HOSTNAME = env('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-
 DATABASES = {
-    'default':{
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("DB_NAME"), #Database Name
-        'USER': env("DB_USER"), #Database Username
-        'PASSWORD':'@#Demboyz46', #DB Password
-        'HOST':'localhost',
-        'PORT':'5432',
-    }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default=env("DB_URL"),
+        conn_max_age=600
+    )
 }
