@@ -50,8 +50,6 @@ def search(request):
         
     except Exception as e:
         print(e)
-
-    messages.success(request, f"{query}")
     context = {
         'query':query,
         'querysets':querysets,

@@ -27,3 +27,9 @@ https://github.com/venthur/gscholar/blob/master/README.md
     import gscholar
     gscholar.query("some author or title")
 `
+
+
+
+
+LINKS
+https://icon-sets.iconify.design/tdesign/institution/

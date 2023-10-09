@@ -82,7 +82,7 @@ body::-webkit-scrollbar{
     align-items: center;
     justify-content: center;
     background: black;
-    background-color: rgba(0, 0, 0, 0.911);
+    background-color: rgba(0, 0, 0, 0.887);
     background-image: url('../images/library.png');
     background-size: cover;
     object-fit: contain;
@@ -107,12 +107,11 @@ body::-webkit-scrollbar{
         color: white;
     }
 }
-
-.text-content, p{
-    font-size: 17px;
+.text-content{
+    font-size: 12px;
     margin: 0;
-    line-height: 35px;
-}   
+    line-height: 18px;
+}
 
 .image-container{
     display: flex;
@@ -137,7 +136,6 @@ body::-webkit-scrollbar{
         text-align: justify;
     }
 }
-
 
 /* REGISTRATIONS */
 #institution_div input{
@@ -185,9 +183,8 @@ body::-webkit-scrollbar{
     margin-top: 50px;
 }
 
-.tab-content{
-    
-}
+.tab-content{}
+
 .list-group-item, .tab-content, .tab-pane.active{
     transition: all ease-in-out .2s;
 }
@@ -207,6 +204,53 @@ body::-webkit-scrollbar{
     bottom: 0;
 }
 
+.dropdown-item{
+    font-size: 13px !important;
+}
+#django_message{
+    width: 40%;
+    display: flex;
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    font-size: 13px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out .5s;
+}
+.text-justify{
+    margin-top: 0 !important;
+    text-align: justify !important;
+    margin-bottom: 1rem !important;
+    text-align-last: justify !important;
+}
+.show{}
+
+/* Input container styles */
+.input {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+  
+/* Input field styles */
+.form-control {
+    border-radius: 0;
+    border: none;
+    outline:none;
+    border-bottom: 2px solid #014949;
+    box-shadow: none;
+}
+.form-control:focus {
+    border: none;
+    box-shadow: none;
+} 
+/* Send button styles */
+.btn-primary {
+    border-radius: 0;
+    border: none;
+}
 
 footer{
     position: relative;
@@ -216,15 +260,9 @@ footer{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background:  var(--bg-secondary);
+    background:  black;
     color: var(--text-white-50);
     bottom: 0px;
-}
-.back-to-top{
-    position: fixed;
-    bottom: 50px;
-    right: 10px;
-    background: #66d24b;
 }
 footer .container .row .col{
     display: flex;
@@ -236,16 +274,14 @@ footer .container .row .col{
     width: 100%;
     font-size: 14px;
     font-weight: normal;
-    text-align: start;
-    word-spacing: 1px;
-    letter-spacing: 1px;
+    text-align: justify;
     line-height: 30px;
 }
 footer .container .row .col{
     display: inline-block;
     & .container{
         & .header{
-            color: var(--text-white-100);
+            color: var(--bg-primary-t);
             margin-bottom: 20px;
             font-size: 22px;
             font-weight: bold;
@@ -257,7 +293,24 @@ footer .container .row .col{
     opacity: .8;
     list-style-type:disclosure-closed;
 }
+.footer-nav-item:hover{
+    list-style-type: circle;
+}
+.back-to-top {
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+    background: #348d1e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.back-to-top:hover{
+    background: #0d3902 !important;
+}
 
 @media only screen and (min-width: 1000px){
     .hero-container{
@@ -309,62 +362,3 @@ footer .container .row .col{
         }
     }
 }
-
-
-
-
-.dropdown-item{
-    font-size: 13px !important;
-  }
-  #django_message{
-    width: 40%;
-    display: flex;
-    position: absolute;
-    top: 100px;
-    right: 30px;
-    font-size: 13px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    transition: all ease-in-out .5s;
-  }
-  .text-justify{
-    margin-top: 0 !important;
-    text-align: justify !important;
-    margin-bottom: 1rem !important;
-    text-align-last: justify !important;
-  }
-  .show{}
-  /* Input container styles */
-  .input {
-    padding: 10px;
-    background-color: #fff;
-    border-top: 1px solid #ddd;
-  }
-  /* Input field styles */
-  .form-control {
-    border-radius: 0;
-    border: none;
-    outline:none;
-    border-bottom: 2px solid #014949;
-    box-shadow: none;
-  }
-  .form-control:focus {
-    border: none;
-    box-shadow: none;
-  }
-  /* Send button styles */
-  .btn-primary {
-    border-radius: 0;
-    border: none;
-  }
-  .back-to-top{
-    position: fixed;
-    bottom: 50px;
-    right: 10px;
-    background: #66d24b;
-
-    &:hover{
-        opacity: .9;
-    }
-  }
