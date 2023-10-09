@@ -363,4 +363,8 @@ footer .container .row .col{
     bottom: 50px;
     right: 10px;
     background: #66d24b;
+
+    &:hover{
+        opacity: .9;
+    }
   }

@@ -1,166 +1,157 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="google-site-verification" content="daPie6NisqEEdRi1JF7f116OTq1jXMeCpJ6Y5zpJaAM"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Naija Catalog: A Comprehensive Resource for Nigerian Universities</title>
-  <meta name="keywords" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
-  <meta name="description" content="Naija Catalog {% if queryset %}{{queryset}}{% endif %}">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Naija Catalog"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Naija Catalog"/>
-  <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities"/>
-  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
-  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
-  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
-  <meta property="og:image:width" content="618"/>
-  <meta property="og:image:height" content="350"/>
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <!-- Allow web app to be run in full-screen mode - iOS. -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="daPie6NisqEEdRi1JF7f116OTq1jXMeCpJ6Y5zpJaAM"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Naija Catalog: A Comprehensive Resource for Nigerian Universities</title>
+    <meta name="keywords" content="Naija Catalog library congress information researchers online catalog">
+    <meta name="description" content="Online Catalog - Information for Researchers in Nigeria">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:site_name" content="Naija Catalog"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Naija Catalog"/>
+    <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities"/>
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+    <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta id="twitter:card" name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@NaijaCatalog">
+    <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
+    <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
+    <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}">
 
-  <meta id="twitter:card" name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@NaijaCatalog">
-  <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
-  <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
-  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}">
-  <!-- Apple -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="green">
-  <meta name="apple-mobile-web-app-title" content="Naija Catalog">
+    <!-- Allow web app to be run in full-screen mode - iOS. -->  
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="green">
+    <meta name="apple-mobile-web-app-title" content="Naija Catalog">
 
-  <!-- Allow web app to be run in full-screen mode - iOS. -->
-  <!-- Apple -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="green">
-  <meta name="apple-mobile-web-app-title" content="Naija Catalog">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
-  <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <!-- Icon Font Stylesheet -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-  {% block extrahead %}{% endblock %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'css/animate/animate.css' %}">
-</head>
+    <!-- Allow web app to be run in full-screen mode - iOS. -->
+    <!-- Apple -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="green">
+    <meta name="apple-mobile-web-app-title" content="Naija Catalog">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+    
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    {% block extrahead %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate/animate.css' %}">
+  </head>
 
-<body>
-  <div class="bg-light p-0">
-    <!-- Spinner Start -->
-    <!--<div id="spinner" class="show bg-light position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only"></span>
-        </div>
-    </div> -->
-    <!-- Spinner End -->
-    <header>
-      {% include "components/header.html" %}
-      <div class="hero-container">
-        <div class="image-container">
-          <span>
-            <h4 class="animate__animated animate__bounce heading-text">NAIJA CATALOG</h4>
-            <p class="tex">
-              Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
-              Universities Library Collections.
-            </p>
-            {% if not request.user.is_authenticated %}
-            <div class="row">
-              <div class="col-10 col-md mx-auto text-center my-2">
-                <a class="btn sign-in-btn w-50" type="button" data-bs-toggle="modal" data-bs-target="#signup">
+  <body>
+    <div class="bg-light p-0">
+      <header>
+        {% include "components/header.html" %}
+        <div class="hero-container">
+          <div class="image-container">
+            <span>
+              <h4 class="animate__animated animate__bounce heading-text">NAIJA CATALOG</h4>
+              <p class="tex">
+                Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+                Universities Library Collections.
+                <img class="img-fluid d-none" src="{% static 'images/naijacatalog.png' %}" alt="Naija Catalog" srcset="{% static 'images/naijacatalog.png' %}">
+              </p>
+              {% if not request.user.is_authenticated %}
+              <div class="mt-5">
+                <a class="btn sign-in-btn" type="button" data-bs-toggle="modal" data-bs-target="#signup">
                   Register <i class="fa fa-user"></i>
-                </a>                  
-              </div>
-
-              <div class="my-2 col-10 col-md mx-auto text-center">
-                <a class="btn sign-in-btn w-50" type="button" data-bs-toggle="modal" data-bs-target="#signin">
+                </a>
+                <a class="btn sign-in-btn" type="button" data-bs-toggle="modal" data-bs-target="#signin">
                   Login 
                   <span class="float-right pl-2" style="padding-top: 5px;">
                     <img alt="login" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC5SURBVHgB7ZS9DcIwEIXf2QhaTxC5AsoIMQCZgBUYhQ1YgQ0YISswgkcILRI+nAKJCCwnvpT+Chf26b37kQ8oFKQQMqnWuzOBjvR8Nc7du1icQiZK+SuIDS91a21tYnHZFfTYbW2ZVQumLlaJyGCMidggZbL4Dqw2+wuYzUR9eB8yJbiQ7oFX+haums/bcMiMB6QwBgnO2CIdWoSfFs005P/iYoOUuMhgjHhP9k+GV6dwutSqKBTkvAFBK2wy62tKzwAAAABJRU5ErkJggg==">
                   </span>
-                </a>
+                </a>  
+              </div>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+        {% include "components/message.html" %}
+      </header>
+
+      <main class="main">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col col-md-7">
+              <div class="container">
+                <div class="header">Naija Catalog</div>
+                <p class="footer-p">
+                  Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
+                  Universities Library Collections.
+                </p>
               </div>
             </div>
-            {% endif %}
-          </span>
-        </div>
-      </div>
-      {% include "components/message.html" %}
-    </header>
 
-    <main class="main">
-      {% block content %}{% endblock %}
-    </main>
-
-    <footer>
-      <div class="container">
-        <div class="row mx-auto">
-          <div class="col col-md-7 mx-auto">
-            <div class="container">
-              <div class="header">Naija Catalog</div>
-              <p class="footer-p">
-                Top #1 Library Catalog in Nigeria, providing undergraduates and researchers access to top Nigerian 
-                Universities Library Collections.
-              </p>
-            </div>
-        </div>
-
-        <div class="row">
-          <div class="container">
-            <div class="row">
-              <div class="col col-md-6">
-                <div class="container">
-                  <div class="header">Important Links</div>
-                  <ul class="footer-nav-item">
-                    <li><a class="nav-link" href="#">Homepage</a></li>
-                    <li><a class="nav-link" href="#">General Search</a></li>
-                    <li><a class="nav-link" href="#">Advanced Search</a></li>
-                  </ul>        
-                </div>
-              </div>
-              <div class="col-12 col-md-6 d-none d-md-block">
-                <div class="container">
-                  <div class="header">Sitemap</div>
+            <div class="col">
+              <div class="row">
+                <div class="col col-md-6">
+                  <div class="container">
+                    <div class="header">Important Links</div>
                     <ul class="footer-nav-item">
-                      <li><a class="nav-link" href="#">About</a></li>
-                      <li><a class="nav-link" href="#">Catalog</a></li>
-                      <li><a class="nav-link" href="#">News</a></li>
-                    </ul>
-                  </div>            
+                      <li><a class="nav-link" href="#">Homepage</a></li>
+                      <li><a class="nav-link" href="#">General Search</a></li>
+                      <li><a class="nav-link" href="#">Advanced Search</a></li>
+                    </ul>        
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 d-none d-md-block">
+                  <div class="container">
+                    <div class="header">Sitemap</div>
+                      <ul class="footer-nav-item">
+                        <li><a class="nav-link" href="#">About</a></li>
+                        <li><a class="nav-link" href="#">Catalog</a></li>
+                        <li><a class="nav-link" href="#">News</a></li>
+                      </ul>
+                    </div>            
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- place footer here -->
-      <div class="row py-2 bg-light mt-5 w-100">
-        <div class="col-12 mx-auto">
-          <div class="text-center text-dark">
-            Copyright @ NaijaCatalog
+        
+        <!-- place footer here -->
+        <div class="row py-2 bg-light w-100">
+          <div class="col-12 mx-auto">
+            <div class="text-center text-dark fw-bold">
+              Copyright @ NaijaCatalog
+            </div>
           </div>
         </div>
-      </div>    
-    </footer>
-    <a href="#" class="btn btn-sm back-to-top" id="toUp"><i class="bi bi-arrow-up"></i></a>
-  </div>
 
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-  <script type="module" src="{% static 'js/custom.js' %}"></script>
-</body>
+      </footer>
+    
+      <a href="#" class="btn btn-sm back-to-top" id="toUp"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script type="module" src="{% static 'js/custom.js' %}"></script>
+  </body>
 </html>
