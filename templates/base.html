@@ -69,6 +69,7 @@
         {% include "components/header.html" %}
       </nav>
       <!-- NAV END CONTAINER -->
+
       {% block HERO %}
       <!-- HERO CONTAINER -->
       <div class="hero-container">
@@ -160,6 +161,7 @@
   </div>
 
   <!-- Bootstrap JavaScript Libraries -->
+  <script type="module" src="{% static 'js/service-workers.js' %}"></script>
   <script type="module" src="{% static 'js/custom.js' %}"></script>{% block scripts %}{% endblock %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
