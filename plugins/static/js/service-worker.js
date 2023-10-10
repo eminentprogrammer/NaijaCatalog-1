@@ -6,8 +6,8 @@ self.addEventListener('install', (event) => {
            '/',
            '/homepage.html',
            '/static/css/styles.css',
-           '/static/js/script.js',
-           '/static/images/icon.png',
+           '/static/js/custom.js',
+           '/static/images/naijacatalog.png',
          ]);
        })
      );
