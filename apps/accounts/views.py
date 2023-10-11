@@ -92,7 +92,7 @@ def signUp(request):
             if not user is None:
                 login(request, user)
                 messages.error(request, f"Welcome {username}")
-                return redirect('dashboard_view')
+                return redirect('dashboard')
             
             messages.error(request, "Account created successfully, log in")
             return redirect("login_view")
@@ -123,7 +123,7 @@ def signIn(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"Sign In Successful, welcome {user.username}")
-            return redirect("homepage")
+            return redirect("dashboard")
         else:
             messages.error(request,  "Incorrect username or password")
 
