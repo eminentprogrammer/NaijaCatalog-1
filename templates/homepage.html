@@ -37,6 +37,7 @@
                     </div>
                     {% endfor %}
                 </div>
+                
                 <div class="shadow  p-3 bg-secondary-c mt-5 rounded-top">
                     <div class="text-center">
                         <marquee direction="left" behavior="alternate">
@@ -44,7 +45,6 @@
                         </marquee>
                     </div>
                 </div>
-
                 <!-- List group -->
                 <div class="list-group mb-4 rounded-0" id="myList" role="tablist">
                   <a id="list" class="list-group-item list-group-item-action active" data-toggle="services" href="#services" role="tab">Services</a>
@@ -285,7 +285,6 @@
                 <div class="shadow my-2 p-3 mb-5 bg-secondary-c rounded-bottom"></div>
 
                 {% if books %}
-
                 <div class="table-responsive">
                     <table class="table table-hover table-dark align-middle shadow-lg">
                         <thead class="text-light">
@@ -343,133 +342,9 @@
                             </tr>
                             {% endfor %}
                         </tbody>
-
-                        <tfoot>
-                                
-                        </tfoot>
+                        <tfoot></tfoot>
                     </table>
                 </div>
                 {% endif %}
             </div>
-            
-            {% if not request.user.is_authenticated %}
-            <!-- Sign in Modal.-->
-            <div class="modal fade" id="signin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-secondary-c">
-                            <h5 class="modal-title" id="modalTitleId">Welcome Back</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{% url 'signin' %}" method="POST">{% csrf_token %}
-                                <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate for undergraduates.</small>
-                                <div class="form-floating my-3 text-dark">
-                                  <input type="email" class="form-control" name="signin_email" id="signin_email" placeholder="" required>
-                                  <label for="signin_email">Email Address</label>
-                                </div>
-                                <div class="form-floating mb-3 text-dark">
-                                    <input type="password" class="form-control" name="signin_password" id="signin_password" placeholder="">
-                                    <label for="signin_password">Password</label>
-                                </div>                               
-                                <div class="form-group mt-4">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Sign Up Modal.-->
-            <div class="modal fade" id="signup" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-secondary-c">
-                            <h5 class="modal-title" id="modalTitleId">
-                                <span>Join the Knowledge Revolution:</span><br>
-                                <span class="text-muted" style="font-size: 13px;">Sign up for an Interative Research journey!</span>
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{% url 'signup' %}" method="POST">{% csrf_token %}
-                                <small id="helpId_sl" class="text-muted">
-                                    Unlock the Power of Collaboration with Our Undergraduate-Driven Union Catalogue.
-                                </small>                    
-
-                                <div class="form-floating my-3 text-dark">
-                                    <input type="email" class="form-control" name="signup_email" id="signup_email" placeholder="">
-                                    <label for="signup_email">Email Address</label>
-                                </div>
-
-                                <div class="row my-3">
-                                    <div class="text-dark">
-                                        <select class="form-select form-select-md form-control" name="category" id="category">
-                                            <option>Choose Account</option>
-                                            <option value="Student">Student</option>
-                                            <option value="Institution">Institution</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex d-none my-3 justify-content-between" id="institution_div">
-                                    <div class="form-floating text-dark">
-                                        <input type="text" class="form-control" list="institutions" name="Institution" id="institution" placeholder="" required>
-                                        <label for="institution">Name of University</label>
-                                    </div>
-                                    <div class="form-floating text-dark">
-                                        <input type="text" class="form-control" name="studentID" id="studentID" placeholder="" required>
-                                        <label for="studentID">Matric ID</label>
-                                    </div>
-                                </div>
-                                <datalist id="institutions">
-                                    <option value="Augustine University Ilara Epe">
-                                    <option value="Caleb University">
-                                    <option value="Covenant University">
-                                    <option value="Lagos State University">
-                                </datalist>
-
-                                <div class="form-floating mb-3 text-dark">
-                                    <input type="password" class="form-control" name="signup_password" id="signup_password" placeholder="" required>
-                                    <label for="signup_password">Password</label>
-                                </div>
-                                
-                                <div class="form-check form-switch text-dark">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Newsletter</label>
-                                </div>
-                                
-                                <div class="form-group mt-4">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn bg-secondary-c">Continue</button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                var Category = document.getElementById('category');
-                var selectedOption; 
-                const institutionDiv = document.getElementById('institution_div');
-
-                Category.addEventListener("click", e=>{  
-                    selectedOption = Category.value;
-                    if(selectedOption == 'Student'){
-                        institutionDiv.classList.remove('d-none');
-                    }
-                    else{
-                        if(institutionDiv.classList.contains('d-none')){
-                        }
-                        else{
-                            institutionDiv.classList.add('d-none');
-                        }
-                    }
-                    console.log(selectedOption);
-                })
-            </script>
-            {% endif %}
 {% endblock %}

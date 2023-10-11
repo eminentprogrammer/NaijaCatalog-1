@@ -1,0 +1,17 @@
+{% extends 'https/base.html' %}
+{% load static %}
+
+
+        {% block https %}
+        <div id="Error-404">
+            <div class="Error-404">
+                <div class="d-404">
+                    <h1>{{code}}</h1>
+                    <h2 style="margin-top:100px;">{{message}}</h2>
+                </div>
+                <div style="margin-top:200px;">
+                    <a href="/" class="">Return To Homepage</a>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

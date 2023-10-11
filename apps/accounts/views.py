@@ -98,7 +98,6 @@ def signUp(request):
             return redirect("login_view")
         else:
             messages.error(request, "Form validation error")
-            return redirect("/")        
 
         data = {
             'token':token,
@@ -106,14 +105,14 @@ def signUp(request):
             'password': hash(password),
             'valid': True
         }
-        print(request)
-    return JsonResponse(data)
+    return render(request, 'users/registrations/register.html', context=data)
 
 
 
 def signIn(request):
     data = {}
     logout(request)
+    
     if request.POST:
         token = request.POST.get('csrfmiddlewaretoken')
         email = request.POST.get('signin_email')
@@ -127,19 +126,15 @@ def signIn(request):
             return redirect("homepage")
         else:
             messages.error(request,  "Incorrect username or password")
-            print("User does not exist")
 
-            return redirect("/")        
         data = {
             'token':token,
             'email': email,
             'password': hash(password),
             'valid': True
         }
-        print(request.POST)
-
-    return JsonResponse(data)
-
+        
+    return render(request, 'users/registrations/login.html', context=data)
 
 
 @login_required

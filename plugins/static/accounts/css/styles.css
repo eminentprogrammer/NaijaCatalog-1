@@ -1,0 +1,55 @@
+body{
+    height: 100vh;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#app{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw !important;
+    background: transparent;
+    background-image: url("/static/images/naijacatalog.png");
+    background-color: rgba(0, 0, 0, 0.885);
+    background-blend-mode: darken;
+}
+#app > h1{
+    font-size: 25px;
+}
+#logo_container{
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: .8;
+    transition: all ease .5s;
+}
+#logo_container:hover{
+    border-color: red;
+    opacity: .95;
+}
+#logo_container > img{
+
+}
+.input {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+/* Input field styles */
+.form-control {
+    border: none;
+    outline:none;
+    border-radius: 0;
+    border-bottom: 2px solid #014949;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-bottom: 2px solid #014949;
+    box-shadow: none;
+    outline:auto;
+    outline-color: #014949;
+    border: none;
+}

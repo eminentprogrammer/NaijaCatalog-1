@@ -32,7 +32,7 @@ INSTALLED_APPS = [
 
     'whitenoise',
     'django.contrib.staticfiles',
-
+    'apps.https',
     'import_export',
     'apps.accounts',
     'apps.catalogue',
