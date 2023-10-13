@@ -84,10 +84,10 @@
             </p>
             {% if not request.user.is_authenticated %}
             <div class="mt-5">
-              <a class="btn sign-in-btn" href="{% url 'signin' %}">
+              <a class="btn sign-in-btn" href="{% url 'signup' %}">
                 Register <i class="fa fa-user"></i>
               </a>
-              <a class="btn sign-in-btn" href="{% url 'signup' %}">
+              <a class="btn sign-in-btn" href="{% url 'signin' %}">
                 Login
                 <span class="float-right pl-2" style="padding-top: 5px;">
                   <img alt="login"
