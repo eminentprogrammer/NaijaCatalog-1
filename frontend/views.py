@@ -7,6 +7,13 @@ from django.contrib import messages
 from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
+
+def about(request):
+    return render(request, 'about-us.html')
+
+def news(request):
+    return render(request, 'news.html')
+
 def robots_view(request):
     return render(request, 'robots.txt')
 

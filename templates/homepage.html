@@ -10,7 +10,7 @@
 {% block content %}
             <div class="container">
                 <div class="d-flex">
-                    <p class="mx-2 my-1 text">
+                    <p class="mx-2 my-1 text-success fw-bold">
                         Search for materials with ease by entering book title, author or subject.
                     </p>
                 </div>
@@ -21,6 +21,7 @@
                     </div>
                 </form>
             </div>
+
             <div class="container">
                 <div class="row" hidden>
                     {% for i in  '123' %}
@@ -45,6 +46,7 @@
                         </marquee>
                     </div>
                 </div>
+
                 <!-- List group -->
                 <div class="list-group mb-4 rounded-0" id="myList" role="tablist">
                   <a id="list" class="list-group-item list-group-item-action active" data-toggle="services" href="#services" role="tab">Services</a>
@@ -52,6 +54,7 @@
                   <a id="list" class="list-group-item list-group-item-action" data-toggle="technicalTeam" href="#technicalTeam" role="tab">Technical Team</a>
                   <a id="list" class="list-group-item list-group-item-action" data-toggle="settings" href="#settings" role="tab">Project Advisers</a>
                 </div>
+
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="services" role="tabpanel" data-wow-delay="0.4s">
@@ -131,42 +134,34 @@
                                 <div class="px-5 py-4 text-white bg-secondary-c rounded">
                                     <p class="row">
                                         <div class="col">
-                                            <h2>OSHILALU Adeyinka</h2>
+                                            <h4>OSHILALU Adeyinka</h4>
                                             <ul hidden>
                                                 <li>Project Manager</li>
                                                 <li>Software Engineer</li>
                                             </ul>    
                                         </div>
-                                        <div class="col">
-                                            <div class="team-pic-container">
-                                                <img draggable="false"  loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
-                                            </div>
-                                        </div>
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 mx-auto my-3 my-md-0">
                                 <div class="px-5 py-4 bg-secondary-c rounded">
                                     <p class="row">
                                         <div class="col">
-                                            <h2>UDEGBE Ikechukwu</h2>
+                                            <h4>UDEGBE Ikechukwu</h4>
                                             <ul hidden>
                                                 <li>Frontend Designer</li>
                                                 <li>Usability Tester</li>
                                             </ul>
                                         </div>
-                                        <div class="col">
-                                            <div class="team-pic-container">
-                                                <img draggable="false" loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
-                                            </div>
-                                        </div>
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 mx-auto">
                                 <div
                                     class="px-5 py-4 text-white bg-secondary-c rounded">
-                                    <h2>OGUNBAWO Kehinde</h2>
+                                    <h4>OGUNBAWO Kehinde</h4>
                                     <p class="row">
                                         <div class="col">
                                             <ul hidden>
@@ -174,16 +169,13 @@
                                                 <li>Usability Tester</li>
                                             </ul>
                                         </div>
-                                        <div class="col">
-                                            <div class="team-pic-container">
-                                                <img draggable="false" loading="lazy" class="img-fluid" src="{% static 'images/pngwing.com.png' %}" alt="" srcset="{% static 'images/pngwing.com.png' %}">
-                                            </div>
-                                        </div>
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                         </div>        
                     </div>
+
                     <!-- Technical Team -->
                     <div class="tab-pane" id="technicalTeam" role="tabpanel" data-wow-delay="0.4s">
                         <p class="text-muted text-center fw-bold">Meet Our Technical Team</p>
@@ -192,16 +184,11 @@
                                 <div class="px-5 py-4 text-white bg-secondary-c rounded">
                                     <p class="row">
                                         <div class="col">
-                                            <h2>IGWESI Emmanuel</h2>
+                                            <h4>IGWESI Emmanuel</h4>
                                             <ul>
                                                 <li>Project Manager</li>
                                                 <li>Software Engineer</li>
                                             </ul>    
-                                        </div>
-                                        <div class="col">
-                                            <div class="team-pic-container">
-                                                <img draggable="false"  loading="lazy" class="img-fluid animate__animated animate__bounce" src="{% static 'images/pngwing.com(1).png' %}" alt="Igwesi Emmanuel" srcset="{% static 'images/pngwing.com(1).png' %}">
-                                            </div>
                                         </div>
                                     </p>
                                     <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
@@ -211,16 +198,11 @@
                                 <div class="px-5 py-4 bg-secondary-c rounded">
                                     <p class="row">
                                         <div class="col">
-                                            <h2>UDEGBE Ikechukwu</h2>
+                                            <h4>UDEGBE Ikechukwu</h4>
                                             <ul>
                                                 <li>Frontend Designer</li>
                                                 <li>Usability Tester</li>
                                             </ul>
-                                        </div>
-                                        <div class="col">
-                                            <div class="team-pic-container">
-                                                <img draggable="false" loading="lazy" class="img-fluid animate__animated animate__bounce" src="{% static 'images/pngwing.com(1).png' %}" alt="Ikechukwu" srcset="{% static 'images/pngwing.com(1).png' %}">
-                                            </div>
                                         </div>
                                     </p>
                                     <a href="tel:+234-807-382-4876" class="btn btn-success">Contact</a>
@@ -229,7 +211,7 @@
                             <div class="col-12 col-md-4 mx-auto">
                                 <div
                                     class="px-5 py-4 text-white bg-secondary-c rounded">
-                                    <h2>OGUNBAWO Kehinde</h2>
+                                    <h4>OGUNBAWO Kehinde</h4>
                                     <p class="row">
                                         <div class="col">
                                             <ul>
@@ -237,7 +219,7 @@
                                                 <li>Usability Tester</li>
                                             </ul>
                                         </div>
-                                        <div class="col">
+                                        <div class="col d-none">
                                             <div class="team-pic-container">
                                                 <img draggable="false" loading="lazy" class="img-fluid animate__animated animate__bounce" src="{% static 'images/pngwing.com(1).png' %}" alt="Kehinde" srcset="{% static 'images/pngwing.com(1).png' %}">
                                             </div>
@@ -259,6 +241,7 @@
                                     <p>
                                         Taye  Solaria University of Education Ijagun.
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 mx-auto my-3 my-md-0">
@@ -267,6 +250,7 @@
                                     <h4>Abdulsalam Abubakar</h4>
                                     <p>
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4 mx-auto">
@@ -276,6 +260,7 @@
                                     <p>
                                         National Librarian
                                     </p>
+                                    <a href="#" class="btn btn-success">Contact</a>
                                 </div>
                             </div>
                         </div>

@@ -128,7 +128,7 @@
             }
         }
         #offcanvasNavbar {
-            width: 40% !important;
+            width: 35% !important;
         }
         .search-div{
             justify-content: space-between;
@@ -201,8 +201,8 @@
             <div class="row">
                 <nav class="navbar navbar-light bg-light fixed-top-c shadow">
                     <div class="container">
-                        <a class="navbar-brand text" href="{% url 'dashboard' %}">NC <i class="bi bi-home"></i></a>
-                        <form class="d-flex my-lg-0 w-50 search-div" method="GET" action="{% url 'dashboard_search' %}">
+                        <a class="navbar-brand text fw-bold mx-4" href="{% url 'dashboard' %}">NC<i class="bi bi-home"></i></a>
+                        <form class="d-none d-md-flex my-lg-0 w-50 search-div" method="GET" action="{% url 'dashboard_search' %}">
                             <input class="form-control me-sm-2" name="search" type="search" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" value="{{query}}" autofocus required>
                             <input type="submit" class="btn btn-primary" value="Search" hidden>
                         </form>
@@ -224,14 +224,16 @@
                                 </div>
                             </div>
                             
-                            <button class="btn btn-sm btn-warning rounded" type="button" id="navbarBtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                            <button class="btn btn-md btn-success rounded" type="button" id="navbarBtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                                 <span class="navbar-toggler-icon"></span>
                             </button>    
                         </div>
                     </div>
                 </nav>
             </div>
-            <div class="row" id="dashMain">{% block dashContent %}{% endblock %}</div>
+            <div class="row" id="dashMain">
+                {% block dashContent %}{% endblock %}
+            </div>
         </div>
     </div>
 </div>
