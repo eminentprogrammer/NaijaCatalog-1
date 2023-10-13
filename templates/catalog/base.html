@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="daPie6NisqEEdRi1JF7f116OTq1jXMeCpJ6Y5zpJaAM"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}{% endblock %} | Naija Catalog</title>
+  <meta name="keywords" content="Naija Catalog library congress information researchers online catalog, Supporting the growth of National Library of Nigeria catalog">
+  <meta name="description" content="Online Catalog - Information for Researchers in Nigeria, Naija Catalog.">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Naija Catalog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Naija Catalog" />
+  <meta property="og:description" content="A Comprehensive Resource for Nigerian Universities" />
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{request.path}}" />
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta id="twitter:card" name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NaijaCatalog">
+  <meta id="twitter:title" name="twitter:title" content="Naija Catalog">
+  <meta name="twitter:description" content="A Comprehensive Resource for Nigerian Universities">
+  <meta id="twitter:image" name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/naijacatalog.png' %}">
+  <!-- Allow web app to be run in full-screen mode - iOS. -->
+
+  <!-- Apple -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="green">
+  <meta name="apple-mobile-web-app-title" content="Naija Catalog">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  {% block extrahead %}{% endblock %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="{% static 'css/animate/animate.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/styles.min.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'manifest.json' %}">
+</head>
+
+<body>
+  <div class="bg-light p-0">
+    <main class="mainContainer">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

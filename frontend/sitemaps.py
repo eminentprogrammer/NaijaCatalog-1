@@ -6,7 +6,8 @@ class Sitemap(Sitemap):
     priority = 0.5  # Set the priority (0.0 to 1.0)
 
     def items(self):
-        return Book.objects.all()
+        obj = Book.objects.all()
+        return obj
 
     def title(self, obj):
         return obj.title  # Replace with the actual field in your model

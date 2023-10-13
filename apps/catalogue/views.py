@@ -31,3 +31,12 @@ def catalogView(request):
     catalog = Book.objects.filter(institution=library_obj.name)
 
     return render(request, 'catalog/list.html', locals())
+
+
+
+def single_book_info(request, slug):
+    book = Book.objects.get(slug=slug)
+    context={
+        'book':book,
+    }
+    return render(request, 'catalog/single_book.html', context)

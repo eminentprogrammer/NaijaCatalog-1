@@ -12,8 +12,8 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('search/', views.search, name="search"),
     path('google-scholar-search/', views.google_scholar_search, name='google_scholar_search'),
-    # Add other URL patterns as needed
 
+    # Add other URL patterns as needed
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path('robots.txt', views.robots_view, name='robots_txt'),
 ]

@@ -4,7 +4,7 @@ from .models import Book, ExcelUpLoad
 from .resources import BookResource
 from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ExportActionModelAdmin
-
+from django.utils.text import slugify
 
 class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'series','call_number', 'publisher', 'location', 'institution']

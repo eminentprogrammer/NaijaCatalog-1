@@ -10,6 +10,7 @@ from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 def robots_view(request):
     return render(request, 'robots.txt')
 
+
 def homepage(request):
     context = {}
     books = Book.objects.all().order_by('title','author','subject')[:4]
