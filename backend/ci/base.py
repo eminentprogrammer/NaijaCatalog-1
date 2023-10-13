@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.humanize',
-
+    'django.contrib.sitemaps',
+    
     'whitenoise',
     'django.contrib.staticfiles',
     'apps.https',

@@ -7,6 +7,9 @@ from django.contrib import messages
 from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
+def robots_view(request):
+    return render(request, 'robots.txt')
+
 def homepage(request):
     context = {}
     books = Book.objects.all().order_by('title','author','subject')[:4]

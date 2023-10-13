@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://naijacatalog.com/sitemap.xml
