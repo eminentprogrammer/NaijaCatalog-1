@@ -197,7 +197,7 @@
             </div>
         </div>
 
-        <div class="col vh-100 right-side" id="right_side">
+        <div class="col right-side" id="right_side">
             <div class="row">
                 <nav class="navbar navbar-light bg-light fixed-top-c shadow">
                     <div class="container">
@@ -232,12 +232,20 @@
                 </nav>
             </div>
             <div class="row" id="dashMain">
+                {% if messages %}
+                <div class="django_message" id="django_message"><div class="row"><div class="col d-flex justify-content-end">{% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show animate__animated animate__fadeI    nDown animate__repeat repeat-2 " role="alert">
+                <p class="text my-auto">{{message}}</p><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+                {% endfor %}</div></div></div>
+                {% endif %}
                 {% block dashContent %}{% endblock %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
 <script>
     const navbarBtn = document.querySelectorAll("#navbarBtn");
     const leftSide = document.getElementById("left_side");
@@ -261,4 +269,5 @@
         });
     })
 </script>
+{% block dash-scripts %}{% endblock  %}
 {% endblock %}

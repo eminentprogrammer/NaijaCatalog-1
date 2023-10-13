@@ -2,22 +2,56 @@
 {% load static %}
 {% block dash-styles %}
 <style>
+    *::-webkit-scrollbar{
+        display: none;
+    }
 </style>
 {% endblock  %}
 
 {% block dashContent %}
 <div class="container">
-    <div class="row justify-content-between vh-100">
-        <form class="d-block d-md-none" method="GET" action="{% url 'dashboard_search' %}">
+    <div class="row mb-5">
+        <form class="" method="GET" action="{% url 'dashboard_search' %}">
             <input class="form-control me-sm-2" name="search" type="search" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" value="{{query}}" autofocus required>
             <input type="submit" class="btn btn-primary" value="Search" hidden>
         </form>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="card shadow text-dark px-2">
+                <canvas id="myChart" height="350"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
+
+{% block dash-scripts %}
 <!-- Optional: Place to the bottom of scripts -->
 <script>
     const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>
 
+<script>
+    const ctx = document.getElementById('myChart');    
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['AUI', 'LASU', 'BAU', 'PAU', 'ABU', 'ADU'],
+        datasets: [{
+          label: '# of book collections',
+          data: [12, 19, 30, 25, 15, 10],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
 {% endblock  %}

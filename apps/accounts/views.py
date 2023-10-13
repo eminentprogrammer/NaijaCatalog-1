@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Account
+from .models import Account, StudentProfile
 from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account
 
 from apps.catalogue.models import Book
@@ -73,38 +73,27 @@ def signUp(request):
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('signup_email')
-        username    = request.POST.get('signup_email')
+        username    = request.POST.get('username')
         category    = request.POST.get('category')
         password    = request.POST.get('signup_password')
+        
+        user = Account.objects.create_user(
+            email=email,
+            username=username,
+            password=password
+        )
+        user = authenticate(email=email, password = password)
 
-        form = UserRegistration(request.POST)
-        if form.is_valid():
-            print("form is valid")
-            # email   = form.cleaned_data.get('email')
-            # username = form.cleaned_data.get('username')
-            # password = form.cleaned_data.get('password1')
-            user = Account.objects.create_user(
-                email=email,
-                username=username,
-                password=password
-            )
-            user = authenticate(email=email, password = password)
-            if not user is None:
-                login(request, user)
-                messages.error(request, f"Welcome {username}")
-                return redirect('dashboard')
+        if not user is None:
+            stud_obj = StudentProfile.objects.create(user=user, institution=category)
+            stud_obj.save()
+            login(request, user)
+            messages.error(request, f"Welcome {username}")
+            return redirect('dashboard')
             
-            messages.error(request, "Account created successfully, log in")
-            return redirect("login_view")
-        else:
-            messages.error(request, "Form validation error")
+        messages.error(request, "Account created successfully, log in")
+        return redirect("signin")
 
-        data = {
-            'token':token,
-            'email': email,
-            'password': hash(password),
-            'valid': True
-        }
     return render(request, 'users/registrations/register.html', context=data)
 
 
