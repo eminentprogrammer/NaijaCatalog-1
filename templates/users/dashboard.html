@@ -10,7 +10,7 @@
 
 {% block dashContent %}
 <div class="container">
-    <div class="row mb-5">
+    <div class="row mb-5 d-block d-md-none">
         <form class="" method="GET" action="{% url 'dashboard_search' %}">
             <input class="form-control me-sm-2" name="search" type="search" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" value="{{query}}" autofocus required>
             <input type="submit" class="btn btn-primary" value="Search" hidden>
