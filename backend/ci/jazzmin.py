@@ -53,6 +53,7 @@ JAZZMIN_SETTINGS = {
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
+
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "apps.library.Book"},
     ],
@@ -144,6 +145,7 @@ JAZZMIN_SETTINGS = {
     # - collapsible
     # - carousel
     "changeform_format": "carousel",
+    
     # override change forms on a per modeladmin basis
     "changeform_format_overrides": {"auth.user": "single", "auth.group": "single"},
     # Add a language dropdown into the admin
