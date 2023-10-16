@@ -1,4 +1,4 @@
-{% extends "users/dashboard/base.html" %}
+{% extends "users/__base.html" %}
 {% load static %}
 {% block dash-styles %}
 <style>
@@ -21,7 +21,7 @@
 </style>
 {% endblock  %}
 
-{% block dashContent %}
+{% block content %}
 <div class="container">
     <div class="row" hidden>
         {% for i in  '123' %}
@@ -41,17 +41,18 @@
 
     <div class="row justify-content-between">
         <div class="col-10 mx-auto">
-            <div class="result-heading">
+            <div class="result-heading text-dark">
                 <span class="text-start fw-bold">Results:</span>
                 <span class="text-end fw-bold">Duration: {{elapsed_time | truncatechars:7}}S</span>
             </div>
+
             {% if queryset %}
             <ul class="list-group result-ul">
                 {% for data in queryset %}
                 <li class="list-group-item px-5 my-2 bg-success-c py-5 rounded">
                     <div class="row">
                         <div class="col-md-9 g-4">
-                            <h5 class="result-title">{{forloop.counter}}) {{ data.title }}</h5>
+                            <h5 class="result-title text-dark">{{forloop.counter}}) {{ data.title }}</h5>
                             <p class="fw-bold h6">
                                 <span class="text-danger">{{ data.institution }}</span>
                             </p>
@@ -59,7 +60,7 @@
                             <p>Publisher: {{ data.publisher }}</p>
                             <p>Year: {{ data.year_published }}</p>
                             <p>Series: {{ data.series }}</p>
-                            <a class="btn btn-sm bg-success rounded-0 py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalId{{data.pk}}">Send Request</a>
+                            <a class="btn btn-sm btn-success py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalId{{data.pk}}">Send Request</a>
                         </div>
                         <div class="col-md-3">
                             <div class="result-img-box">
@@ -69,6 +70,7 @@
                         </div>
                     </div>
                 </li>
+
                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
                 <div class="modal fade" id="modalId{{data.pk}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
@@ -98,11 +100,4 @@
         </div>
     </div>
 </div>
-
-<!-- Optional: Place to the bottom of scripts -->
-<script>
-    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-
-</script>
-
 {% endblock  %}

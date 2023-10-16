@@ -1,4 +1,4 @@
-        {% extends 'users/base.html' %}
+        {% extends 'users/registrations/sbase.html' %}
         {% load static %}
         {% block title %} Join Naija Catalog - Register - {% endblock %}
 
@@ -8,14 +8,15 @@
 
 
         {% block content %}
-        <div class="container-fluid" id="app">
+        <div class="container-fluid py-3" id="app">
             <h1 class="text-center text-light text-muted">Join Here</h1>
             <div class="logo-box" id="logo_container">
                 <img class="img-fluid" draggable="false" src="{% static 'images/naijacatalog.png' %}" alt="naijacatalog" srcset="{% static 'images/naijacatalog.png' %}">
             </div>
+
             <div class="container">
                 <div class="row">
-                    <div class="col-10 col-md-4 mx-auto">
+                    <div class="col-10 col-md-5 mx-auto">
                         <form class="shadow active" action="{% url 'signup' %}" method="POST">{% csrf_token %}
                             {% if messages %}
                             {% include "components/message.html" %}
@@ -25,22 +26,22 @@
                             </small>                    
                         
                             <div class="form-floating mb-2 text-dark">
-                                <input type="text" class="form-control" name="username" id="username" placeholder="">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="" required {% if username %}value="{{username}}"{% endif %}>
                                 <label for="username">Username</label>
                             </div>
                             <div class="form-floating mb-2 text-dark">
-                                <input type="email" class="form-control" name="signup_email" id="signup_email" placeholder="">
-                                <label for="signup_email">Email Address</label>
+                                <input type="email" class="form-control" name="email" id="signup_email" placeholder="" required {% if email %}value="{{email}}"{% endif %}>
+                                <label for="email">Email Address</label>
                             </div>
                         
                             <div class="row mb-2">
                                 <div class="text-dark">
-                                    <select class="form-select form-control" name="category" id="category">
+                                    <select class="form-select form-control" name="category" id="category" required>
                                         <option class="text-warning">Choose University</option>
-                                        <option class="text-success" value="Augustine University Ilara Epe"> Augustine University Ilara-Epe</option>
-                                        <option class="text-success" value="Caleb University">Caleb University</option>
-                                        <option class="text-success" value="Covenant University"> Convenant University </option>
-                                        <option class="text-success" value="Unilag"> Unilag</option>
+                                        <option class="text-success" value="Augustine University Ilara Epe" {% if category == 'Augustine University Ilara Epe' %}selected{% endif %}> Augustine University Ilara-Epe</option>
+                                        <option class="text-success" value="Caleb University" {% if category == 'Caleb University' %}selected{% endif %}> Caleb University</option>
+                                        <option class="text-success" value="Covenant University" {% if category == 'Covenant University' %}selected{% endif %}> Convenant University </option>
+                                        <option class="text-success" value="Unilag" {% if category == 'Unilag' %}selected{% endif %}>Unilag</option>
                                         <option class="text-danger" value="Others">Others</option>
                                     </select>
                                 </div>
@@ -52,14 +53,22 @@
                             </div>
                         
                             <div class="form-floating mb-2 text-dark">
-                                <input type="password" class="form-control" name="signup_password" id="signup_password" placeholder="" required>
-                                <label for="signup_password">Password</label>
+                                <input type="password" class="form-control" name="password" id="signup_password" placeholder="" required>
+                                <label for="password">Password</label>
                             </div>
-                        
-                            <div class="form-group my-4">
+
+                            <div class="form-group my-4 d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                          <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input" required> I agree to all Terms & Conditions </label>
+                                        </div>
+                                    </div>          
+                                </div>
                                 <button type="submit" class="btn btn-danger">Continue</button>
                             </div>
-                            <p class="text-muted">Already have an account, <a class="text-decoration-none text-success fw-bold" href="{% url 'signin' %}">login</a></p>
+                            <p class="text-muted my-auto text-center">Already have an account, <a class="text-decoration-none text-success fw-bold" href="{% url 'signin' %}">login</a></p>
                         </form>
                     </div>
                 </div>

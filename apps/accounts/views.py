@@ -19,10 +19,9 @@ context = {
     'page_title' : 'Naija Catalog',
 }
 
-
 @login_required
 def dashboard_view(request):
-    return render(request, "users/dashboard.html", context)
+    return render(request, "users/__dashboard.html", context)
 
 
 def dashboard_search(request):
@@ -68,62 +67,77 @@ def dashboard_search(request):
 
 
 def signUp(request):
-    data = {}
+    context = {}
     form = UserRegistration()
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
-        email       = request.POST.get('signup_email')
+        email       = request.POST.get('email')
         username    = request.POST.get('username')
         category    = request.POST.get('category')
-        password    = request.POST.get('signup_password')
+        institution = request.POST.get('institution')
+        password    = request.POST.get('password')
         
-        user = Account.objects.create_user(
-            email=email,
-            username=username,
-            password=password
-        )
-        user = authenticate(email=email, password = password)
+        if not Account.objects.filter(email=email).exists():
+            user = Account.objects.create_user(
+                email=email,
+                username=username,
+                password=password
+            )
 
-        if not user is None:
-            stud_obj = StudentProfile.objects.create(user=user, institution=category)
-            stud_obj.save()
-            login(request, user)
-            messages.error(request, f"Welcome {username}")
-            return redirect('dashboard')
-            
-        messages.error(request, "Account created successfully, log in")
-        return redirect("signin")
+            user = authenticate(email=email, password = password)
+            if not user is None:
+                stud_obj = StudentProfile.objects.create(user=user, institution=category)
+                stud_obj.save()
+                login(request, user)
+                messages.error(request, f"Welcome {username}")
+                return redirect('dashboard')
 
-    return render(request, 'users/registrations/register.html', context=data)
+            messages.error(request, "Account created successfully, log in")
+            return redirect("signin")
+
+        context = {
+            'email':email,
+            'username':username,
+            'category':category,
+            'password':password,
+            'institution':institution,
+        }        
+        messages.error(request, "Email Already exist !!!")
+    return render(request, 'users/registrations/register.html', context)
+    # return render(request, 'connect-plus/pages/samples/register.html', context=data)
+
 
 
 
 def signIn(request):
-    data = {}
-    logout(request)
-    
-    if request.POST:
-        token = request.POST.get('csrfmiddlewaretoken')
-        email = request.POST.get('signin_email')
-        password = request.POST.get('signin_password')
+    context = {}
 
-        user = authenticate(email=email, password=password)    
-        
+    logout(request)
+    if request.POST:
+        token       = request.POST.get('csrfmiddlewaretoken')
+        email       = request.POST.get('email')
+        saveauth    = request.POST.get('savelogin')
+        password    = request.POST.get('password')
+
+        print(email, password, saveauth)
+        user = authenticate(email=email, password=password)
+
         if user is not None:
             login(request, user)
-            messages.success(request, f"Sign In Successful, welcome {user.username}")
+            messages.success(request, f"Sign In Successful, welcome back, {user.username}")
             return redirect("dashboard")
         else:
-            messages.error(request,  "Incorrect username or password")
-
-        data = {
+            messages.error(request,  "Incorrect email or password")
+        
+        context = {
             'token':token,
             'email': email,
-            'password': hash(password),
-            'valid': True
+            'password': password,
+            'valid': True,
+            'saveauth':saveauth
         }
-        
-    return render(request, 'users/registrations/login.html', context=data)
+    return render(request, 'users/registrations/login.html', context)
+    # return render(request, 'connect-plus/pages/samples/login.html', context=data)
 
 
 @login_required
@@ -192,5 +206,5 @@ def update_password(request):
 def signOut(request):
     user = request.user
     logout(request)
-    messages.info(request, f"Thanks {user}, Call Again")
-    return redirect('homepage')
+    messages.info(request, f"Thanks {user}")
+    return redirect('signin')

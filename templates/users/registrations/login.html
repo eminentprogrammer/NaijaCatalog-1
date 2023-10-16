@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends 'users/registrations/base.html' %}
 {% load static %}
 
 {% block title %} Login Into Naija Catalog {% endblock %}
@@ -23,25 +23,31 @@
                             <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate
                                 for undergraduates.</small>
                             <div class="form-floating my-3 text-dark">
-                                <input type="email" class="form-control" name="signin_email" id="signin_email" placeholder=""
-                                    required>
+                                <input type="email" class="form-control" name="email" id="signin_email" placeholder=""
+                                    required {% if email %}value="{{email}}"{% endif %}>
                                 <label for="signin_email">Email Address</label>
                             </div>
                             <div class="form-floating mb-3 text-dark">
-                                <input type="password" class="form-control" name="signin_password" id="signin_password"
-                                    placeholder="">
+                                <input type="password" class="form-control" name="password" id="signin_password"
+                                    placeholder="" required {% if password %}value="{{password}}"{% endif %}>
                                 <label for="signin_password">Password</label>
                             </div>
-
-                            <div class="form-check form-switch text-dark">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                <label class="form-check-label text-light" for="flexSwitchCheckDefault">Save</label>
+                            <div class="my-2 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <label class="form-check-label text-muted">
+                                        <input type="checkbox" class="form-check-input" name="savelogin" {% if saveauth %}checked{% endif %}>
+                                        Keep me signed in 
+                                    </label>
+                                </div>
+                                <a href="#" class="auth-link text-light">Forgot password?</a>
                             </div>
-                            
+
                             <div class="form-group my-4">
                                 <button type="submit" class="btn btn-success">Continue</button>
                             </div>
-                            <p class="text-muted">Don't have an account, <a class="text-decoration-none text-danger fw-bold" href="{% url 'signup' %}">Register</a></p>
+                            <div class="text-center mt-4 font-weight-light">
+                                <p class="text-muted">Don't have an account, <a class="text-decoration-none text-warning fw-bold" href="{% url 'signup' %}">Create</a></p>
+                            </div>
                         </form>
                     </div>
                 </div>
