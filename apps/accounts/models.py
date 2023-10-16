@@ -1,5 +1,7 @@
 import uuid
 import random
+from django.urls import reverse
+from django.contrib import messages
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -79,20 +81,38 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 
 class Institution(models.Model):
+    logo            = models.ImageField(blank=True, null=True)
     name            = models.CharField(max_length=500)
     location        = models.CharField(max_length=500)
     contact_email   = models.EmailField(blank=True)
     contact_phone   = models.CharField(max_length=15, blank=True) 
+    slug            = models.SlugField(blank=True, null=True)
     admin           = models.OneToOneField(Account, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Institutions"
     
+    def get_absolute_url(self):
+        return reverse('partner_portal', args=[str(self.slug)])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            try:
+                self.slug = slugify(self.name)
+                self.save()
+            except Exception as e:
+                raise ValueError(e)
+        
+        super().save(*args, **kwargs)
+    
+
     def __str__(self):
         return str(self.name)
 
-
+ 
 class StudentProfile(models.Model):
+    image           = models.ImageField(blank=True, null=True)
     firstname       = models.CharField(max_length=200, blank=True)
     lastname        = models.CharField(max_length=200, blank=True)
     contact_no      = models.CharField(max_length=15, blank=True)

@@ -30,14 +30,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
-    
+
     'whitenoise',
     'django.contrib.staticfiles',
+    'frontend',
     'apps.https',
     'import_export',
     'apps.accounts',
     'apps.catalogue',
-    'frontend',
+    'apps.emailApp',
 ]
 
 # HEALTH CHECK
@@ -91,9 +92,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 AUTH_USER_MODEL = 'accounts.Account'
 
+# GMAIL CONFIGURATIONS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # For TLS
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # Set to False for TLS
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -117,6 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization

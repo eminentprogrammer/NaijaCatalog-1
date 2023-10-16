@@ -10,7 +10,7 @@ from django.contrib import messages
 from .models import Account, StudentProfile
 from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account
 
-from apps.catalogue.models import Book
+from apps.catalogue.models import Book, Institution
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
 

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from apps.accounts.models import Institution
 from apps.catalogue.models import Book
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
@@ -16,7 +17,6 @@ def news(request):
 
 def robots_view(request):
     return render(request, 'robots.txt')
-
 
 def homepage(request):
     context = {}
@@ -70,3 +70,15 @@ def search(request):
 
 def google_scholar_search(request):
     return render(request, 'engine/google_scholar_search.html')
+
+
+
+
+
+@login_required
+def partner_portal(request, slug):
+    context = {}
+    partner = Institution.objects.get(slug=slug)
+
+    context['partner'] = partner
+    return render(request, 'partner_portal/index.html', context)
