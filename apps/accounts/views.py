@@ -13,6 +13,8 @@ from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account
 from apps.catalogue.models import Book, Institution
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
+from apps.emailApp.views import send_confirmation_email
+
 
 # Create your views here.
 context = {
@@ -21,6 +23,25 @@ context = {
 
 @login_required
 def dashboard_view(request):
+    user = request.user
+    if user.is_superuser:
+        messages.success(request, 'Master Dashboard')
+        
+        users =  StudentProfile.objects.all()
+        institutions = Institution.objects.all()
+        context = {
+            'users':users,
+            'users_count': users.count(),
+            'instituions':institutions,
+            'instituions_count':institutions.count(),
+        }
+        return render(request, "users/__dashboard.html", context)
+    
+
+    if user.is_student:
+        messages.success(request, 'Student Dashboard')
+    if user.is_librarian:
+        messages.success(request, 'Librarian Dashboard')
     return render(request, "users/__dashboard.html", context)
 
 
@@ -80,7 +101,7 @@ def signUp(request):
         if not Account.objects.filter(email=email).exists():
             user = Account.objects.create_user(
                 email=email,
-                username=username,
+                username=email,
                 password=password
             )
 
@@ -89,7 +110,8 @@ def signUp(request):
                 stud_obj = StudentProfile.objects.create(user=user, institution=category)
                 stud_obj.save()
                 login(request, user)
-                messages.error(request, f"Welcome {username}")
+                send_confirmation_email(request, user)
+                messages.error(request, f"Welcome {email}")
                 return redirect('dashboard')
 
             messages.error(request, "Account created successfully, log in")
@@ -97,14 +119,16 @@ def signUp(request):
 
         context = {
             'email':email,
-            'username':username,
+            # 'username':username,
             'category':category,
             'password':password,
             'institution':institution,
-        }        
+        }       
         messages.error(request, "Email Already exist !!!")
     return render(request, 'users/registrations/register.html', context)
     # return render(request, 'connect-plus/pages/samples/register.html', context=data)
+
+
 
 
 
@@ -119,13 +143,15 @@ def signIn(request):
         saveauth    = request.POST.get('savelogin')
         password    = request.POST.get('password')
 
-        print(email, password, saveauth)
         user = authenticate(email=email, password=password)
-
+        
         if user is not None:
             login(request, user)
+            send_confirmation_email(request, user)
+
             messages.success(request, f"Sign In Successful, welcome back, {user.username}")
             return redirect("dashboard")
+        
         else:
             messages.error(request,  "Incorrect email or password")
         
@@ -143,9 +169,8 @@ def signIn(request):
 @login_required
 def update_profile(request):
     context['page_title'] = 'Update Profile'
-    
     user = Account.objects.get(id = request.user.id)
-    
+
     if not request.method == 'POST':
         form = UpdateProfile(instance=user)
         context['form'] = form
@@ -154,11 +179,14 @@ def update_profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile has been updated")
-            return redirect("accounts:profile")
+            return redirect("update_profile")
         else:
             context['form'] = form
-            
-    return render(request, 'users/management/update_profile.html', context)
+    
+    context['user'] = user
+    return render(request, 'users/registrations/update_profile.html', context)
+
+
 
 @login_required
 def update_user(request):
@@ -185,21 +213,32 @@ def update_user(request):
 @login_required
 def update_password(request):
     context['page_title'] = "Update Password"
+
     if request.method == 'POST':
         form = UpdatePasswords(user = request.user, data= request.POST)
+
         if form.is_valid():
             form.save()
             messages.success(request,"Your Account Password has been updated successfully")
             update_session_auth_hash(request, form.user)
-            return redirect("accounts:user_profile")
-        
+            return redirect("update_password")
         else:
             context['form'] = form
     else:
-        
         form = UpdatePasswords(request.POST)
         context['form'] = form
-    return render(request,'users/management/update_password.html', context)
+    return render(request,'users/registrations/change_password.html', context)
+
+def reset_password(request):
+    context = {}
+
+    if request.POST:
+        email = request.POST.get('email')
+        if Account.objects.filter(email=email).exists():
+            user = Account.objects.get(email=email)
+            messages.success(request, f'Reset link generated, proceed further with the email sent to you @{email}')             
+        context['email'] = email
+    return render(request, 'users/registrations/reset_password.html', context)
 
 
 #Logout

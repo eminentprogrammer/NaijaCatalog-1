@@ -13,13 +13,15 @@ class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
-    
-        user = self.model(email=self.normalize_email(email), username=username, **extra_fields)
+        
+        email = email.lower()
+        user = self.model(email=self.normalize_email(email), username=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, username, password, **extra_fields):
+
         if not email:
             raise ValueError("Email is required")
         
@@ -36,6 +38,7 @@ class MyAccountManager(BaseUserManager):
     
         return self.create_user(email, username, password, **extra_fields)
 
+
 class Account(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(unique=True)
     username        = models.CharField(max_length=100, unique=True)
@@ -44,22 +47,22 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_student      = models.BooleanField(default=False)
     is_admin        = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
+    is_librarian     = models.BooleanField(default=False)
     is_superuser    = models.BooleanField(default=False)
     
     date_joined     = models.DateTimeField(auto_now_add=True, editable=True)
     last_login      = models.DateTimeField(verbose_name='last login', auto_now=True, editable=True)
 
-    slug            = models.CharField(max_length=200)
+    slug            = models.CharField(max_length=200, blank=True, null=True)
     
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
     
+
     objects = MyAccountManager()
-    
     class Meta:
         verbose_name_plural = "Account Manager"
         ordering            = ['-date_joined']
-
     
     def __str__(self):
         return self.email   
@@ -78,6 +81,13 @@ class Account(AbstractBaseUser, PermissionsMixin):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+    
+    def save(self, *args, **kwargs):
+
+        if not self.slug:
+            self.slug = uuid.uuid4()
+
+        super().save(*args, **kwargs)
 
 
 class Institution(models.Model):
@@ -87,7 +97,7 @@ class Institution(models.Model):
     contact_email   = models.EmailField(blank=True)
     contact_phone   = models.CharField(max_length=15, blank=True) 
     slug            = models.SlugField(blank=True, null=True)
-    admin           = models.OneToOneField(Account, on_delete=models.CASCADE)
+    admin           = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='Librarian')
 
     class Meta:
         verbose_name_plural = "Institutions"
@@ -120,7 +130,7 @@ class StudentProfile(models.Model):
     institution     = models.CharField(max_length=500, blank=True)
     department      = models.CharField(max_length=100, blank=True)
     is_active       = models.BooleanField(default=False)
-    user            = models.OneToOneField(Account, on_delete=models.CASCADE)
+    user            = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="student")
 
     class Meta:
         verbose_name_plural = "Students"

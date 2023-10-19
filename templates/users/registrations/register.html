@@ -1,4 +1,4 @@
-        {% extends 'users/registrations/sbase.html' %}
+        {% extends 'users/registrations/base.html' %}
         {% load static %}
         {% block title %} Join Naija Catalog - Register - {% endblock %}
 
@@ -16,15 +16,14 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-10 col-md-5 mx-auto">
+                    <div class="col-10 col-md-4 mx-auto">
                         <form class="shadow active" action="{% url 'signup' %}" method="POST">{% csrf_token %}
                             {% if messages %}
                             {% include "components/message.html" %}
                             {% endif %}
-                            <small id="helpId_sl" class="text-muted">
+                            <div id="helpId_sl" class="text-muted mb-4">
                                 Unlock the Power of Collaboration with Our Undergraduate-Driven Union Catalogue.
-                            </small>                    
-                        
+                            </div>                    
                             <div class="form-floating mb-2 text-dark">
                                 <input type="text" class="form-control" name="username" id="username" placeholder="" required {% if username %}value="{{username}}"{% endif %}>
                                 <label for="username">Username</label>

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %} {% endblock %} Naija Catalog Plug</title>
     <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'connects/vendors/mdi/css/materialdesignicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'connects/vendors/flag-icon-css/css/flag-icon.min.css' %}">
     <link rel="stylesheet" href="{% static 'connects/vendors/css/vendor.bundle.base.css' %}">
@@ -27,14 +28,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+    {% block styles %}{% endblock %}
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="{% url 'dashboard' %}"><img src="{% static 'connects/images/logo.svg' %}" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="{% url 'dashboard' %}"><img src="{% static 'connects/images/logo-mini.svg' %}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{% url 'dashboard' %}">
+            <!-- <img src="{% static 'connects/images/logo.svg' %}" alt="logo" /></a> -->
+            <h1 class="text-light fw-bold">
+              Naija Catalog
+            </h1>
+          <a class="navbar-brand brand-logo-mini" href="{% url 'dashboard' %}">
+            <img src="{% static 'connects/images/logo-mini.svg' %}" alt="logo" /></a>
         </div>
 
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -118,6 +125,7 @@
                   <p class="mb-1 text-black">Igwesi Emmanuel</p>
                 </div>
               </a>
+
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-3 text-center bg-primary">
                   <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% static 'connects/images/faces/face28.png' %}" alt="">
@@ -197,6 +205,8 @@
                 <h6 class="p-3 mb-0 text-center">4 new messages</h6>
               </div>
             </li>
+
+            
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
@@ -283,8 +293,8 @@
             <footer class="footer">
                 <div class="footer-inner-wraper">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2023</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="#https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © naijacatalog.com 2023</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Igwesi Emmanuel</span>
                     </div>
                 </div>
             </footer>
@@ -297,19 +307,20 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="{% static 'connects/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'connects/vendors/js/vendor.bundle.base.js' %}" defer></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="{% static 'connects/vendors/chart.js/Chart.min.js' %}"></script>
-    <script src="{% static 'connects/vendors/jquery-circle-progress/js/circle-progress.min.js' %}"></script>
+    <script src="{% static 'connects/vendors/chart.js/Chart.min.js' %}" defer></script>
+    <script src="{% static 'connects/vendors/jquery-circle-progress/js/circle-progress.min.js' %}" defer></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="{% static 'connects/js/off-canvas.js' %}"></script>
-    <script src="{% static 'connects/js/hoverable-collapse.js' %}"></script>
-    <script src="{% static 'connects/js/misc.js' %}"></script>
+    <script src="{% static 'connects/js/off-canvas.js' %}" defer></script>
+    <script src="{% static 'connects/js/hoverable-collapse.js' %}" defer></script>
+    <script src="{% static 'connects/js/misc.js' %}" defer></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="{% static 'connects/js/dashboard.js' %}"></script>
+    <script src="{% static 'connects/js/dashboard.js' %}" defer></script>
     <!-- End custom js for this page -->
+    {% block scripts %}{% endblock %}
   </body>
 </html>

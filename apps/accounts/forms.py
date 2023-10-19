@@ -51,18 +51,12 @@ class UserRegistration(UserCreationForm):
 
 
 class UpdateProfile(UserChangeForm):
-     username       = forms.CharField(max_length=250,help_text="The Username field is required.")
      first_name     = forms.CharField(max_length=250,help_text="The First Name field is required.")
      last_name      = forms.CharField(max_length=250,help_text="The Last Name field is required.")
-     current_password = forms.CharField(max_length=250)
-
+     
      class Meta:
           model = Account
-          fields = ('username','first_name', 'last_name')
-
-     def clean_current_password(self):
-          if not self.instance.check_password(self.cleaned_data['current_password']):
-               raise forms.ValidationError(f"Password is Incorrect")  
+          fields = ('first_name', 'last_name')
 
      def clean_username(self):
           username = self.cleaned_data['username']

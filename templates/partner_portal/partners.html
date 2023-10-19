@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Partners
+{% endblock %}
+
 {% block HERO %}
 {% endblock %}
 
-{% block extrahead %}
-<style></style>
-{% endblock %}
 
 {% block content %}
-<div class="container" id="appContainer" style="margin-top: 100px;">
-    <div class="row mb-3">
-        <div class="col-10 mx-auto">
-            <h4 class="text-dark fw-bold">News</h4>
-        </div>
-    </div>
+<div class="card py-3 rounded-2 border-0 border-bottom mb-5"></div>
 
+<div class="container-fluid">
     <div class="row">
-        <div class="col-10 mx-auto">
+        <div class="col-md-8 mx-auto">
+            <h1 class="text-dark text-center mb-4"> Registered Partners </h1>
             <p class="text-dark text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, 
                 dolores obcaecati ut totam necessitatibus deleniti hic illum quisquam deserunt adipisci distinctio veritatis eos blanditiis sed quia aut earum repellendus repudiandae.
@@ -25,18 +23,21 @@
     </div>
     
     <div class="row py-4">
-        <div class="col-12 col-md-10 g-3 mx-auto">
+        <div class="col-12 col-md-7 g-3 mx-auto">
             <div class="container">
+                {% for partner in partners %}
                 <div class="row py-3">
-                    <div class="logo-box">
-                        <img src="" alt="news_001" srcset="">
-                    </div>
                     <div class="col">
                         <h4>
-                            <a href="#news001" >News --1</a>
+                            <a href="{{partner.get_absolute_url}}" >{{ partner.name }}</a>
                         </h4>
                     </div>
+            
+                    <div class="logo-box">
+                        <img src="" alt="{{partner.name}}" srcset="">
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

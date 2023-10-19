@@ -7,6 +7,11 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 
+import threading
+
+def send_email_async(subject, message, from_email, recipient_list):
+    send_mail(subject, message, from_email, recipient_list)
+
 
 def send_confirmation_email(request, user):
     # Generate a token for the user
@@ -27,5 +32,8 @@ def send_confirmation_email(request, user):
         "confirmation_link": confirmation_link,
     })
 
-    # Send the email
-    send_mail(subject, message, settings.EMAIL_USER, [user.email])
+    email_thread = threading.Thread(
+        target=send_email_async,
+        args=("Email Subject", "Email Message", settings.EMAIL_HOST_USER, [user.email])
+    )
+    email_thread.start()

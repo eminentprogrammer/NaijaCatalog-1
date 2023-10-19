@@ -10,20 +10,30 @@ from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 
 
 def about(request):
-    return render(request, 'about-us.html')
+    page = 'about'
+    context = {
+        'page':page
+    }
+    return render(request, 'about-us.html', context)
 
 def news(request):
-    return render(request, 'news.html')
+    page = 'news'
+    context = {
+        'page':page
+    }
+    return render(request, 'news.html', context)
 
 def robots_view(request):
     return render(request, 'robots.txt')
 
 def homepage(request):
     context = {}
+    page = "homepage"
     books = Book.objects.all().order_by('title','author','subject')[:4]
     institutions = Institution.objects.all()
     
     context = {
+        'page': page,
         'search':search,
         'studform': StudentRegistration(),
         'Instiform':InstitutionRegistration(),
@@ -48,37 +58,43 @@ def convertJ(obj):
 
 def search(request):
     context = {}
+
     if not request.user.is_authenticated:
         messages.success(request, f"Sign in to use the search functionality")
         return redirect("homepage")
     
     query = request.GET.get('article')
-    try:
-        querysets = Book.objects.filter(title__icontains=query)
-        obj = gscholar.query(query)
-        scholar = convertJ(obj)
-        context['gscholar'] = scholar
+    if query:
+        try:
+            querysets = Book.objects.filter(title__icontains=query)
+            obj = gscholar.query(query)
+            scholar = convertJ(obj)
+            context['gscholar'] = scholar
+            
+        except Exception as e:
+            print(e)
         
-    except Exception as e:
-        print(e)
-    context = {
-        'query':query,
-        'querysets':querysets,
-    }
-    return render(request, 'engine/general_search.html', context)
+        context = {
+            'query':query,
+            'querysets':querysets,
+        }
+
+        return render(request, 'engine/general_search.html', context)
+    return render(request, 'engine/general_search.html')
 
 
 def google_scholar_search(request):
     return render(request, 'engine/google_scholar_search.html')
 
 
-
-
-
 @login_required
-def partner_portal(request, slug):
+def partner_portal(request, slug=None):
     context = {}
-    partner = Institution.objects.get(slug=slug)
 
+    if not slug:
+        context['partners'] = Institution.objects.all().order_by('name')
+        return render(request, 'partner_portal/partners.html', context)
+    
+    partner = Institution.objects.get(slug=slug)
     context['partner'] = partner
     return render(request, 'partner_portal/index.html', context)

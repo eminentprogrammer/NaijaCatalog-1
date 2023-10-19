@@ -19,5 +19,6 @@ urlpatterns = [
     path('robots.txt', views.robots_view, name='robots_txt'),
     
     path('google-scholar-search/', views.google_scholar_search, name='google_scholar_search'),
-    path("partner-portal/<slug:slug>", views.partner_portal, name="partner_portal"),
+    path("partner-portal/", views.partner_portal, name="partner_portal"),
+    path("partner-portal/<slug:slug>/", views.partner_portal, name="partner_portal"),
 ]
