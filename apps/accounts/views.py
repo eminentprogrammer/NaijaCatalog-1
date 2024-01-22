@@ -37,12 +37,12 @@ def dashboard_view(request):
         }
         return render(request, "users/__dashboard.html", context)
     
-
     if user.is_student:
         messages.success(request, 'Student Dashboard')
     if user.is_librarian:
         messages.success(request, 'Librarian Dashboard')
-    return render(request, "users/__dashboard.html", context)
+    
+    return render(request, "users/__dashboard.html", locals())
 
 
 def dashboard_search(request):
@@ -87,13 +87,13 @@ def dashboard_search(request):
     return render(request, "users/dashboard/general_search.html", context)
 
 
+
 def signUp(request):
     context = {}
     form = UserRegistration()
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
-        username    = request.POST.get('username')
         category    = request.POST.get('category')
         institution = request.POST.get('institution')
         password    = request.POST.get('password')
@@ -101,33 +101,30 @@ def signUp(request):
         if not Account.objects.filter(email=email).exists():
             user = Account.objects.create_user(
                 email=email,
-                username=email,
                 password=password
             )
-
             user = authenticate(email=email, password = password)
             if not user is None:
                 stud_obj = StudentProfile.objects.create(user=user, institution=category)
                 stud_obj.save()
                 login(request, user)
                 send_confirmation_email(request, user)
+
                 messages.error(request, f"Welcome {email}")
                 return redirect('dashboard')
-
             messages.error(request, "Account created successfully, log in")
-            return redirect("signin")
+            return redirect("signin")        
+        else:
+            context = {
+                'email':email,
+                'category':category,
+                'password':password,
+                'institution':institution,
+            }       
+            messages.error(request, "Email Already exist !!!")
+            return render(request, 'users/registrations/register.html')
 
-        context = {
-            'email':email,
-            # 'username':username,
-            'category':category,
-            'password':password,
-            'institution':institution,
-        }       
-        messages.error(request, "Email Already exist !!!")
-    return render(request, 'users/registrations/register.html', context)
-    # return render(request, 'connect-plus/pages/samples/register.html', context=data)
-
+    return render(request, 'users/registrations/register.html', locals())
 
 
 
@@ -149,7 +146,7 @@ def signIn(request):
             login(request, user)
             send_confirmation_email(request, user)
 
-            messages.success(request, f"Sign In Successful, welcome back, {user.username}")
+            messages.success(request, f"Sign In Successful, welcome back, {user.email}")
             return redirect("dashboard")
         
         else:
@@ -192,13 +189,8 @@ def update_profile(request):
 def update_user(request):
     if request.POST:
         user = Account.objects.get(email=request.user.email)
-        username = request.POST.get("username")
         lastname = request.POST.get("last_name")
         firstname = request.POST.get("first_name")
-        
-        if not Account.objects.filter(username=username).exists():
-            user.username = username
-            messages.error(request, "Username has already be used !!!")
         
         user.last_name = lastname
         user.first_name = firstname

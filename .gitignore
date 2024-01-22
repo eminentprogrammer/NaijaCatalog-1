@@ -3,7 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 dependencies.txt
-
+node_modules
+package-lock.json
+package.json
 # C extensions
 *.so
 

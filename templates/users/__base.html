@@ -6,18 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %} {% endblock %} Naija Catalog Plug</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'connects/vendors/mdi/css/materialdesignicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'connects/vendors/flag-icon-css/css/flag-icon.min.css' %}">
-    <link rel="stylesheet" href="{% static 'connects/vendors/css/vendor.bundle.base.css' %}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{% static 'connects/vendors/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'connects/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
-    <!-- End plugin css for this page -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{% static 'connects/css/style.css' %}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{% static 'images/favicon/apple-touch-icon.png' %}" />
     <meta name="mobile-web-app-capable" content="yes">
@@ -28,20 +16,31 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+  
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'connects/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'connects/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'connects/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'connects/vendors/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'connects/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'connects/css/style.css' %}">
+    <!-- End plugin css for this page -->
     {% block styles %}{% endblock %}
   </head>
   <body>
     <div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="navbar-brand brand-logo" href="{% url 'dashboard' %}">
-            <!-- <img src="{% static 'connects/images/logo.svg' %}" alt="logo" /></a> -->
-            <h1 class="text-light fw-bold">
-              Naija Catalog
-            </h1>
+            <!-- <img src="{% static 'connects/images/logo.svg' %}" alt="logo" /> -->
+            <span class="text-light">NC</span>
+          </a>
           <a class="navbar-brand brand-logo-mini" href="{% url 'dashboard' %}">
-            <img src="{% static 'connects/images/logo-mini.svg' %}" alt="logo" /></a>
+            <img src="{% static 'connects/images/logo-mini.svg' %}" alt="logo" />
+          </a>
         </div>
 
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -49,87 +48,39 @@
             <span class="mdi mdi-menu"></span>
           </button>
         
-          <div class="search-field d-none d-xl-block">
+          <div class="search-field d-none d-xl-block w-100">
             <form class="d-flex align-items-center h-100" action="{% url 'dashboard_search' %}">
-              <div class="input-group">
+              <div class="input-group w-100 my-auto">
                 <div class="input-group-prepend bg-transparent">
                   <i class="input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" name="search" class="form-control bg-transparent border-0" value="{{query}}" autofocus required
+                <input type="text" name="search" class="form-control bg-transparent border-0" value="{{query}}" required
                 placeholder="Search for books, articles, manuals and authors in 84,921,855 files">
               </div>
             </form>
           </div>
 
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item  dropdown d-none d-md-block">
-              <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> Reports </a>
-              <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-file-pdf mr-2"></i>PDF </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-file-excel mr-2"></i>Excel </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-file-word mr-2"></i>doc </a>
-              </div>
+            <li class="">
+              <a href="{% url 'homepage' %}" class="btn btn-sm">
+                <h6 class="p-3 mb-0 bg-primary text-white py-4">Homepage</h6>
+               </a>
             </li>
-            <li class="nav-item  dropdown d-none d-md-block">
-              <a class="nav-link dropdown-toggle" id="projectDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> Projects </a>
-              <div class="dropdown-menu navbar-dropdown" aria-labelledby="projectDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-eye-outline mr-2"></i>View Project </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-pencil-outline mr-2"></i>Edit Project </a>
-              </div>
-            </li>
-
-            <li class="nav-item nav-language dropdown d-none d-md-block">
-              <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <div class="nav-language-icon">
-                  <i class="flag-icon flag-icon-us" title="us" id="us"></i>
-                </div>
-                <div class="nav-language-text">
-                  <p class="mb-1 text-black">English</p>
-                </div>
-              </a>
-              <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                <a class="dropdown-item" href="#">
-                  <div class="nav-language-icon mr-2">
-                    <i class="flag-icon flag-icon-ae" title="ae" id="ae"></i>
-                  </div>
-                  <div class="nav-language-text">
-                    <p class="mb-1 text-black">Arabic</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <div class="nav-language-icon mr-2">
-                    <i class="flag-icon flag-icon-gb" title="GB" id="gb"></i>
-                  </div>
-                  <div class="nav-language-text">
-                    <p class="mb-1 text-black">English</p>
-                  </div>
-                </a>
-              </div>
-            </li>
-
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <div class="nav-profile-img">
+                <div class="nav-profile-img d-none">
                   <img src="{% static 'connects/images/faces/face28.png' %}" alt="image">
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">Igwesi Emmanuel</p>
+                  <p class="mb-1 text-black">{{ request.user.email }}</p>
                 </div>
               </a>
 
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-3 text-center bg-primary">
-                  <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% static 'connects/images/faces/face28.png' %}" alt="">
+                  <!-- <img class="img-avatar" src="{% static 'connects/images/faces/face28.png' %}" alt=""> -->
                 </div>
+
                 <div class="p-2">
                   <h5 class="dropdown-header text-uppercase pl-2 text-dark">User Options</h5>
                   <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
@@ -146,12 +97,14 @@
                       <i class="mdi mdi-account-outline ml-1"></i>
                     </span>
                   </a>
+                  
+                  <div role="separator" class="dropdown-divider"></div>
+
+                  <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Management</h5>
                   <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="javascript:void(0)">
                     <span>Settings</span>
                     <i class="mdi mdi-settings"></i>
                   </a>
-                  <div role="separator" class="dropdown-divider"></div>
-                  <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
                   <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
                     <span>Lock Account</span>
                     <i class="mdi mdi-lock ml-1"></i>
@@ -165,53 +118,11 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-email-outline"></i>
-                <span class="count-symbol bg-success"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                <h6 class="p-3 mb-0 bg-primary text-white py-4">Messages</h6>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{% static 'connects/images/faces/face4.jpg' %}" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
-                    <p class="text-gray mb-0"> 1 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{% static 'connects/images/faces/face2.jpg' %}" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
-                    <p class="text-gray mb-0"> 15 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{% static 'connects/images/faces/face3.jpg' %}" alt="image" class="profile-pic">
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
-                    <p class="text-gray mb-0"> 18 Minutes ago </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <h6 class="p-3 mb-0 text-center">4 new messages</h6>
-              </div>
-            </li>
-
-            
-            <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="count-symbol bg-danger"></span>
               </a>
+
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                 <h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
                 <div class="dropdown-divider"></div>
@@ -258,8 +169,7 @@
 
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
-          </button>
-            
+          </button>  
         </div>
       </nav>
 
@@ -268,43 +178,45 @@
         <!-- partial:partials/_sidebar.html -->
         {% include 'users/__dashboard/__sidebar.html' %}
         <!-- partial:partials/_sidebar.html -->
-
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">
-              {% if messages %}
-              {% for message in messages %}
-              <div class="row" id="proBanner">
-                <div class="col-12">
-                  <span class="d-flex align-items-center purchase-popup d-flex justify-content-between">
-                    <div class="col">
-                      <p>{{message}}</p><br>
-                    </div>
-                    <i class="mdi mdi-close" id="bannerClose"></i>
-                  </span>
-                </div>
+          <div class="content-wrapper">
+            {% if messages %}
+            <div class="row" id="proBanner">
+              <div class="col-12 my-auto">
+                <span class="d-flex align-items-center purchase-popup d-flex justify-content-between">
+                  <div class="col">
+                    {% for message in messages %}
+                    <li class="row">
+                     <p>{{message}}</p>
+                    </li>
+                    {% endfor %}
+                  </div>
+                  <i class="mdi mdi-close" id="bannerClose"></i>
+                </span>
               </div>
-              {% endfor %}
-              {% endif %}
-              {% block content %}{% endblock %}
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-                <div class="footer-inner-wraper">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © naijacatalog.com 2023</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Igwesi Emmanuel</span>
-                    </div>
-                </div>
-            </footer>
+            {% endif %}
+            {% block content %}{% endblock %}
+          </div>
+          <!-- content-wrapper ends -->
+
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="footer-inner-wraper">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © naijacatalog.com 2023</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Igwesi Emmanuel</span>
+              </div>
+            </div>
+          </footer>
           <!-- partial -->
         </div>
-        <!-- main-panel ends -->
-        
       </div>
-      <!-- page-body-wrapper ends -->
+      <!-- main-panel ends -->       
     </div>
+
+    <!-- page-body-wrapper ends -->
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="{% static 'connects/vendors/js/vendor.bundle.base.js' %}" defer></script>

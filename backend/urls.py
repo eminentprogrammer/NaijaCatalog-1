@@ -18,9 +18,10 @@ urlpatterns = [
     path("catalog/", include("apps.catalogue.urls")),
     path("i18n/", include(i18n)),
     path('admin/', admin.site.urls),
+    path('health/', include('health_check.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-settings.DEBUG = False
+# settings.DEBUG = False

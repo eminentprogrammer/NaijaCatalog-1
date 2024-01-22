@@ -314,7 +314,7 @@ footer .container .row .col{
 
 @media only screen and (min-width: 1000px){
     .hero-container{
-        height: 100vh;
+        height: 78vh;
     }
     .image-container{
         height: 200px;
@@ -340,7 +340,7 @@ footer .container .row .col{
 
 @media only screen and (max-width: 700px){
     .hero-container{
-        height: 100vh !important;
+        height: 78vh !important;
     }
     .nav-section form{
         width: 100%; 

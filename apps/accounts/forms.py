@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, User
 from .models import Account
 
 
-
 class StudentRegistration(forms.Form):
      university = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name of Institution'}))
      student_ID = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Student ID'}))
@@ -25,11 +24,10 @@ class InstitutionRegistration(forms.Form):
 
 class UserRegistration(UserCreationForm):
      email      = forms.EmailField(max_length=250,help_text="The email field is required.")
-     username   = forms.CharField(max_length=250,help_text="The username field is required.")
      
      class Meta:
           model = Account
-          fields = ('email', 'username', 'password1')
+          fields = ('email', 'password1', 'password2')
 
 
      def clean_email(self):
@@ -40,14 +38,6 @@ class UserRegistration(UserCreationForm):
                return email
           raise forms.ValidationError(f"The {user.email} mail is already exists/taken")
 
-     def clean_username(self):
-          username = self.cleaned_data['username']
-          try:
-               user = Account.objects.get(username = username)
-          except Exception as e:
-               return username
-          raise forms.ValidationError(f"The {user.username} mail is already exists/taken")
-
 
 
 class UpdateProfile(UserChangeForm):
@@ -57,15 +47,6 @@ class UpdateProfile(UserChangeForm):
      class Meta:
           model = Account
           fields = ('first_name', 'last_name')
-
-     def clean_username(self):
-          username = self.cleaned_data['username']
-          try:
-               user = Account.objects.exclude(id=self.cleaned_data['id']).get(username = username)
-          except Exception as e:
-               return username
-          raise forms.ValidationError(f"The {user.username} mail is already exists/taken")
-     
 
 
 class UpdatePasswords(PasswordChangeForm):

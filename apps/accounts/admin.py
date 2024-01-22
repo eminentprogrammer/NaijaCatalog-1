@@ -4,7 +4,7 @@ from .models import Account, StudentProfile, Institution
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['email','username', 'date_joined','last_login']
+    list_display = ['email', 'date_joined','last_login']
     # readonly_fields = ['password']
 
 

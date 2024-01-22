@@ -9,18 +9,17 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class MyAccountManager(BaseUserManager):
-         
-    def create_user(self, email, username, password, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
-        
         email = email.lower()
-        user = self.model(email=self.normalize_email(email), username=self.normalize_email(email), **extra_fields)
+
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
 
         if not email:
             raise ValueError("Email is required")
@@ -36,18 +35,16 @@ class MyAccountManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True")
     
-        return self.create_user(email, username, password, **extra_fields)
+        return self.create_user(email, password, **extra_fields)
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(unique=True)
-    username        = models.CharField(max_length=100, unique=True)
-
     is_active       = models.BooleanField(default=True)    
     is_student      = models.BooleanField(default=False)
     is_admin        = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
-    is_librarian     = models.BooleanField(default=False)
+    is_librarian    = models.BooleanField(default=False)
     is_superuser    = models.BooleanField(default=False)
     
     date_joined     = models.DateTimeField(auto_now_add=True, editable=True)
@@ -55,23 +52,17 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     slug            = models.CharField(max_length=200, blank=True, null=True)
     
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['username']
-    
+    USERNAME_FIELD  = "email"
+    # REQUIRED_FIELDS = []
 
-    objects = MyAccountManager()
+    objects         = MyAccountManager()
+
     class Meta:
         verbose_name_plural = "Account Manager"
         ordering            = ['-date_joined']
     
     def __str__(self):
-        return self.email   
-
-    def get_full_name(self):
-        return f"{self.last_name} {self.first_name}"
-
-    def get_username(self):
-        return str(self.username.capitalize())
+        return self.email
 
     # For checking permissions. to keep it simple all admin have ALL permissons
     def has_perm(self, perm, obj=None):
@@ -83,11 +74,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return True
     
     def save(self, *args, **kwargs):
-
         if not self.slug:
             self.slug = uuid.uuid4()
-
         super().save(*args, **kwargs)
+
 
 
 class Institution(models.Model):

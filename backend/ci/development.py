@@ -12,7 +12,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env("DB_LOCAL_NAME"), #Database Name
         'USER': env("DB_LOCAL_USER"), #Database Username
-        'PASSWORD':'@#Demboyz46', #DB Password
+        'PASSWORD': env("DB_LOCAL_PASSWORD"), #DB Password
         'HOST':'localhost',
         'PORT':'5432',
     }

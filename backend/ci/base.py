@@ -13,12 +13,10 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
 )
-
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*", "192.168.1.209"]
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -91,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 AUTH_USER_MODEL = 'accounts.Account'
-
 
 # GMAIL CONFIGURATIONS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
