@@ -14,6 +14,7 @@ handler500 = views.handler500
 
 urlpatterns = [
     path('', include('frontend.urls')),
+    path("partners/", include("apps.partners.urls")),
     path('accounts/', include('apps.accounts.urls')),
     path("catalog/", include("apps.catalogue.urls")),
     path("i18n/", include(i18n)),

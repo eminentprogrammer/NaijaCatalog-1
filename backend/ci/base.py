@@ -4,7 +4,6 @@ import dj_database_url
 from .jazzmin import *
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 environ.Env.read_env(BASE_DIR / '.env')
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.catalogue',
     'apps.emailApp',
+    'apps.partners',
 ]
 
 # HEALTH CHECK
@@ -91,12 +91,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 AUTH_USER_MODEL = 'accounts.Account'
 
 # GMAIL CONFIGURATIONS
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587  # For TLS
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False  # Set to False for TLS
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587  # For TLS
+EMAIL_USE_TLS       = True
+EMAIL_USE_SSL       = False  # Set to False for TLS
+EMAIL_HOST_USER     = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 
@@ -127,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -148,7 +147,6 @@ MEDIA_URL = 'media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'plugins/static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'plugins/assets')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'plugins/media')
 
 # Following settings only make sense on production and may break development environments.
@@ -156,12 +154,10 @@ if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'plugins/assets')
-
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

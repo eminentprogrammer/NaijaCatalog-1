@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
-
 def about(request):
     page = 'about'
     context = {
@@ -85,16 +84,3 @@ def search(request):
 
 def google_scholar_search(request):
     return render(request, 'engine/google_scholar_search.html')
-
-
-@login_required
-def partner_portal(request, slug=None):
-    context = {}
-
-    if not slug:
-        context['partners'] = Institution.objects.all().order_by('name')
-        return render(request, 'partner_portal/partners.html', context)
-    
-    partner = Institution.objects.get(slug=slug)
-    context['partner'] = partner
-    return render(request, 'partner_portal/index.html', context)
