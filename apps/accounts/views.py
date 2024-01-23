@@ -24,24 +24,7 @@ context = {
 @login_required
 def dashboard_view(request):
     user = request.user
-    if user.is_superuser:
-        messages.success(request, 'Master Dashboard')
-        
-        users =  StudentProfile.objects.all()
-        institutions = Institution.objects.all()
-        context = {
-            'users':users,
-            'users_count': users.count(),
-            'instituions':institutions,
-            'instituions_count':institutions.count(),
-        }
-        return render(request, "users/__dashboard.html", context)
-    
-    if user.is_student:
-        messages.success(request, 'Student Dashboard')
-    if user.is_librarian:
-        messages.success(request, 'Librarian Dashboard')
-    
+    messages.success(request, 'Master Dashboard')
     return render(request, "users/__dashboard.html", locals())
 
 
@@ -130,7 +113,6 @@ def signUp(request):
 def signIn(request):
     context = {}
     logout(request)
-
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
@@ -141,7 +123,7 @@ def signIn(request):
         
         if user is not None:
             login(request, user)
-            send_confirmation_email(request, user)
+            res = send_confirmation_email(request, user)
             messages.success(request, f"Sign In Successful, welcome back, {user.email}")
             return redirect("dashboard")
         else:
