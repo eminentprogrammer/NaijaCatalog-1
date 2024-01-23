@@ -127,13 +127,10 @@ def signUp(request):
     return render(request, 'users/registrations/register.html', locals())
 
 
-
-
-
 def signIn(request):
     context = {}
-
     logout(request)
+
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
@@ -145,22 +142,19 @@ def signIn(request):
         if user is not None:
             login(request, user)
             send_confirmation_email(request, user)
-
             messages.success(request, f"Sign In Successful, welcome back, {user.email}")
             return redirect("dashboard")
-        
         else:
             messages.error(request,  "Incorrect email or password")
-        
+
         context = {
-            'token':token,
-            'email': email,
-            'password': password,
-            'valid': True,
-            'saveauth':saveauth
+            'token'     :token,
+            'email'     : email,
+            'password'  : password,
+            'valid'     : True,
+            'saveauth'  :saveauth
         }
     return render(request, 'users/registrations/login.html', context)
-    # return render(request, 'connect-plus/pages/samples/login.html', context=data)
 
 
 @login_required
@@ -223,7 +217,6 @@ def update_password(request):
 
 def reset_password(request):
     context = {}
-
     if request.POST:
         email = request.POST.get('email')
         if Account.objects.filter(email=email).exists():

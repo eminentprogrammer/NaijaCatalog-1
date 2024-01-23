@@ -25,14 +25,9 @@
                                 Unlock the Power of Collaboration with Our Undergraduate-Driven Union Catalogue.
                             </div>                    
                             <div class="form-floating mb-2 text-dark">
-                                <input type="text" class="form-control" name="username" id="username" placeholder="" required {% if username %}value="{{username}}"{% endif %}>
-                                <label for="username">Username</label>
-                            </div>
-                            <div class="form-floating mb-2 text-dark">
                                 <input type="email" class="form-control" name="email" id="signup_email" placeholder="" required {% if email %}value="{{email}}"{% endif %}>
                                 <label for="email">Email Address</label>
-                            </div>
-                        
+                            </div>                        
                             <div class="row mb-2">
                                 <div class="text-dark">
                                     <select class="form-select form-control" name="category" id="category" required>
@@ -45,17 +40,14 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="form-floating text-dark mb-2 d-none" id="institution_div">
                                 <input type="text" class="form-control" list="institutions" name="Institution" id="institution" placeholder="">
                                 <label for="institution">Name of University</label>
                             </div>
-                        
                             <div class="form-floating mb-2 text-dark">
                                 <input type="password" class="form-control" name="password" id="signup_password" placeholder="" required>
                                 <label for="password">Password</label>
                             </div>
-
                             <div class="form-group my-4 d-flex justify-content-between">
                                 <div class="row">
                                     <div class="form-group">

@@ -40,7 +40,7 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(unique=True)
-    is_active       = models.BooleanField(default=True)    
+    is_active       = models.BooleanField(default=True)  
     is_student      = models.BooleanField(default=False)
     is_admin        = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
