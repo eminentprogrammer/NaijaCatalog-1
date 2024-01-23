@@ -147,6 +147,7 @@ MEDIA_URL = 'media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'plugins/static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'plugins/assets')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'plugins/media')
 
 # Following settings only make sense on production and may break development environments.
