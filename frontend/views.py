@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
+
+def support(request):
+    return render(request, "support.html")
+
 def about(request):
     page = 'about'
     context = {

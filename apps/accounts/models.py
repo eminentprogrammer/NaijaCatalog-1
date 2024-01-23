@@ -88,6 +88,9 @@ class Institution(models.Model):
     contact_phone   = models.CharField(max_length=15, blank=True) 
     slug            = models.SlugField(blank=True, null=True)
     admin           = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='Librarian')
+    gmap            = models.URLField(blank=True, max_length=1000)
+    is_active       = models.BooleanField(default=True)
+    date_joined     = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Institutions"

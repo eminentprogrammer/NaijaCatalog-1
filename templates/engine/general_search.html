@@ -18,6 +18,7 @@
                 </div>
             </form>
         </div>
+
         <div class="container my-5 text-dark searchResult">
             {% if gscholar %}
             <div class="row">
@@ -33,6 +34,7 @@
                 </ul>
             </div>
             {% endif %}
+
             <div class="row justify-content-between">
                 <div class="col-12 mx-auto">            
                     {% if querysets %}
@@ -46,24 +48,25 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="table-responsive" style="padding: 0;">
-                                            <table class="table table-striped table-hover mx-auto">
+                                        <div class="table-responsive p-0">
+                                            <table class="table table-striped table-hover">
                                                 <thead class="table-light">
                                                     <caption class="fw-bold institution d-none"><iconify-icon icon="tdesign:institution"></iconify-icon> {{data.institution}}</caption>
                                                     <tr>
-                                                        <th class="col-8" scope="col-8"><iconify-icon icon="solar:user-bold-duotone"></iconify-icon> <small>Author</small> </th>
-                                                        <th scope="col-4" class="col-3"><iconify-icon icon="clarity:number-list-line"></iconify-icon> <small>Series</small></th>
-                                                        <th scope="col-4" class="col-3"><small>Publisher</small></th>
+                                                        <th class="col-4" scope="col-4"><iconify-icon icon="solar:user-bold-duotone"></iconify-icon> <small>Author</small> </th>
+                                                        <th scope="col-4" class="col-4"><iconify-icon icon="clarity:number-list-line"></iconify-icon> <small>Series</small></th>
+                                                        <th scope="col-4" class="col-4"><small>Publisher</small></th>
+                                                        <th scope="col-4" class="col-4"><small></small></th>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody class="table-group-divider">
-                                                        <tr class="table-success" >
-                                                            <td scope="row">{{ data.author }}</td>
-                                                            <td>{{ data.series }}</td>
-                                                            <td>{{ data.publisher }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <tfoot></tfoot>
+                                                </thead>
+                                                <tbody class="table-group-divider">
+                                                    <tr class="w-100">
+                                                        <td scope="row">{{ data.author }}</td>
+                                                        <td>{{ data.series }}</td>
+                                                        <td>{{ data.publisher }}</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot></tfoot>
                                             </table>
                                         </div>                                            
                                     </div>

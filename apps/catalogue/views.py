@@ -3,6 +3,9 @@ from .forms import BookForm
 from .models import Book
 from apps.accounts.models import Institution, Account
 from django.contrib import messages
+from django.utils.text import slugify
+from django.contrib import messages
+
 
 def CreateBook(request):
     form = BookForm()
@@ -35,8 +38,12 @@ def catalogView(request):
 
 
 def single_book_info(request, slug):
-    book = Book.objects.get(slug=slug)
-    context={
-        'book':book,
-    }
+    context = {}
+    book = Book.objects.get(slug=slug)    
+    try:
+        context['partner'] = Institution.objects.get(slug=slugify(book.institution.lower()))
+    except Exception as e:
+        messages.info(request, "No Map Loaded")    
+    context['book'] = book
+    context['page_from'] = request.META.get('HTTP_REFERER')
     return render(request, 'catalog/single_book.html', context)

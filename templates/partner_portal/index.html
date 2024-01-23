@@ -29,21 +29,21 @@
             </div>
         </div>
     </div>
-    <section class="map mb-5">
-        Augustine University Ilara-Epe, Igbonla Road, Epe 106103, Lagos, Nigeria
+    <div class="row">
+        <canvas style="position: relative; height: 500px; width: 100%;" id="rive-canvas"></canvas>
+    </div>
+</div>
+    {% if partner.gmap %}
+    <section class="map" style="margin-top: 100px; margin-bottom: 50p">
+        <div class="container-fluid fw-bold my-3">
+            {{partner.name}}
+        </div>
         <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d507360.4312974864!2d3.3267290755858197!3d6.55278986432339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x103953d964f3ea7b%3A0x1ad22ce0ee201119!2span+atlantic+university+Lekki-Epe+Expressway+Ibeju-Lekki%2C%2C+Lagos!3m2!1d6.487255299999999!2d3.8553506!5e0!3m2!1sen!2sng!4v1551563040108"
-                width="100%" height="350" frameborder="0" style="border:0" allowfullscreen>
-        </iframe>
-        6.6598897,3.9660468
-        <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d607360.4312974864!2d5.9660468!3d6.6598897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x103953d964f3ea7b%3A0x1ad22ce0ee201119!2span+Augustine+University+Ilara-Epe+Igbonla+Road%2C%2C+Epe!3m2!1d6.6598897!2d3.9660468!5e0!3m2!1sen!2sng!4v1551563040108"
-            width="100%" height="350" frameborder="0" style="border:0" allowfullscreen>
+            src="{{partner.gmap}}"
+                class="" width="100%" height="450" frameborder="0" style="margin-bottom:0px">
         </iframe>
     </section>
-</div>
-
-<canvas style="position: absolute; height: 500px; width: 500px;" id="rive-canvas"></canvas>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -55,13 +55,13 @@
         canvas: document.getElementById("rive-canvas"),
         autoplay: false,
         stateMachines: "bumpy",
-
         onLoad: () => {
           r.resizeDrawingSurfaceToCanvas();
         },
     });
-
+    r.play();
     document.getElementById("rive-canvas").addEventListener("click", e=>{
-        r.play()
+        r.stop();
     })
-</script>{% endblock %}
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load static %}
+<div class="container-fluid nav-section">
+    <div class="d-flex w-50">
+        <a class="navbar-brand fw-bold" href="{% url 'homepage' %}">NC</a>
+        <form class="d-flex my-lg-0 search-div" method="GET" action="{% url 'search' %}">
+            <input class="form-control me-sm-2" name="article" type="search"
+                placeholder="Search for books, articles, manuals and authors in 84,921,855 files"
+                value="{{search.article.value}}" />
+            <input type="submit" class="btn btn-primary" value="Search" hidden />
+        </form>
+    </div>
+
+    <button class="btn btn-sm d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'homepage' %}active{% endif %}" href="{% url 'homepage' %}"
+                    aria-current="page">
+                    Home
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'about' %}active{% endif %} d-none"
+                    href="{% url 'about_us' %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if page == 'news' %}active{% endif %}" href="{% url 'news' %}">News</a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownId" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Account</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a class="dropdown-item" href="{% url 'signout' %}">Sign Out</a>
+                </div>
+            </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</div>

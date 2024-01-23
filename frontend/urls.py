@@ -9,10 +9,11 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('news/', views.news, name="news"),
     path('', views.homepage, name="homepage"),
+    path('news/', views.news, name="news"),
     path('search/', views.search, name="search"),
     path('about-us/', views.about, name="about_us"),
+    path('support/', views.support, name="support"),
 
     # Add other URL patterns as needed
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
