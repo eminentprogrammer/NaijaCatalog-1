@@ -27,7 +27,13 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
         self.message_user(request, f'{updated_count} books were marked as published.')
 
     def generate_slug(self, request, queryset):
-        updated_count = queryset.update(slug=slugify(queryset['book']))
+        updated_count = 0
+        for instance in queryset:
+            # Assuming 'title' is the field you want to slugify
+            instance.slug = slugify(instance.title)  
+            instance.save()
+        updated_count +=  1
+        # updated_count = queryset.update(slug=slugify(queryset['book']))
         self.message_user(request, f'{updated_count} books slug were generated.')
      
     def mark_pending(self, request, queryset):
