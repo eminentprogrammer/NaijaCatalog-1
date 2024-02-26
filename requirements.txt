@@ -49,7 +49,6 @@ poetry
 poetry-core
 poetry-plugin-export
 psutil
-pyscopg2
 psycopg2-binary
 ptyprocess
 pycparser
@@ -64,9 +63,6 @@ SecretStorage
 shellingham
 sqlparse
 tablib
-tomli
-tomlkit
-trove-classifiers
 typing_extensions
 urllib3
 virtualenv
