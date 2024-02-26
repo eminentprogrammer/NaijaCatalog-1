@@ -9,7 +9,7 @@ package.json
 # C extensions
 *.so
 plugins/assets
-
+*/migrations/
 # Distribution / packaging
 .Python
 build/
