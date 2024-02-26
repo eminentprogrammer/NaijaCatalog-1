@@ -76,9 +76,9 @@ def search(request):
     if query:
         try:
             querysets   = Book.objects.filter(title__icontains=query)
-            # obj         = gscholar.query(query)
-            # scholar     = convertJ(obj)
-            # context['gscholar'] = scholar
+            obj         = gscholar.query(query)
+            scholar     = convertJ(obj)
+            context['gscholar'] = scholar
             context = {'query':query, 'querysets':querysets}                    
         except Exception as e:
             print(e)
