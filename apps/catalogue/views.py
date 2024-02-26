@@ -7,6 +7,10 @@ from django.utils.text import slugify
 from django.contrib import messages
 
 
+def listBook(request):
+    book = Book.objects.all()
+    pass
+
 def CreateBook(request):
     form = BookForm()
     user = request.user
@@ -29,11 +33,17 @@ def CreateBook(request):
 
 
 def catalogView(request):
-    user_obj = Account.objects.get(pk=request.user.pk)
+    context = []
+    user_obj    = Account.objects.get(pk=request.user.pk)
     library_obj = Institution.objects.get(admin=user_obj)
-    catalog = Book.objects.filter(institution=library_obj.name)
+    catalog     = Book.objects.filter(institution=library_obj.name)
 
-    return render(request, 'catalog/list.html', locals())
+    context = {
+        'user': user_obj,
+        'library': library_obj,
+        'user_catalog': catalog,
+    }
+    return render(request, 'catalog/list.html', context)
 
 
 

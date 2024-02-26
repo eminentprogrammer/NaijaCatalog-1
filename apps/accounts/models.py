@@ -39,9 +39,9 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
-    first_name      = models.CharField(max_length=500)
-    _name      = models.CharField(max_length=500)
     email           = models.EmailField(unique=True)
+    first_name      = models.CharField(max_length=500)
+    last_name       = models.CharField(max_length=500)
     is_active       = models.BooleanField(default=True)  
     is_student      = models.BooleanField(default=False)
     is_admin        = models.BooleanField(default=False)

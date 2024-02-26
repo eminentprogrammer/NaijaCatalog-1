@@ -68,22 +68,22 @@ def convertJ(obj):
 
 def search(request):
     context = {}
+    query = request.GET.get('article')
     if not request.user.is_authenticated:
         messages.success(request, f"Sign in to use the search functionality")
         return redirect("homepage")
     
-    query = request.GET.get('article')
     if query:
         try:
-            querysets = Book.objects.filter(title__icontains=query)
-            obj = gscholar.query(query)
-            scholar = convertJ(obj)
-            context['gscholar'] = scholar
-            
+            querysets   = Book.objects.filter(title__icontains=query)
+            # obj         = gscholar.query(query)
+            # scholar     = convertJ(obj)
+            # context['gscholar'] = scholar
+            context = {'query':query, 'querysets':querysets}                    
         except Exception as e:
             print(e)
-        context = {'query':query, 'querysets':querysets}
         return render(request, 'engine/general_search.html', context)
+    
     return render(request, 'engine/general_search.html')
 
 

@@ -7,22 +7,23 @@ class BookResource(resources.ModelResource):
     # author = fields.Field(column_name='author', attribute='author', widget=ForeignKeyWidget(Author, field='name'))
     
     def before_import_row(self, row, **kwargs):
-        isbn         = row["isbn"]
-        title        = row["title"]
-        series       = row["series"]
-        author       = row["author"]
-        subject      = row["subject"]
-        location     = row["location"]
-        publisher    = row["publisher"]
-        year_published = row["year_published"]
-        call_number  = row["call_number"]
+        isbn            = row["isbn"]
+        title           = row["title"]
+        series          = row["series"]
+        author          = row["author"]
+        subject         = row["subject"]
+        location        = row["location"]
+        publisher       = row["publisher"]
+        call_number     = row["call_number"]
+        year_published  = row["year_published"]
 
         # # Create New Object
-        # Book.objects.get_or_create(
-        #      title=title, author=author, 
-        #      isbn=isbn,series=series,publisher=publisher,
-        #      subject=subject, location=location, call_number=call_number,
-        # )
+        if Book.objects.filter(title=title, author=author).exists:
+            Book.objects.get_or_create(
+                title=title, author=author, 
+                isbn=isbn,series=series,publisher=publisher,
+                subject=subject, location=location, call_number=call_number,
+            )
     
     class Meta:
         model = Book

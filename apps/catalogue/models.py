@@ -8,14 +8,19 @@ class Book(models.Model):
     author          = models.CharField(max_length=200, blank=True)
     series          = models.CharField(max_length=200, blank=True)
     subject         = models.CharField(max_length=200, blank=True)
+    
     isbn            = models.CharField(max_length=200, blank=True, verbose_name="ISBN")
     publisher       = models.CharField(max_length=200, blank=True)
     location        = models.CharField(max_length=200, blank=True, verbose_name="Publisher Location")
     call_number     = models.CharField(max_length=200, blank=True, verbose_name="Call Number")
+    
     institution     = models.CharField(max_length=200, blank=True, verbose_name="Institution Hosted")
     year_published  = models.DateField(editable=True)
+    
     date_uploaded   = models.DateField(auto_now_add=True, editable=True)
     is_available    = models.BooleanField(default=True)
+    count           = models.PositiveIntegerField(default=0)
+
     slug            = models.SlugField(blank=True, null=True, max_length=500)
 
     # Custom action
@@ -29,7 +34,7 @@ class Book(models.Model):
             self.slug = slugify(self.title)
             self.save()
         return slugify(self.title)
-
+    
     def get_absolute_url(self):
         return reverse('catalog:single_book_info', args=[str(slugify(self.title))])
 

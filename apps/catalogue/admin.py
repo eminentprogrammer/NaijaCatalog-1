@@ -25,6 +25,10 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     def make_published(self, request, queryset):
         updated_count = queryset.update(status='published')
         self.message_user(request, f'{updated_count} books were marked as published.')
+
+    def generate_slug(self, request, queryset):
+        updated_count = queryset.update(slug=slugify(queryset['book']))
+        self.message_user(request, f'{updated_count} books slug were generated.')
      
     def mark_pending(self, request, queryset):
         updated_count = queryset.update(status='pending')
@@ -44,12 +48,12 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     
 
     mark_pending.short_description = "Mark selected books as pending"
+    generate_slug.short_description = "Generate Slugs for Selected Books"
     make_published.short_description = "Mark selected books as published"
     mark_available.short_description = "Mark selected books as available"
     mark_unavailable.short_description = "Mark selected books as unavailable"
     mark_augustineUniversity.short_description = "Mark selected books as Augustine University Materials"
-    actions = [make_published, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
-
+    actions = [make_published, generate_slug, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
 admin.site.register(Book, CatalogAdmin)
 
 
