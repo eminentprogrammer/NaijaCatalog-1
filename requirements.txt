@@ -49,12 +49,12 @@ poetry
 poetry-core
 poetry-plugin-export
 psutil
+pyscopg2
 psycopg2-binary
 ptyprocess
 pycparser
 pyproject_hooks
 pyrsistent
-pyscopg2
 pytz
 PyYAML
 rapidfuzz
