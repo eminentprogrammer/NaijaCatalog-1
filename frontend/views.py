@@ -9,8 +9,10 @@ from apps.accounts.forms import StudentRegistration, InstitutionRegistration
 # Create your views here.
 
 
+
 def support(request):
     return render(request, "support.html")
+
 
 def about(request):
     page = 'about'
@@ -18,6 +20,7 @@ def about(request):
         'page':page
     }
     return render(request, 'about-us.html', context)
+
 
 def news(request):
     page = 'news'
@@ -29,21 +32,25 @@ def news(request):
 def robots_view(request):
     return render(request, 'robots.txt')
 
+
 def homepage(request):
     context = {}
     page = "homepage"
-    books = Book.objects.all().order_by('title','author','subject')[:4]
-    institutions = Institution.objects.all()
-    
-    context = {
-        'page': page,
-        'search':search,
-        'studform': StudentRegistration(),
-        'Instiform':InstitutionRegistration(),
-        'books':books,
-        'institutions':institutions,
-    }
-    return render(request, 'homepage.html', context)
+    try:
+        books = Book.objects.all().order_by('title','author','subject')[:4]
+        institutions = Institution.objects.all()    
+        context = {
+            'page': page,
+            'search':search,
+            'studform': StudentRegistration(),
+            'Instiform':InstitutionRegistration(),
+            'books':books,
+            'institutions':institutions,
+        }
+        return render(request, 'homepage.html', context)
+    except Exception as e:
+        print(e)    
+    return render(request, 'homepage.html')
 
 
 def convertJ(obj):

@@ -12,10 +12,10 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
 )
-SECRET_KEY = env("SECRET_KEY")
-DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ["*", "192.168.1.209"]
+DEBUG           = env('DEBUG')
+SECRET_KEY      = env("SECRET_KEY")
+ALLOWED_HOSTS   = ["*", "192.168.1.209"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 
     'whitenoise',
     'django.contrib.staticfiles',
+
     'frontend',
     'apps.https',
     'import_export',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'apps.emailApp',
     'apps.partners',
 ]
-
 # HEALTH CHECK
 INSTALLED_APPS += [
     # HEALTH CHECK SETTINGS
@@ -50,14 +50,11 @@ INSTALLED_APPS += [
     'health_check.storage',
     'health_check.contrib.migrations',
 ]
-
 HEALTH_CHECK = {
     'DISK_USAGE_MAX': 90, #Percent
     'MEMORY_MIN': 100, # in MB
 }
-
 HEALTH_CHECK['DISK_USAGE_MAX'] = 5 * (1 << 30)   # 5GB in bytes
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     
@@ -69,9 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'backend.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -88,8 +83,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL  = 'accounts.Account'
 WSGI_APPLICATION = 'backend.wsgi.application'
-AUTH_USER_MODEL = 'accounts.Account'
 
 # GMAIL CONFIGURATIONS
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
@@ -120,13 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Africa/Lagos'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -148,7 +139,9 @@ if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'plugins/assets')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

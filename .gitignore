@@ -8,6 +8,7 @@ package-lock.json
 package.json
 # C extensions
 *.so
+plugins/assets
 
 # Distribution / packaging
 .Python
