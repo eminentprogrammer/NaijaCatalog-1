@@ -22,23 +22,34 @@ def about(request):
     return render(request, 'about-us.html', context)
 
 
+# Define the news view function
 def news(request):
-    page = 'news'
+    # Create a context dictionary with the page variable
+    page = "news"
     context = {
         'page':page
     }
+    # Render the news.html template with the context
     return render(request, 'news.html', context)
 
+# Define the robots view function
 def robots_view(request):
+    # Render the robots.txt template
     return render(request, 'robots.txt')
 
-
+# Define the homepage view function
 def homepage(request):
+    # Initialize an empty context dictionary
     context = {}
+    # Set the page variable to 'homepage'
     page = "homepage"
+    # Try to retrieve books and institutions from the database
     try:
+        # Retrieve all books and order them by title, author, and subject
         books = Book.objects.all().order_by('title','author','subject')[:4]
-        institutions = Institution.objects.all()    
+        # Retrieve all institutions
+        institutions = Institution.objects.all()
+        # Create a context dictionary with the necessary variables
         context = {
             'page': page,
             'search':search,
@@ -47,11 +58,12 @@ def homepage(request):
             'books': books,
             'institutions':institutions,
         }
+        # Render the homepage template with the context dictionary
         return render(request, 'homepage.html', context)
+    # If an exception occurs, print the error message and render the homepage template without any context
     except Exception as e:
-        print(e)    
+        print(e)
     return render(request, 'homepage.html')
-
 
 def convertJ(obj):
     import re
