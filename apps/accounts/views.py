@@ -80,32 +80,32 @@ def signUp(request):
         category    = request.POST.get('category')
         institution = request.POST.get('institution')
         password    = request.POST.get('password')
-        
+
         if not Account.objects.filter(email=email).exists():
             user = Account.objects.create_user(
-                email=email,
-                password=password
+                email       = email,
+                password    = password
             )
             user = authenticate(email=email, password = password)
+
             if not user is None:
                 stud_obj = StudentProfile.objects.create(user=user, institution=category)
                 stud_obj.save()
                 login(request, user)
                 send_confirmation_email(request, user)
-
                 messages.error(request, f"Welcome {email}")
                 return redirect('dashboard')
             messages.error(request, "Account created successfully, log in")
-            return redirect("signin")        
+            return redirect("signin")
         else:
             context = {
                 'email':email,
                 'category':category,
                 'password':password,
                 'institution':institution,
-            }       
+            }
             messages.error(request, "Email Already exist !!!")
-            return render(request, 'users/registrations/register.html')
+            return render(request, 'users/registrations/register.html', context)
 
     return render(request, 'users/registrations/register.html', locals())
 
@@ -142,21 +142,26 @@ def signIn(request):
 @login_required
 def update_profile(request):
     context['page_title'] = 'Update Profile'
-    user = Account.objects.get(id = request.user.id)
-
-    if not request.method == 'POST':
-        form = UpdateProfile(instance=user)
-        context['form'] = form
-    else:
-        form = UpdateProfile(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Profile has been updated")
-            return redirect("update_profile")
-        else:
-            context['form'] = form
+    print(request.user)
+    user, created = Account.objects.get_or_create(email=request.user)
     
-    context['user'] = user
+    try:
+        print("Update Profile")
+        if not request.method == 'POST':
+            form = UpdateProfile(instance=user)
+            context['form'] = form
+        else:
+            form = UpdateProfile(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Profile has been updated")
+                return redirect("update_profile")
+            else:
+                messages.error(request, "Profile not saved")
+    except Exception as e:
+        print(e)
+    
+    context['form','user'] = [form, user]
     return render(request, 'users/registrations/update_profile.html', context)
 
 

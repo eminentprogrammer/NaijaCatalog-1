@@ -12,3 +12,17 @@ category.addEventListener('change', (e) => {
     }
     console.log(selectedOption);
 });
+
+
+const decryptBtn = document.querySelector("#decrypt");
+const passwordInput = document.querySelector("#signup_password");
+decryptBtn.addEventListener("click", e = () => {
+    if(decryptBtn.value == "Decrypt Password"){
+        decryptBtn.value = "Encrypt Password";
+        passwordInput.type = "text";
+    }
+    else{
+        decryptBtn.value = "Decrypt Password";
+        passwordInput.type = "password";
+    }
+})

@@ -42,9 +42,9 @@ def homepage(request):
         context = {
             'page': page,
             'search':search,
-            'studform': StudentRegistration(),
-            'Instiform':InstitutionRegistration(),
-            'books':books,
+            'studform':  StudentRegistration(),
+            'Instiform': InstitutionRegistration(),
+            'books': books,
             'institutions':institutions,
         }
         return render(request, 'homepage.html', context)
@@ -68,7 +68,6 @@ def convertJ(obj):
 
 def search(request):
     context = {}
-
     if not request.user.is_authenticated:
         messages.success(request, f"Sign in to use the search functionality")
         return redirect("homepage")
@@ -83,12 +82,7 @@ def search(request):
             
         except Exception as e:
             print(e)
-        
-        context = {
-            'query':query,
-            'querysets':querysets,
-        }
-
+        context = {'query':query, 'querysets':querysets}
         return render(request, 'engine/general_search.html', context)
     return render(request, 'engine/general_search.html')
 

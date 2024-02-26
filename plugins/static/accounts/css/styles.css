@@ -53,3 +53,15 @@ body{
     outline-color: #014949;
     border: none;
 }
+
+#signup_password, #decrypt{
+    transition: all ease 1s;
+}
+#signup_password{
+
+}
+#decrypt{
+    background: green;
+    border: 1px solid darkgreen;
+    color: white;
+}

@@ -43,7 +43,6 @@ class UserRegistration(UserCreationForm):
 class UpdateProfile(UserChangeForm):
      first_name     = forms.CharField(max_length=250,help_text="The First Name field is required.")
      last_name      = forms.CharField(max_length=250,help_text="The Last Name field is required.")
-     
      class Meta:
           model = Account
           fields = ('first_name', 'last_name')

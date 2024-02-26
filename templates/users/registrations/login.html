@@ -5,6 +5,19 @@
 
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'accounts/css/styles.min.css' %}">
+<style>
+    #signup_password, #decrypt{
+        transition: all ease 1s;
+    }
+    #signup_password{
+
+    }
+    #decrypt{
+        background: green;
+        border: 1px solid darkgreen;
+        color: white;
+    }
+</style>
 {% endblock %}
 
 
@@ -43,8 +56,9 @@
                             </div>
 
                             <div class="form-group my-4">
-                                <button type="submit" class="btn btn-success">Continue</button>
+                                <button type="submit" class="btn btn-md btn-success">Continue</button>
                             </div>
+                            <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
                             <div class="text-center mt-4 font-weight-light">
                                 <p class="text-muted">Don't have an account, <a class="text-decoration-none text-warning fw-bold" href="{% url 'signup' %}">Create Account</a></p>
                             </div>
@@ -55,4 +69,19 @@
         </div>
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script>
+    const decryptBtn = document.querySelector("#decrypt");
+    const passwordInput = document.querySelector("#signin_password");
+    decryptBtn.addEventListener("click", e = () => {
+        if(decryptBtn.value == "Decrypt Password"){
+            decryptBtn.value = "Encrypt Password";
+            passwordInput.type = "text";
+        }
+        else{
+            decryptBtn.value = "Decrypt Password";
+            passwordInput.type = "password";
+        }
+    })
+</script>
+{% endblock %}

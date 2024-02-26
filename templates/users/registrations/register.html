@@ -4,6 +4,19 @@
 
         {% block extrahead %}
         <link rel="stylesheet" href="{% static 'accounts/css/styles.min.css' %}">
+        <style>
+            #signup_password, #decrypt{
+                transition: all ease 1s;
+            }
+            #signup_password{
+
+            }
+            #decrypt{
+                background: green;
+                border: 1px solid darkgreen;
+                color: white;
+            }
+        </style>
         {% endblock %}
 
 
@@ -45,19 +58,23 @@
                                 <label for="institution">Name of University</label>
                             </div>
                             <div class="form-floating mb-2 text-dark">
-                                <input type="password" class="form-control" name="password" id="signup_password" placeholder="" required>
+                                <input type="password" class="form-control" name="password" id="signup_password" {% if password %}value="{{password}}"{% endif %} placeholder="" required>
                                 <label for="password">Password</label>
                             </div>
                             <div class="form-group my-4 d-flex justify-content-between">
-                                <div class="row">
+                                <div class="row my-auto">
                                     <div class="form-group">
                                         <div class="form-check">
-                                          <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input" required> I agree to all Terms & Conditions </label>
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" class="form-check-input" required> I agree to all Terms & Conditions 
+                                            </label>
                                         </div>
                                     </div>          
                                 </div>
-                                <button type="submit" class="btn btn-danger">Continue</button>
+                                <label class="row">
+                                    <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
+                                </label>
+                                <button type="submit" class="btn btn-danger">Register</button>
                             </div>
                             <p class="text-muted my-auto text-center">Already have an account, <a class="text-decoration-none text-success fw-bold" href="{% url 'signin' %}">login</a></p>
                         </form>
@@ -68,5 +85,19 @@
         {% endblock %}
 
         {% block scripts %}
+        <script>
+            const decryptBtn = document.querySelector("#decrypt");
+            const passwordInput = document.querySelector("#signup_password");
+            decryptBtn.addEventListener("click", e = () => {
+                if(decryptBtn.value == "Decrypt Password"){
+                    decryptBtn.value = "Encrypt Password";
+                    passwordInput.type = "text";
+                }
+                else{
+                    decryptBtn.value = "Decrypt Password";
+                    passwordInput.type = "password";
+                }
+            })
+        </script>
         <script src="{% static 'accounts/js/scripts.js' %}"></script>
         {% endblock %}
