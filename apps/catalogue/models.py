@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class Book(models.Model):
     title           = models.CharField(max_length=200, blank=True)
     author          = models.CharField(max_length=200, blank=True)
-    series          = models.CharField(max_length=200, blank=True)
+    edition         = models.CharField(max_length=200, blank=True)
     subject         = models.CharField(max_length=200, blank=True)
     
     isbn            = models.CharField(max_length=200, blank=True, verbose_name="ISBN")

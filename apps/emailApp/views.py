@@ -19,11 +19,15 @@ def send_confirmation_email(request, user):
         token = default_token_generator.make_token(user)
         # Encode user ID to include in the confirmation link
         uid = urlsafe_base64_encode(force_bytes(user.pk))
+
         # Build the confirmation link
         current_site = get_current_site(request)
+        
         confirmation_link = f"http://{current_site.domain}/confirm/{uid}/{token}/"
+        
         # Create the email message
         subject = "Activate Your Account"
+        
         message = render_to_string("email/confirmation.html", {
             "user": user,
             "confirmation_link": confirmation_link,

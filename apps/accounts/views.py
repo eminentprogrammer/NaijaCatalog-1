@@ -21,11 +21,13 @@ context = {
     'page_title' : 'Naija Catalog',
 }
 
+
 @login_required
 def dashboard_view(request):
     user = request.user
     messages.success(request, 'Master Dashboard')
     return render(request, "users/__dashboard.html", locals())
+
 
 
 def dashboard_search(request):
@@ -87,7 +89,6 @@ def signUp(request):
                 password    = password
             )
             user = authenticate(email=email, password = password)
-
             if not user is None:
                 stud_obj = StudentProfile.objects.create(user=user, institution=category)
                 stud_obj.save()

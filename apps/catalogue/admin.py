@@ -8,13 +8,26 @@ from django.utils.text import slugify
 from django.db.models import F
 
 
+@admin.register(Book)
 class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
-    list_display   = ["title", 'subject', 'author', 'isbn', 'series','call_number', 'publisher', 'location', 'institution']
+    list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
 
-    import_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'series','call_number', 'publisher', 'location', 'year_published', 'institution']
-    export_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'series','call_number', 'publisher', 'location', 'year_published', 'institution']
+    fieldsets = (
+        ('Institution', {
+            'fields': ('institution',),
+            'classes': ('collapse',)
+        }),
+        ('Book Information', {
+            'fields': ('title', 'subject', 'author', 'edition', 'publisher', 'location', 'year_published')
+        }),
+        ('Book Access Information', {
+            'fields': ('isbn', 'call_number',)
+        }),
+    )
+    import_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'year_published', 'institution']
+    export_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'year_published', 'institution']
 
     ordering = ['title']  # Sort by title in ascending order
 
@@ -52,7 +65,6 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
         updated_count = queryset.update(institution="Augustine University Ilara-Epe, Lagos")
         self.message_user(request, f'{updated_count} books were stored in Augustine University Library Catalog')
     
-
     mark_pending.short_description = "Mark selected books as pending"
     generate_slug.short_description = "Generate Slugs for Selected Books"
     make_published.short_description = "Mark selected books as published"
@@ -61,10 +73,7 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     mark_augustineUniversity.short_description = "Mark selected books as Augustine University Materials"
     actions = [make_published, generate_slug, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
 
-admin.site.register(Book, CatalogAdmin)
-
 
 class ExcelUploadAdmin(admin.ModelAdmin):
     list_display = ['id','owner','file','date_uploaded']
-
 admin.site.register(ExcelUpLoad, ExcelUploadAdmin)

@@ -13,10 +13,18 @@ class MyAccountManager(BaseUserManager):
         if not email:
             raise ValueError("The Email field must be set")
         email = email.lower()
-
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        user.refresh_from_db()
+        
+        if user.is_student:
+            student = StudentProfile.objects.get_or_create(user=user)
+            student.save()
+        
+        if user.is_librarian:
+            library = Institution.objects.get_or_create(admin=user)
+            library.save()
         return user
 
     def create_superuser(self, email, password, **extra_fields):
@@ -42,10 +50,13 @@ class Account(AbstractBaseUser, PermissionsMixin):
     email           = models.EmailField(unique=True)
     first_name      = models.CharField(max_length=500)
     last_name       = models.CharField(max_length=500)
+
     is_active       = models.BooleanField(default=True)  
     is_student      = models.BooleanField(default=False)
+    
     is_admin        = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
+    
     is_librarian    = models.BooleanField(default=False)
     is_superuser    = models.BooleanField(default=False)
     
@@ -88,11 +99,11 @@ class Institution(models.Model):
     location        = models.CharField(max_length=500)
     contact_email   = models.EmailField(blank=True)
     contact_phone   = models.CharField(max_length=15, blank=True) 
-    slug            = models.SlugField(blank=True, null=True)
-    admin           = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='Librarian')
-    gmap            = models.URLField(blank=True, max_length=1000)
+    gmap            = models.CharField(blank=True, max_length=1000)
     is_active       = models.BooleanField(default=True)
     date_joined     = models.DateField(auto_now_add=True)
+    slug            = models.SlugField(blank=True, null=True)
+    admin           = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='Librarian', default=0)
 
     class Meta:
         verbose_name_plural = "Institutions"
@@ -108,16 +119,13 @@ class Institution(models.Model):
                 self.save()
             except Exception as e:
                 raise ValueError(e)
-        
-        super().save(*args, **kwargs)
-    
+        super().save(*args, **kwargs)    
 
     def __str__(self):
         return str(self.name)
 
  
 class StudentProfile(models.Model):
-    image           = models.ImageField(blank=True, null=True)
     firstname       = models.CharField(max_length=200, blank=True)
     lastname        = models.CharField(max_length=200, blank=True)
     contact_no      = models.CharField(max_length=15, blank=True)
@@ -125,7 +133,7 @@ class StudentProfile(models.Model):
     institution     = models.CharField(max_length=500, blank=True)
     department      = models.CharField(max_length=100, blank=True)
     is_active       = models.BooleanField(default=False)
-    user            = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="student")
+    user            = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="student", default=0)
 
     class Meta:
         verbose_name_plural = "Students"

@@ -11,7 +11,7 @@
 
 {% block content %}
         <div class="container">
-            <form class="" method="GET" action="{% url 'search' %}">
+            <form class="form" method="GET" action="{% url 'search' %}">
                 <div class="form-group search-div">
                     <input type="search" value="{{query}}" class="form-control rounded-0" id="search" name="article" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required />
                     <input type="submit" class="btn btn-success-c rounded-0 rounded-end" value="Search">
@@ -21,69 +21,55 @@
 
         <div class="container my-5 text-dark searchResult">
             {% if gscholar %}
-            <div class="row">
-                <span class="h6">{{gscholar.title}}</span>
-                <ul>
-                    <li class="text-content">Authors: {{gscholar.author}}</li>
-                    <li class="text-content">Journal: {{gscholar.journal}}</li>
-                    <li class="text-content">Volume: {{gscholar.volume}}</li>
-                    <li class="text-content">No: {{gscholar.number}}</li>
-                    <li class="text-content">Pages: {{gscholar.pages}}</li>
-                    <li class="text-content">Year: {{gscholar.year}}</li>
-                    <li class="text-content">Publisher: {{gscholar.publisher}}</li>
-                </ul>
-            </div>
             {% endif %}
-
-            <div class="row justify-content-between">
-                <div class="col-12 mx-auto">            
+            <div class="row">
+                <div class="col col-md-3 d-none d-lg-block">
+                    <span class="h6">{{gscholar.title}}</span>
+                    <ul class="my-3">
+                        <li class="text-content">Authors: {{gscholar.author}}</li>
+                        <li class="text-content">Journal: {{gscholar.journal}}</li>
+                        <li class="text-content">Volume: {{gscholar.volume}}</li>
+                        <li class="text-content">No: {{gscholar.number}}</li>
+                        <li class="text-content">Pages: {{gscholar.pages}}</li>
+                        <li class="text-content">Year: {{gscholar.year}}</li>
+                        <li class="text-content">Publisher: {{gscholar.publisher}}</li>
+                    </ul>
+                </div>
+                <div class="col-10 col-md-9 mx-auto shadow">  
+                    <h4 class="text-center"> 
+                        <span class="text-content">{{querysets.count}} Result Found</span>
+                    </h4>          
                     {% if querysets %}
                     <ul class="list-group result-ul">
                         {% for data in querysets %}
-                        <li class="result-item my-4"><hr>
-                            <div class="row card border-0 shadow-c">
-                                <div class="card-header">
-                                    <a href="{{data.get_absolute_url}}" class="nav-link"><h5 class="result-title">{{ data.title }} </h5></a>
-                                    <p class="institution fw-bold"><iconify-icon icon="mingcute:location-2-line"></iconify-icon>{{ data.institution }}</p>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="table-responsive p-0">
-                                            <table class="table table-striped table-hover">
-                                                <thead class="table-light">
-                                                    <caption class="fw-bold institution d-none"><iconify-icon icon="tdesign:institution"></iconify-icon> {{data.institution}}</caption>
-                                                    <tr>
-                                                        <th class="col-4" scope="col-4"><iconify-icon icon="solar:user-bold-duotone"></iconify-icon> <small>Author</small> </th>
-                                                        <th scope="col-4" class="col-4"><iconify-icon icon="clarity:number-list-line"></iconify-icon> <small>Series</small></th>
-                                                        <th scope="col-4" class="col-4"><small>Publisher</small></th>
-                                                        <th scope="col-4" class="col-4"><small></small></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="table-group-divider">
-                                                    <tr class="w-100">
-                                                        <td scope="row">{{ data.author }}</td>
-                                                        <td>{{ data.series }}</td>
-                                                        <td>{{ data.publisher }}</td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot></tfoot>
-                                            </table>
-                                        </div>                                            
-                                    </div>
-                                </div>
-                                <div class="d-none d-md-block col-md-2">
-                                    <div class="result-img-box">
-                                        <img class="img-fluid" src=""/>
-                                    </div>
-                                    <!-- Add any additional content on the right side -->
-                                </div>
-                            </div>
+                        <li class="result-item py-2">
+                            <a href="{{data.get_absolute_url}}" class="nav-link">
+                                <h5 class="result-title" style="font-size: 12px;">
+                                    {{forloop.counter|safe}})
+                                    {{ data.title|safe }} 
+                                </h5>
+                            </a>
+                            <p class="institution fw-bold m-0" style="font-size: 10px;">
+                                <iconify-icon icon="mingcute:location-2-line"></iconify-icon>
+                                {{ data.institution|safe }}
+                            </p>
+                            <p style="font-size: 10px;" class="p-0">
+                                <iconify-icon icon="solar:user-bold-duotone"></iconify-icon> 
+                                {{ data.author }}
+                            </p>
                         </li>
                         {% endfor %}
                     </ul>
+                    {% else %}
+                        <p> No result found !!! </p>
                     {% endif %}
+                    <!-- Pagination -->
+                    <div class="col-10 mx-auto col-md-3 border border-2 rounded border-success text-center">
+                        Pagination
+                    </div>
+                    <!-- Pagination -->
+
                 </div>
-                <div class="col-md-3"></div>
             </div>
         </div>
     {% endblock %}

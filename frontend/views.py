@@ -23,9 +23,9 @@ def about(request):
 
 
 # Define the news view function
-def news(request):
+def blog(request):
     # Create a context dictionary with the page variable
-    page = "news"
+    page = "blog"
     context = {
         'page':page
     }
