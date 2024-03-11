@@ -10,8 +10,6 @@ from django.db.models import F
 
 class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'series','call_number', 'publisher', 'location', 'institution']
-    search_fields  = ['title', 'author']
-
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
 
@@ -20,7 +18,7 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
 
     ordering = ['title']  # Sort by title in ascending order
 
-    # Export options
+    # Import/Export options
     resource_class = BookResource
 
     # Custom action
@@ -62,6 +60,7 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
     mark_unavailable.short_description = "Mark selected books as unavailable"
     mark_augustineUniversity.short_description = "Mark selected books as Augustine University Materials"
     actions = [make_published, generate_slug, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
+
 admin.site.register(Book, CatalogAdmin)
 
 
