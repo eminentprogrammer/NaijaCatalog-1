@@ -94,9 +94,12 @@ def search(request):
         except Exception as e:
             print(e)
         return render(request, 'engine/general_search.html', context)
-    
     return render(request, 'engine/general_search.html')
 
+
+
+def advanced_search(request, data):
+    pass
 
 def google_scholar_search(request):
     return render(request, 'engine/google_scholar_search.html')

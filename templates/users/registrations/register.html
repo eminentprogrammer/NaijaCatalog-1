@@ -3,22 +3,8 @@
         {% block title %} Join Naija Catalog - Register - {% endblock %}
 
         {% block extrahead %}
-        <link rel="stylesheet" href="{% static 'accounts/css/styles.min.css' %}">
-        <style>
-            #signup_password, #decrypt{
-                transition: all ease 1s;
-            }
-            #signup_password{
-
-            }
-            #decrypt{
-                background: green;
-                border: 1px solid darkgreen;
-                color: white;
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
         {% endblock %}
-
 
         {% block content %}
         <div class="container-fluid py-3" id="app">
@@ -34,16 +20,16 @@
                             {% if messages %}
                             {% include "components/message.html" %}
                             {% endif %}
-                            <div id="helpId_sl" class="text-muted mb-4">
+                            <div id="helpId_sl" class="text-muted my-2 text-center">
                                 Unlock the Power of Collaboration with Our Undergraduate-Driven Union Catalogue.
                             </div>                    
                             <div class="form-floating mb-2 text-dark">
-                                <input type="email" class="form-control" name="email" id="signup_email" placeholder="" required {% if email %}value="{{email}}"{% endif %}>
+                                <input type="email" class="form-control rounded" name="email" id="signup_email" placeholder="" required {% if email %}value="{{email}}"{% endif %}>
                                 <label for="email">Email Address</label>
                             </div>                        
                             <div class="row mb-2">
                                 <div class="text-dark">
-                                    <select class="form-select form-control" name="category" id="category" required>
+                                    <select class="form-select form-control rounded" name="category" id="category" required>
                                         <option class="text-warning">Choose University</option>
                                         <option class="text-success" value="Augustine University Ilara Epe" {% if category == 'Augustine University Ilara Epe' %}selected{% endif %}> Augustine University Ilara-Epe</option>
                                         <option class="text-success" value="Caleb University" {% if category == 'Caleb University' %}selected{% endif %}> Caleb University</option>
@@ -54,29 +40,31 @@
                                 </div>
                             </div>
                             <div class="form-floating text-dark mb-2 d-none" id="institution_div">
-                                <input type="text" class="form-control" list="institutions" name="Institution" id="institution" placeholder="">
+                                <input type="text" class="form-control rounded" list="institutions" name="Institution" id="institution" placeholder="">
                                 <label for="institution">Name of University</label>
                             </div>
                             <div class="form-floating mb-2 text-dark">
-                                <input type="password" class="form-control" name="password" id="signup_password" {% if password %}value="{{password}}"{% endif %} placeholder="" required>
+                                <input type="password" class="form-control rounded" name="password" id="signup_password" {% if password %}value="{{password}}"{% endif %} placeholder="" required>
                                 <label for="password">Password</label>
                             </div>
-                            <div class="form-group my-4 d-flex justify-content-between">
-                                <div class="row my-auto">
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <label class="form-check-label text-muted">
-                                                <input type="checkbox" class="form-check-input" required> I agree to all Terms & Conditions 
-                                            </label>
-                                        </div>
-                                    </div>          
-                                </div>
-                                <label class="row">
-                                    <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
-                                </label>
-                                <button type="submit" class="btn btn-danger">Register</button>
+                            <div class="row my-auto">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            I agree to all Terms & Conditions 
+                                        </label>
+                                        <input type="checkbox" class="form-check-input" required> 
+                                    </div>
+                                </div>          
                             </div>
-                            <p class="text-muted my-auto text-center">Already have an account, <a class="text-decoration-none text-success fw-bold" href="{% url 'signin' %}">login</a></p>
+                            <div class="form-group my-4 d-flex justify-content-between">
+                                <input type="button" class="btn btn-sm btn-light" id="decrypt" value="Decrypt Password"> 
+                                <button type="submit" class="btn btn-danger">Register Account</button>
+                            </div>
+                            <p class="text-muted my-auto text-center">
+                                <br>Already have an account
+                                <a class="text-decoration-none text-success fw-bold" href="{% url 'signin' %}">login</a>
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -85,19 +73,5 @@
         {% endblock %}
 
         {% block scripts %}
-        <script>
-            const decryptBtn = document.querySelector("#decrypt");
-            const passwordInput = document.querySelector("#signup_password");
-            decryptBtn.addEventListener("click", e = () => {
-                if(decryptBtn.value == "Decrypt Password"){
-                    decryptBtn.value = "Encrypt Password";
-                    passwordInput.type = "text";
-                }
-                else{
-                    decryptBtn.value = "Decrypt Password";
-                    passwordInput.type = "password";
-                }
-            })
-        </script>
         <script src="{% static 'accounts/js/scripts.js' %}"></script>
         {% endblock %}

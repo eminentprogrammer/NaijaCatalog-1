@@ -12,6 +12,7 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('news/', views.news, name="news"),
     path('search/', views.search, name="search"),
+    path('advanced/', views.advanced_search, name="advanced_search"),
     path('about-us/', views.about, name="about_us"),
     path('support/', views.support, name="support"),
 

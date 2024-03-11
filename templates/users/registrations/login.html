@@ -4,26 +4,13 @@
 {% block title %} Login Into Naija Catalog {% endblock %}
 
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'accounts/css/styles.min.css' %}">
-<style>
-    #signup_password, #decrypt{
-        transition: all ease 1s;
-    }
-    #signup_password{
-
-    }
-    #decrypt{
-        background: green;
-        border: 1px solid darkgreen;
-        color: white;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
 {% endblock %}
 
 
 {% block content %}
         <div class="container-fluid" id="app">
-            <h1 class="text-center text-light text-muted app-title"> Login  </h1>
+            <h1 class="text-center text-light text-muted app-title"> Login </h1>
             <div class="logo-box" id="logo_container">
                 <img class="img-fluid" draggable="false" src="{% static 'images/naijacatalog.png' %}" alt="naijacatalog"
                     srcset="{% static 'images/naijacatalog.png' %}">
@@ -33,8 +20,10 @@
                     <div class="col-10 col-md-4 mx-auto">
                         <form action="{% url 'signin' %}" method="POST">{% csrf_token %}
                             {% include "components/message.html" %}
-                            <small id="helpId" class="text-muted">Enjoy flexible research algorithm built by an undergraduate
-                                for undergraduates.</small>
+                            <small id="helpId" class="text-muted text-center">
+                                Enjoy flexible research algorithm built by an undergraduate
+                                for undergraduates.
+                            </small>
                             <div class="form-floating my-3 text-dark">
                                 <input type="email" class="form-control" name="email" id="signin_email" placeholder=""
                                     required {% if email %}value="{{email}}"{% endif %}>
@@ -54,13 +43,15 @@
                                 </div>
                                 <a href="#" class="auth-link text-light">Forgot password?</a>
                             </div>
-
                             <div class="form-group my-4">
+                                <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
                                 <button type="submit" class="btn btn-md btn-success">Login</button>
                             </div>
-                            <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
                             <div class="text-center mt-4 font-weight-light">
-                                <p class="text-muted">Don't have an account, <a class="text-decoration-none text-warning fw-bold" href="{% url 'signup' %}">Create Account</a></p>
+                                <p class="text-muted">
+                                    Don't have an account, 
+                                    <a class="text-decoration-none text-light fw-bold" href="{% url 'signup' %}">Create Account</a>
+                                </p>
                             </div>
                         </form>
                     </div>
