@@ -20,6 +20,7 @@
         </div>
 
         <div class="container my-5 text-dark searchResult">
+            {% if gscholar %}
             <div class="row">
                 <span class="h6">{{gscholar.title}}</span>
                 <ul>
@@ -32,8 +33,6 @@
                     <li class="text-content">Publisher: {{gscholar.publisher}}</li>
                 </ul>
             </div>
-            
-            {% if gscholar %}
             {% endif %}
 
             <div class="row justify-content-between">
