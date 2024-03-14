@@ -1,6 +1,6 @@
 # Register your models here.
 from django.contrib import admin
-from .models import Book, ExcelUpLoad
+from .models import Book, ExcelUpLoad, Institution
 from .resources import BookResource
 from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ExportActionModelAdmin
@@ -62,7 +62,7 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
         self.message_user(request, f'{updated_count} books were set unavailable')
           
     def mark_augustineUniversity(self, request, queryset):
-        updated_count = queryset.update(institution="Augustine University Ilara-Epe, Lagos")
+        updated_count = queryset.update(institution=Institution.objects.get(id=1).name)
         self.message_user(request, f'{updated_count} books were stored in Augustine University Library Catalog')
     
     mark_pending.short_description = "Mark selected books as pending"

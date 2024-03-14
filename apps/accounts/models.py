@@ -1,17 +1,19 @@
 import uuid
 import random
-from django.urls import reverse
-from django.contrib import messages
 from django.db import models
+from django.urls import reverse
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 # Create your models here.
 
 
 class MyAccountManager(BaseUserManager):
+
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
+        
         email = email.lower()
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
@@ -25,10 +27,11 @@ class MyAccountManager(BaseUserManager):
         if user.is_librarian:
             library = Institution.objects.get_or_create(admin=user)
             library.save()
+
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-
+        
         if not email:
             raise ValueError("Email is required")
         
@@ -90,7 +93,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
         if not self.slug:
             self.slug = uuid.uuid4()
         super().save(*args, **kwargs)
-
 
 
 class Institution(models.Model):

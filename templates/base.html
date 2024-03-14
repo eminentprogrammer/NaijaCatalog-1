@@ -3,6 +3,14 @@
 <html lang="en">
   <head>
     {% include "components/head.html" %} {% block extrahead %}{% endblock %}
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       .hero-desc{
         text-align: justify !important;
@@ -41,14 +49,10 @@
     <div class="bg-light p-0">
       <header>
         <!-- NAV CONTAINER -->
-        <nav
-          nav
-          class="navbar navbar-expand-lg navbar-dark shadow-lg fixed-top py-3"
-        >
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-lg fixed-top py-3">
           {% include "components/navbar.html" %}
         </nav>
         <!-- NAV END CONTAINER -->
-
         {% block HERO %}
         <!-- HERO CONTAINER -->
         <div class="hero-container">
@@ -57,29 +61,24 @@
               <h4 class="animate__animated animate__bounce heading-text">
                 NAIJA CATALOG
               </h4>
-              <p class="hero-desc">
+              <p class="hero-des">
                 Top Library Catalogue in Nigeria, providing Nigerians access to
                 Collections in Libraries across the country.
-                <img
-                  class="img-fluid d-none"
+                <img class="img-fluid d-none"
                   src="{% static 'images/naijacatalog.png' %}"
                   alt="Naija Catalog"
                   srcset="{% static 'images/naijacatalog.png' %}"
                 />
               </p>
               {% if not request.user.is_authenticated %}
-              <div class="hero-auth">
+              <div class="hero-auth justify-content-around">
                 <a class="btn sign-in-btn" href="{% url 'signup' %}">
-                  Register <i class="fa fa-user"></i>
+                  <i class="fa fa-users"></i>
+                  Student
                 </a>
-                <a class="btn sign-in-btn" href="{% url 'signin' %}">
-                  Login
-                  <span class="float-right pl-2" style="padding-top: 5px">
-                    <img
-                      alt="login"
-                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC5SURBVHgB7ZS9DcIwEIXf2QhaTxC5AsoIMQCZgBUYhQ1YgQ0YISswgkcILRI+nAKJCCwnvpT+Chf26b37kQ8oFKQQMqnWuzOBjvR8Nc7du1icQiZK+SuIDS91a21tYnHZFfTYbW2ZVQumLlaJyGCMidggZbL4Dqw2+wuYzUR9eB8yJbiQ7oFX+haums/bcMiMB6QwBgnO2CIdWoSfFs005P/iYoOUuMhgjHhP9k+GV6dwutSqKBTkvAFBK2wy62tKzwAAAABJRU5ErkJggg=="
-                    />
-                  </span>
+                <a class="btn sign-in-btn" href="{% url 'institution_registration' %}">
+                  <i class="fas fa-institution" style="padding-top: 5px"></i>
+                  University
                 </a>
               </div>
               {% endif %}

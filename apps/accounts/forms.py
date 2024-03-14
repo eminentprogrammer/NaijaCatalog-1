@@ -1,12 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
-from .models import Account
+from .models import Account, Institution, StudentProfile
 
 
 class StudentRegistration(forms.Form):
      university = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name of Institution'}))
      student_ID = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Student ID'}))
-
      class Meta:
           model = None
           fields = ['university','student_ID']
@@ -14,14 +13,24 @@ class StudentRegistration(forms.Form):
 
 class InstitutionRegistration(forms.Form):
      university = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name of Institution'}))
+
      class Meta:
-          model = None
-          fields = ['university']
+          model = Institution
+          fields = ['logo', 'name', 'contact_email', 'contact_phone', 'location']
+
+     def save(self, *args, **kwargs):
+          if not self.instance.slug:
+               from django.utils.text import slugify
+               try:
+                    self.instance.slug = slugify(self.instance.name)
+                    self.instance.save()
+               except Exception as e:
+                    raise ValueError(e)
+          super().save(*args, **kwargs)
 
 
 class UserRegistration(UserCreationForm):
      email      = forms.EmailField(max_length=250,help_text="The email field is required.")
-     
      class Meta:
           model = Account
           fields = ('email', 'password1', 'password2')

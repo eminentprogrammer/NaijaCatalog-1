@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.emailApp',
     'apps.partners',
 ]
+
 # HEALTH CHECK
 INSTALLED_APPS += [
     # HEALTH CHECK SETTINGS
@@ -50,11 +51,14 @@ INSTALLED_APPS += [
     'health_check.storage',
     'health_check.contrib.migrations',
 ]
+
 HEALTH_CHECK = {
     'DISK_USAGE_MAX': 90, #Percent
     'MEMORY_MIN': 100, # in MB
 }
+
 HEALTH_CHECK['DISK_USAGE_MAX'] = 5 * (1 << 30)   # 5GB in bytes
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     
@@ -66,7 +70,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 ROOT_URLCONF = 'backend.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -84,6 +90,7 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL  = 'accounts.Account'
+
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # GMAIL CONFIGURATIONS

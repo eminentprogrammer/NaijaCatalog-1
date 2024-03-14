@@ -38,7 +38,7 @@ class StudentAdmin(admin.ModelAdmin):
 class InstitutionAdmin(admin.ModelAdmin):
     list_display    = ['name', 'contact_email', 'contact_phone', 'location',"date_joined"]
     fieldsets = (
-        ('Institutional', {'fields': ('name', 'contact_email', 'contact_phone', 'location',)}),
+        ('Institutional', {'fields': ('logo','name', 'contact_email', 'contact_phone', 'location', 'gmap')}),
         ('Additional Information',{'fields': ('admin',)}),
     )
     ordering        = ['name']

@@ -16,25 +16,25 @@
     </button>
 
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mt-2 mt-lg-0">
+        <ul class="w-25 navbar-nav mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link {% if page == 'homepage' %}active{% endif %}" href="{% url 'homepage' %}"
-                    aria-current="page">
+                <a class="nav-link {% if page == 'homepage' %}active{% endif %}" href="{% url 'homepage' %}" aria-current="page">
                     Home
                     <span class="visually-hidden">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if page == 'about' %}active{% endif %} d-none"
-                    href="{% url 'about_us' %}">About</a>
+                <a class="nav-link {% if page == 'about' %}active{% endif %} d-none" href="{% url 'about_us' %}">About
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if page == 'blog' %}active{% endif %}" href="{% url 'blog' %}">Blog</a>
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" type="button" id="dropdownId" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Account</a>
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
                     <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
                     <a class="dropdown-item" href="{% url 'signout' %}">Sign Out</a>
@@ -42,13 +42,9 @@
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link {% if page == 'login' %}active{% endif %}" href="{% url 'signin' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if page == 'register' %}active{% endif %}" href="{% url 'signup' %}">Register</a>
+                <a class="nav-link {% if page == 'login' %}active{% endif %}" href="{% url 'signin' %}">Sign In</a>
             </li>
             {% endif %}
-
         </ul>
     </div>
 </div>

@@ -8,18 +8,48 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Account, StudentProfile
-from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account
-
+from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account, InstitutionRegistration
 from apps.catalogue.models import Book, Institution
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
-from apps.emailApp.views import send_confirmation_email
 
+from apps.emailApp.views import send_confirmation_email
 
 # Create your views here.
 context = {
     'page_title' : 'Naija Catalog',
 }
+
+
+@login_required
+def dashboard_redirect(request):
+    user = request.user
+    if user.is_student:
+        return redirect('student_dashboard')
+    elif user.is_librarian:
+        return redirect('library_dashboard')
+    else:
+        return redirect('admin:index')
+
+
+@login_required
+def insitutionDashboard(request):
+    user = request.user
+    
+    context = {
+
+    }
+    return render(request, 'users/institution/dashboard.html', context)
+
+
+@login_required
+def studentDashboard(request):
+    user = request.user
+    
+    context = {
+
+    }
+    return render(request, 'users/student/dashboard.html', context)
 
 
 @login_required
@@ -30,6 +60,7 @@ def dashboard_view(request):
 
 
 
+@login_required
 def dashboard_search(request):
     start_time = time.time()
     context['page_title'] = 'Dashboard'
@@ -74,29 +105,31 @@ def dashboard_search(request):
 
 
 def signUp(request):
+    logout(request)
     context = {}
     form = UserRegistration()
     if request.POST:
-        token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
         category    = request.POST.get('category')
         institution = request.POST.get('institution')
         password    = request.POST.get('password')
-
+        
         if not Account.objects.filter(email=email).exists():
             user = Account.objects.create_user(
                 email       = email,
                 password    = password
             )
+            user.is_student = True
+            user.save()
             user = authenticate(email=email, password = password)
+
             if not user is None:
-                stud_obj = StudentProfile.objects.create(user=user, institution=category)
-                stud_obj.save()
                 login(request, user)
-                send_confirmation_email(request, user)
+                # send_confirmation_email(request, user)
                 messages.error(request, f"Welcome {email}")
                 return redirect('dashboard')
             messages.error(request, "Account created successfully, log in")
+
             return redirect("signin")
         else:
             context = {
@@ -112,8 +145,8 @@ def signUp(request):
 
 
 def signIn(request):
-    context = {}
     logout(request)
+    context = {}
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
@@ -138,6 +171,27 @@ def signIn(request):
             'saveauth'  :saveauth
         }
     return render(request, 'users/registrations/login.html', context)
+
+
+
+def institutionRegistration(request):
+    logout(request)
+    context = {}
+    if request.POST:
+        form = UserRegistration(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.is_librarian = True
+            instance.save()
+            messages.success(request, "Institution Registration Successful")
+            return redirect("signin")
+        else:
+            messages.error(request, "Institution Registration Failed")
+    else:
+        form = UserRegistration()
+    context['form'] = form
+    return render(request, 'users/registrations/institution_registration.html', context)
+
 
 
 @login_required
