@@ -9,6 +9,7 @@ charset-normalizer
 cleo
 crashtest
 cryptography
+cloudinary
 defusedxml
 diff-match-patch
 distlib
