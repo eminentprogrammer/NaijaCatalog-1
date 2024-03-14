@@ -1,5 +1,6 @@
 import os
 import environ
+import cloudinary
 import dj_database_url
 from .jazzmin import *
 from pathlib import Path
@@ -153,3 +154,11 @@ if not DEBUG:
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CLOUDINARY SETTINGS FOR IMAGE STORAGE
+cloudinary.config(
+    cloud_name = env("CLOUDINARY_NAME"),
+    api_key    = env("CLOUDINARY_API_KEY"),
+    api_secret = env("CLOUDINARY_API_SECRET"),
+)

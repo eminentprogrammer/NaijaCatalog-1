@@ -1,9 +1,11 @@
 import uuid
 import random
+import cloudinary
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.contrib import messages
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 # Create your models here.
 
@@ -31,7 +33,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-        
+
         if not email:
             raise ValueError("Email is required")
         
@@ -96,7 +98,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
 
 class Institution(models.Model):
-    logo            = models.ImageField(blank=True, null=True)
+    logo            = CloudinaryField("NaijaCatalog/institution/logo/", blank=True, null=True)
     name            = models.CharField(max_length=500)
     location        = models.CharField(max_length=500)
     contact_email   = models.EmailField(blank=True)
