@@ -1,6 +1,5 @@
 asgiref
 attrs
-backports.zoneinfo
 build
 CacheControl
 certifi

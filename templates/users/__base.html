@@ -41,7 +41,7 @@
             <span class="text-light">NC</span>
           </a>
           <a class="navbar-brand brand-logo-mini" href="{% url 'dashboard' %}">
-            <img src="{% static 'connects/images/logo-mini.svg' %}" alt="logo" />
+            <img src="{% static 'images/favicon/icon.png' %}" alt="logo" />
           </a>
         </div>
 
@@ -70,7 +70,11 @@
                   <img src="{% static 'connects/images/faces/face28.png' %}" alt="image">
                 </div>
                 <div class="nav-profile-text">
+                  {% if request.user.is_librarian %}
+                  <p class="mb-1 text-black">{{ request.user.institution }}</p>
+                  {% else %}
                   <p class="mb-1 text-black">{{ request.user.email }}</p>
+                  {% endif %}
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
@@ -176,7 +180,11 @@
       <div class="container-fluid page-body-wrapper d-flex justify-content-between">
 
         <!-- partial:partials/_sidebar.html -->
-        {% include 'users/__dashboard/__sidebar.html' %}
+        {% if request.user.is_librarian %}
+          {% include 'users/__dashboard/institution__sidebar.html' %}
+        {% else %}
+          {% include 'users/__dashboard/__sidebar.html' %}
+        {% endif %}
         <!-- partial:partials/_sidebar.html -->
 
         <!-- partial -->
@@ -185,16 +193,12 @@
             {% if messages %}
             <div class="row" id="proBanner">
               <div class="col-12 my-auto">
-                <span class="d-flex align-items-center purchase-popup d-flex justify-content-between">
-                  <div class="col">
-                    {% for message in messages %}
-                    <li class="row">
-                      <p>{{message}}</p>
-                    </li>
-                    {% endfor %}
-                  </div>
-                  <i class="mdi mdi-close" id="bannerClose"></i>
-                </span>
+                {% for message in messages %}
+                <div class="{{message.extra_tags}} d-flex justify-content-between">
+                  <p class="my-auto">{{message}}</p>
+                  <i class="btn btn-success mdi mdi-close" id="bannerClose"></i>
+                </div>
+                {% endfor %}
               </div>
             </div>
             {% endif %}

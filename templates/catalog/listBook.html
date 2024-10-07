@@ -1,0 +1,49 @@
+{% extends "users/__base.html" %}
+{% load static %}
+
+{% block styles %}
+<style>
+    *::-webkit-scrollbar{
+        display: none;
+    }
+    .errorlist{
+        color:red;
+    }
+</style>
+{% endblock  %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-10 px-md-5 mx-auto">
+        <div class="container">
+            <div class="row">
+                <div class="rounded-top text-dark fw-bold">{{request.user.institution}}'s Library Catalog</div>
+                <div class="container rounded-bottom g-4">
+                    {% if catalog %}
+                    {% for book in catalog %}
+                    <div class="row my-3 py-4 px-2 rounded shadow d-flex justify-content-center align-items-center">
+                        <h5>{{ book.title }}</h5>
+                        <p>Author: {{ book.author }}</p>
+                        <p>Published: {{ book.year_published }}</p>
+                        <p>ISBN: {{ book.isbn }}</p>
+                        <div class="col">
+                            <a href="{% url 'catalog:single_book_info' book.slug %}" class="text btn btn-success btn-left btn-md">View Details</a>
+                            <a href="#" class="text btn btn-danger btn-left btn-md">Edit</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="row my-3 py-3 px-2 rounded shadow d-flex justify-content-center align-items-center">
+                        <h5 class="my-auto">No Record Found!</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 
+
+{% block scripts %}{% endblock %}

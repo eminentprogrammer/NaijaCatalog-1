@@ -3,7 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.dashboard_redirect, name="dashboard"),
     path('login/', views.signIn, name='signin'),
     path('logout/', views.signOut, name='signout'),
 
@@ -16,7 +15,9 @@ urlpatterns = [
     
 
     path('student/signup/', views.signUp, name='signup'),
-    path('student/dashboard/', views.studentDashboard, name="student_dashboard"),
-    path('institution/dashboard/', views.insitutionDashboard, name="institution_dashboard"),
+    path('dashboard/', views.dashboard, name="dashboard"),
+    # path('', views.dashboard_redirect, name="dashboard"),
+    path('dashboard/', views.studentDashboard, name="student_dashboard"),
+    path('dashboard/', views.institutionDashboard, name="institution_dashboard"),
     path('institution/signup/', views.institutionRegistration, name="institution_registration"),
 ]

@@ -18,14 +18,14 @@
                 </div>
                 <form class="form" method="GET" action="{% url 'search' %}">
                     <div class="form-group d-flex search-div">
-                        <input type="search" class="form-control" id="search" name="article" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required/>
+                        <input type="search" class="form-control" id="search" name="title" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required/>
                         <button type="submit" class="btn btn-md bg-secondary-c rounded-0 rounded-end">Search</button>
                     </div>
                 </form>
             </div>
 
             <div class="container">
-                <div class="row" hidden>
+                <div class="row">
                     {% for i in  '123' %}
                     <div class="col-md-4 mx-auto">
                         <div class="card-container country-card shadow">

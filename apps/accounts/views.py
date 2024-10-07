@@ -7,9 +7,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Account, StudentProfile
-from .forms import UserRegistration, UpdateProfile, UpdatePasswords, Account, InstitutionRegistration
-from apps.catalogue.models import Book, Institution
+from .models import Account, Institution
+from .forms import UserRegistration, UpdateProfileForm, UpdatePasswords, Account, InstitutionRegistration, UpdateInstitutionForm
+from apps.catalogue.models import Book
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
 
@@ -21,21 +21,26 @@ context = {
 }
 
 
+
+
+@login_required
+def dashboard(request):
+    return render(request, 'users/institution/dashboard.html', context)
+
+
 @login_required
 def dashboard_redirect(request):
     user = request.user
-    if user.is_student:
-        return redirect('student_dashboard')
-    elif user.is_librarian:
+    if user.is_librarian:
         return redirect('library_dashboard')
+    # elif user.is_superuser:
+        # return redirect('admin:index')
     else:
-        return redirect('admin:index')
-
+        return redirect('student_dashboard')
 
 @login_required
-def insitutionDashboard(request):
+def institutionDashboard(request):
     user = request.user
-    
     context = {
 
     }
@@ -45,7 +50,6 @@ def insitutionDashboard(request):
 @login_required
 def studentDashboard(request):
     user = request.user
-    
     context = {
 
     }
@@ -57,7 +61,6 @@ def dashboard_view(request):
     user = request.user
     messages.success(request, 'Master Dashboard')
     return render(request, "users/__dashboard.html", locals())
-
 
 
 @login_required
@@ -103,11 +106,53 @@ def dashboard_search(request):
     return render(request, "users/dashboard/general_search.html", context)
 
 
+def institutionRegistration(request):
+    logout(request)
+    context = {}
+
+    if request.POST:
+        email       = request.POST['email']
+        institution = request.POST['institution']
+        password    = request.POST['password']
+        
+        if not Account.objects.filter(email=email).exists():
+            user = Account.objects.create_user(
+                email       = email,
+                password    = password
+            )
+            user.is_librarian = True
+            user.save()
+            user.refresh_from_db()
+
+            user = authenticate(email=email, password = password)
+            institution = Institution.objects.create(
+                name=institution, 
+                contact_email=user.email,
+                admin=user)
+            institution.refresh_from_db()
+
+            if not user is None:
+                login(request, user)
+                messages.add_message(request, messages.SUCCESS, extra_tags="alert alert-success", message="Account created successfully, log in")
+                return redirect('update_profile')
+
+            messages.add_message(request, messages.ERROR, extra_tags="alert alert-danger", message="Account not created")
+            return redirect("signin")
+        else:
+            messages.error(request, "Account already exists")
+            return redirect("signin")
+
+    form = UserRegistration()
+    context['form'] = form
+    return render(request, 'users/registrations/institution_registration.html', context)
+
+
 
 def signUp(request):
     logout(request)
     context = {}
     form = UserRegistration()
+
     if request.POST:
         email       = request.POST.get('email')
         category    = request.POST.get('category')
@@ -119,7 +164,6 @@ def signUp(request):
                 email       = email,
                 password    = password
             )
-            user.is_student = True
             user.save()
             user = authenticate(email=email, password = password)
 
@@ -140,13 +184,16 @@ def signUp(request):
             }
             messages.error(request, "Email Already exist !!!")
             return render(request, 'users/registrations/register.html', context)
-
+        
+    institutions = Institution.objects.all().only("name","pk")
+    context['institutions'] = institutions
     return render(request, 'users/registrations/register.html', locals())
-
+    
 
 def signIn(request):
     logout(request)
     context = {}
+
     if request.POST:
         token       = request.POST.get('csrfmiddlewaretoken')
         email       = request.POST.get('email')
@@ -157,8 +204,8 @@ def signIn(request):
         
         if user is not None:
             login(request, user)
-            res = send_confirmation_email(request, user)
-            messages.success(request, f"Sign In Successful, welcome back, {user.email}")
+            # res = send_confirmation_email(request, user)
+            messages.add_message(request, messages.SUCCESS, extra_tags="alert alert-success", message="Sign In Successful")
             return redirect("dashboard")
         else:
             messages.error(request,  "Incorrect email or password")
@@ -174,49 +221,27 @@ def signIn(request):
 
 
 
-def institutionRegistration(request):
-    logout(request)
-    context = {}
-    if request.POST:
-        form = UserRegistration(request.POST, request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.is_librarian = True
-            instance.save()
-            messages.success(request, "Institution Registration Successful")
-            return redirect("signin")
-        else:
-            messages.error(request, "Institution Registration Failed")
-    else:
-        form = UserRegistration()
-    context['form'] = form
-    return render(request, 'users/registrations/institution_registration.html', context)
-
-
-
 @login_required
 def update_profile(request):
-    context['page_title'] = 'Update Profile'
-    print(request.user)
-    user, created = Account.objects.get_or_create(email=request.user)
+    context = {'page_title': 'Update Profile'}
+    user = request.user
     
-    try:
-        print("Update Profile")
-        if not request.method == 'POST':
-            form = UpdateProfile(instance=user)
-            context['form'] = form
+    if user.is_librarian:
+        form = UpdateInstitutionForm(instance=user.institution)
+    else:
+        form = UpdateProfileForm(instance=user)
+
+    if request.POST:
+        form = UpdateInstitutionForm(request.POST, instance=Institution.objects.get(admin=user))
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, extra_tags="alert alert-success", message="Profile has been updated")
+            return redirect("update_profile")
+        
         else:
-            form = UpdateProfile(request.POST, instance=user)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Profile has been updated")
-                return redirect("update_profile")
-            else:
-                messages.error(request, "Profile not saved")
-    except Exception as e:
-        print(e)
-    
-    context['form','user'] = [form, user]
+            messages.add_message(request, messages.SUCCESS, extra_tags="alert alert-warning", message="Profile not updated")
+    context['form'] = form    
     return render(request, 'users/registrations/update_profile.html', context)
 
 

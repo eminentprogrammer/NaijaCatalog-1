@@ -20,18 +20,18 @@
             {% if form %}
             <div class="row">
                 <div class="rounded-top text-dark fw-bold">Update Profile</div>
-
                 <div class="container rounded-bottom g-4">
-
-                    <form class="form form" method="POST" action="">{% csrf_token %}
+                    <form class="form form" method="POST">{% csrf_token %}
+                        {% for field in form %}
                         <div class="form-floating my-2">
-                            <input class="form-control" type="text" name="first_name" maxlength="250" id="id_first_name" placeholder="" {% if user.first_name %}value="{{user.first_name}}"{% endif %} required>                           
-                            <label for="id_title"><i class="bi bi-book"  style="font-size: 1em; color: #007bff;"></i> First Name:</label>
+                            {{ field.errors }}
+                            {{ field }}
+                            <label>
+                                <i class="bi bi-book"  style="font-size: 1em; color: #007bff;"></i> 
+                                {{field.label}}
+                            </label>
                         </div>
-                        <div class="form-floating mb-3">
-                          <input class="form-control" type="text" name="last_name" maxlength="200" id="id_last_name" placeholder="" value="{% if user.last_name %}{{user.last_name}}{% endif %}" required>                       
-                          <label for="id_author"><i class="bi bi-book"  style="font-size: 1em; color: #007bff;"></i>Last Name</label>
-                        </div>
+                        {% endfor %}
                         <div class="form-group mb-3">
                             <input class="btn btn-md btn-success" type="submit" value="Submit">
                             <small id="help-submit" class="text-muted">click to Save</small>
@@ -39,7 +39,6 @@
                     </form>
                 </div>
             </div>
-
             {% endif %}
         </div>
     </div>

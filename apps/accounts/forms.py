@@ -1,6 +1,7 @@
+import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
-from .models import Account, Institution, StudentProfile
+from .models import Account, Institution #StudentProfile
 
 
 class StudentRegistration(forms.Form):
@@ -46,12 +47,12 @@ class UserRegistration(UserCreationForm):
 
 
 
-class UpdateProfile(UserChangeForm):
+class UpdateProfileForm(UserChangeForm):
      first_name     = forms.CharField(max_length=250, help_text="The First Name field is required.")
      last_name      = forms.CharField(max_length=250, help_text="The Last Name field is required.")
      class Meta:
           model = Account
-          fields = ('first_name', 'last_name')
+          fields = ('email',)
 
 
 class UpdatePasswords(PasswordChangeForm):
@@ -62,3 +63,36 @@ class UpdatePasswords(PasswordChangeForm):
      class Meta:
           model = Account
           fields = ('old_password','new_password1', 'new_password2')
+
+
+class UpdateInstitutionForm(forms.ModelForm):
+     name = forms.CharField(label='Name of Institution', widget=forms.TextInput(attrs={'class':'form-control', 'name':'institution'}))
+     contact_email = forms.EmailField(label='Email', widget=forms.TextInput(attrs={'class':'form-control', 'name':'email'}))
+     contact_phone = forms.CharField(label='Phone', widget=forms.TextInput(attrs={'class':'form-control', 'name':'phone'}))
+     location = forms.CharField(label='Location', widget=forms.TextInput(attrs={'class':'form-control', 'name':'location'}))
+     
+     def clean(self):
+          cleaned_data = super().clean()
+          email = cleaned_data.get('contact_email')
+          phone = cleaned_data.get('contact_phone')
+          cleaned_phone = ''.join(char for char in phone if char.isdigit())
+
+          EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+          if email and not re.match(EMAIL_REGEX, email):
+               raise forms.ValidationError("Please enter a valid email address")
+
+
+          PHONE_REGEX = r'^(\+?1-?)?(?:\d{3})[\s.-]?(?:\d{3})[\s.-]?\d{4}$'
+          if bool(re.match(PHONE_REGEX, cleaned_phone)):
+               raise forms.ValidationError("Please enter a valid phone number")
+        
+     def save(self, commit=True):
+          instance = super().save(commit=False)
+          if commit:
+               instance.save()
+               instance.refresh_from_db()
+          return instance
+     
+     class Meta:
+          model = Institution
+          fields = ('name', 'contact_email', 'contact_phone', 'location')

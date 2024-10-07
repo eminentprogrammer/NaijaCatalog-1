@@ -2,7 +2,7 @@ import os
 import environ
 import cloudinary
 import dj_database_url
-from .jazzmin import *
+# from .jazzmin import *
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,7 @@ ALLOWED_HOSTS   = ["*", "192.168.1.209"]
 
 # Application definition
 INSTALLED_APPS = [
-    'jazzmin',
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

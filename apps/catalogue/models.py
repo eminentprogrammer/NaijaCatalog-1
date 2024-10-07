@@ -3,26 +3,26 @@ from django.urls import reverse
 from apps.accounts.models import Account, Institution
 from django.utils.text import slugify
 
+
 class Book(models.Model):
     title           = models.CharField(max_length=200, blank=True)
     author          = models.CharField(max_length=200, blank=True)
     edition         = models.CharField(max_length=200, blank=True)
     subject         = models.CharField(max_length=200, blank=True)
     
-    isbn            = models.CharField(max_length=200, blank=True, verbose_name="ISBN")
     publisher       = models.CharField(max_length=200, blank=True)
-    location        = models.CharField(max_length=200, blank=True, verbose_name="Publisher Location")
-    call_number     = models.CharField(max_length=200, blank=True, verbose_name="Call Number")
-    
-    institution     = models.CharField(max_length=200, blank=True, verbose_name="Institution Hosted")
-    year_published  = models.DateField(editable=True)
-    
-    date_uploaded   = models.DateField(auto_now_add=True, editable=True)
+    isbn            = models.CharField(max_length=200, blank=True, verbose_name="ISBN")
+    call_no                 = models.CharField(max_length=200, blank=True, verbose_name="Call Number")
+    place_of_publication    = models.CharField(max_length=200, blank=True, verbose_name="Publisher Location")    
+
+    year_published  = models.CharField(max_length=4, blank=True)
     is_available    = models.BooleanField(default=True)
-    count           = models.PositiveIntegerField(default=0)
-
+    edited          = models.BooleanField(default=False)
     slug            = models.SlugField(blank=True, null=True, max_length=500)
-
+    institution     = models.ForeignKey(Institution, default=0,  on_delete=models.PROTECT)
+    
+    # CALL NO, TITLE, AUTHOR, SUBJECT, ISBN, PUBLISHER, SERIES, YEAR, LOCATION
+    
     # Custom action
     def make_published(self, request, queryset):
         updated_count = queryset.update(status='published')
@@ -48,7 +48,7 @@ class Book(models.Model):
 
     class Meta:
         verbose_name_plural = "Book Catalogue"
-
+    
 
 class ExcelUpLoad(models.Model):
     file = models.FileField(upload_to='catalogue/uploads/')

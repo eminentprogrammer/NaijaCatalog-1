@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ExportActionModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Account, StudentProfile, Institution
+from .models import Account, Institution
 # Register your models here.
 
 
@@ -12,14 +12,12 @@ class AccountAdmin(BaseUserAdmin, ImportExportModelAdmin, ExportActionModelAdmin
     ordering = ['email',"last_login"]
     fieldsets = (
         ('User Credentials', {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('last_name','first_name',)}),
-        ('Location', {'fields':('gmap',)}),
-        ('Permissions', {'fields': ('is_student','is_librarian','is_active','is_admin','is_staff', 'is_superuser',)})
+        ('Permissions', {'fields': ('is_librarian','is_active','is_admin','is_staff', 'is_superuser',)})
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'last_name','first_name', 'password1', 'password2'),
+            'fields': ('email', 'password1', 'password2'),
         }),
     )
     search_fields       = ('email',)
@@ -28,9 +26,9 @@ class AccountAdmin(BaseUserAdmin, ImportExportModelAdmin, ExportActionModelAdmin
 
 
 
-@admin.register(StudentProfile)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ['user','firstname','lastname','contact_no', 'institution', 'institutionID', 'department']
+# @admin.register(StudentProfile)
+# class StudentAdmin(admin.ModelAdmin):
+#     list_display = ['user','firstname','lastname','contact_no', 'institution', 'institutionID', 'department']
 
 
 

@@ -2,6 +2,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 from . import views
 from .sitemaps import Sitemap  # Import your sitemap class
+from apps.catalogue.views import search, advanced_search, google_scholar_search
 
 
 sitemaps = {
@@ -10,9 +11,8 @@ sitemaps = {
 
 urlpatterns = [
     path('', views.homepage, name="homepage"),
-    path('blog/', views.blog, name="blog"),
-    path('search/', views.search, name="search"),
-    path('advanced/', views.advanced_search, name="advanced_search"),
+    path('search/', search, name="search"),
+    path('advanced/', advanced_search, name="advanced_search"),
     path('about-us/', views.about, name="about_us"),
     path('support/', views.support, name="support"),
 
@@ -20,5 +20,5 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path('robots.txt', views.robots_view, name='robots_txt'),
     
-    path('google-scholar-search/', views.google_scholar_search, name='google_scholar_search')
+    path('google-scholar-search/', google_scholar_search, name='google_scholar_search')
 ]

@@ -53,6 +53,7 @@
           {% include "components/navbar.html" %}
         </nav>
         <!-- NAV END CONTAINER -->
+         
         {% block HERO %}
         <!-- HERO CONTAINER -->
         <div class="hero-container">
@@ -91,10 +92,13 @@
 
       <main class="main">{% block content %}{% endblock %}</main>
 
+      {% block footer %}
       {% include "components/footer.html" %}
-      <a href="#" class="btn btn-sm back-to-top" id="toUp"
-        ><i class="bi bi-arrow-up"></i
-      ></a>
+      {% endblock %}
+
+      <a href="#" class="btn btn-sm back-to-top" id="toUp">
+        <i class="bi bi-arrow-up"></i>
+      </a>
     </div>
 
     <!-- Bootstrap JavaScript Libraries -->

@@ -6,23 +6,25 @@
 {% endblock %}
 
 {% block HERO %}
-      <div class="row py-5"></div>
+    <div class="row py-5"></div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
 
 {% block content %}
         <div class="container">
             <form class="form" method="GET" action="{% url 'search' %}">
                 <div class="form-group search-div">
-                    <input type="search" value="{{query}}" class="form-control rounded-0" id="search" name="article" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required />
+                    <input type="search" value="{{title}}" class="form-control rounded-0" 
+                        id="search" name="title" placeholder="Search for books, articles, manuals and authors in 84,921,855 files" required />
                     <input type="submit" class="btn btn-success-c rounded-0 rounded-end" value="Search">
                 </div>
             </form>
         </div>
 
-        <div class="container my-5 text-dark searchResult">
-            {% if gscholar %}
-            {% endif %}
+        <div class="container my-5 text-dark">
             <div class="row">
+                {% if gscholar %}
                 <div class="col col-md-3 d-none d-lg-block">
                     <span class="h6">{{gscholar.title}}</span>
                     <ul class="my-3">
@@ -35,13 +37,35 @@
                         <li class="text-content">Publisher: {{gscholar.publisher}}</li>
                     </ul>
                 </div>
-                <div class="col-10 col-md-9 mx-auto shadow">  
+                {% endif %}
+                <div class="col col-md-3 d-none d-lg-block">
+                    <form class="form" method="GET" action="{% url 'search' %}">
+                        <ul class="my-2">
+                            <li class="text-content my-2">
+                                Title: 
+                                <input type="text" class="form-control" name="title" {% if title %}value={{title}} {% endif %}></input>
+                            </li>
+                            <li class="text-content">
+                                Authors: 
+                                <input type="text" class="form-control" name="author" {% if author %} value={{author}} {% endif %}></input>
+                            </li>
+                            <li class="text-content my-2">
+                                institution: 
+                                <input type="text" class="form-control" name="institution" {% if institution %}value={{institution}}{% endif %}></input>
+                            </li>
+                        </ul>
+                        <input type="submit" class="btn btn-success-c" value="Search">
+                    </form>
+                </div>
+
+                <div class="col-10 col-md-9 mx-auto">  
                     <h4 class="text-center"> 
-                        <span class="text-content">{{querysets.count}} Result Found</span>
+                        <span class="text-content fw-bold">{{querysets.count}} Result Found</span>
                     </h4>          
-                    {% if querysets %}
-                    <ul class="list-group result-ul">
-                        {% for data in querysets %}
+                    {{params}}
+                    {% if response %}
+                    <ul class="list-group result-ul shadow p-2">
+                        {% for data in response %}
                         <li class="result-item py-2">
                             <a href="{{data.get_absolute_url}}" class="nav-link">
                                 <h5 class="result-title" style="font-size: 12px;">
@@ -49,6 +73,7 @@
                                     {{ data.title|safe }} 
                                 </h5>
                             </a>
+                            
                             <p class="institution fw-bold m-0" style="font-size: 10px;">
                                 <iconify-icon icon="mingcute:location-2-line"></iconify-icon>
                                 {{ data.institution|safe }}
@@ -60,15 +85,22 @@
                         </li>
                         {% endfor %}
                     </ul>
-                    {% else %}
-                        <p> No result found !!! </p>
-                    {% endif %}
-                    <!-- Pagination -->
-                    <div class="col-10 mx-auto col-md-3 border border-2 rounded border-success text-center">
-                        Pagination
-                    </div>
-                    <!-- Pagination -->
+                    <div class="row">
+                        <div class="my-2">
+                            <a class="btn btn-primary-c">Previous</a>
+                            <a class="btn btn-primary-c">Next</a>
+                        </div>
+                    </div>    
 
+                    {% else %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-md-12">
+                                <p class="alert alert-info">No result found!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ from django.db.models import F
 
 @admin.register(Book)
 class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
-    list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'institution']
+    list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
 
@@ -20,16 +20,13 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
             'classes': ('collapse',)
         }),
         ('Book Information', {
-            'fields': ('title', 'subject', 'author', 'edition', 'publisher', 'location', 'year_published')
+            'fields': ('title', 'subject', 'author', 'edition', 'publisher', 'place_of_publication', 'year_published')
         }),
         ('Book Access Information', {
-            'fields': ('isbn', 'call_number',)
+            'fields': ('isbn', 'call_no',)
         }),
     )
-    import_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'year_published', 'institution']
-    export_fields  = ['id', 'title', 'subject', 'author', 'isbn', 'edition','call_number', 'publisher', 'location', 'year_published', 'institution']
-
-    ordering = ['title']  # Sort by title in ascending order
+    ordering = ['id']  # Sort by title in ascending order
 
     # Import/Export options
     resource_class = BookResource

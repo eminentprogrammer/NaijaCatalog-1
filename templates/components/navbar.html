@@ -3,7 +3,7 @@
     <div class="d-flex w-50">
         <a class="navbar-brand fw-bold" href="{% url 'homepage' %}">NC</a>
         <form class="d-flex my-lg-0 search-div" method="GET" action="{% url 'search' %}">
-            <input class="form-control me-sm-2" name="article" type="search"
+            <input class="form-control me-sm-2" name="title" type="search"
                 placeholder="Search for books, articles, manuals and authors in 84,921,855 files"
                 value="{{search.article.value}}" />
             <input type="submit" class="btn btn-primary" value="Search" hidden />

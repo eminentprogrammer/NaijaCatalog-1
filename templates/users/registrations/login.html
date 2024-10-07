@@ -15,9 +15,9 @@
                 <img class="img-fluid" draggable="false" src="{% static 'images/naijacatalog.png' %}" alt="naijacatalog"
                     srcset="{% static 'images/naijacatalog.png' %}">
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-10 col-md-4 mx-auto">
+                    <div class="col-10 col-md-7 mx-auto">
                         <form action="{% url 'signin' %}" method="POST">{% csrf_token %}
                             {% include "components/message.html" %}
                             <small id="helpId" class="text-muted text-center">
@@ -27,28 +27,28 @@
                             <div class="form-floating my-3 text-dark">
                                 <input type="email" class="form-control" name="email" id="signin_email" placeholder=""
                                     required {% if email %}value="{{email}}"{% endif %}>
-                                <label for="signin_email">Email Address</label>
+                                <label for="signin_email" style="font-size:12px;">Email Address</label>
                             </div>
                             <div class="form-floating mb-3 text-dark">
                                 <input type="password" class="form-control" name="password" id="signin_password"
                                     placeholder="" required {% if password %}value="{{password}}"{% endif %}>
-                                <label for="signin_password">Password</label>
+                                <label for="signin_password" style="font-size:12px;">Password</label>
                             </div>
                             <div class="my-2 d-flex justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <label class="form-check-label text-muted">
+                                    <label class="form-check-label text-muted" style="font-size:12px;">
                                         <input type="checkbox" class="form-check-input" name="savelogin" {% if saveauth %}checked{% endif %}>
                                         Keep me signed in 
                                     </label>
                                 </div>
-                                <a href="#" class="auth-link text-light">Forgot password?</a>
+                                <a href="#" class="auth-link text-light" style="font-size:12px;">Forgot password?</a>
                             </div>
                             <div class="form-group my-4">
-                                <input type="button" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
-                                <button type="submit" class="btn btn-md btn-success">Login</button>
+                                <button type="submit" class="btn btn-md btn-success" style="font-size:12px;">Login</button>
+                                <input type="button" style="font-size:12px;" class="btn btn-light" id="decrypt" value="Decrypt Password"> 
                             </div>
                             <div class="text-center mt-4 font-weight-light">
-                                <p class="text-muted">
+                                <p class="text-muted" style="font-size:12px;">
                                     Don't have an account, 
                                     <a class="text-decoration-none text-light fw-bold" href="{% url 'signup' %}">Create Account</a>
                                 </p>
