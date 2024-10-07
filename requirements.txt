@@ -64,9 +64,6 @@ RapidFuzz
 referencing
 requests
 requests-toolbelt
-rpds-py
-SecretStorage
-shellingham
 six
 sqlparse
 tablib
