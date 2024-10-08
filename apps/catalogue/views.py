@@ -31,11 +31,14 @@ def search(request):
         print(e)
         return render(request, 'engine/general_search.html', {'error': str(e)})
 
+
 def advanced_search(request, data):
     pass
 
+
 def google_scholar_search(request):
     return render(request, 'engine/google_scholar_search.html')
+
 
 def listBook(request):
     user = request.user
@@ -85,13 +88,20 @@ def catalogView(request):
 
 def single_book_info(request, slug):
     context = {}
-    book = Book.objects.get(slug=slug)    
     try:
+        book = Book.objects.filter(slug=slug).first()
+        fields_dict = {}
+        for field in book._meta.fields:
+            if field.name not in ['title','id', 'is_available', 'institution', 'slug'] and getattr(book, field.name) != None:
+                fields_dict[field.name] = getattr(book, field.name)
+
+        context["fields_dict"] = fields_dict
         context['partner'] = Institution.objects.get(pk=book.institution.pk)
+        context['book'] = book
+
     except Exception as e:
         messages.info(request, "No Map Loaded")
-            
-    context['book'] = book
+
     context['page_from'] = request.META.get('HTTP_REFERER')
     return render(request, 'catalog/single_book.html', context)
 
