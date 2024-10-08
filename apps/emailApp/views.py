@@ -23,7 +23,7 @@ def send_confirmation_email(request, user):
         # Build the confirmation link
         current_site = get_current_site(request)
         
-        confirmation_link = f"http://{current_site.domain}/confirm/{uid}/{token}/"
+        confirmation_link = f"https://{current_site.domain}/confirm/{uid}/{token}/"
     
         # Create the email message
         subject = "Activate Your Account"    
