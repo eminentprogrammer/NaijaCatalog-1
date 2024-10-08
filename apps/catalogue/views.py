@@ -87,9 +87,10 @@ def single_book_info(request, slug):
     context = {}
     book = Book.objects.get(slug=slug)    
     try:
-        context['partner'] = Institution.objects.get(slug=slugify(book.institution.lower()))
+        context['partner'] = Institution.objects.get(pk=book.institution.pk)
     except Exception as e:
-        messages.info(request, "No Map Loaded")    
+        messages.info(request, "No Map Loaded")
+            
     context['book'] = book
     context['page_from'] = request.META.get('HTTP_REFERER')
     return render(request, 'catalog/single_book.html', context)

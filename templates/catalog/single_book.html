@@ -39,8 +39,8 @@
 
 {% if partner.logo %}
 <div class="container" id="img_container">
-    <div class="img-box">
-        <img class="w-100" src="{{partner.logo.url}}" loading="lazy" class="img-fluid" alt="{{partner.name}}"/>
+    <div class="img-box h-100 d-flex flex-column justify-content-center">
+        <img style="width:150px;" src="{{partner.logo.url}}" loading="lazy" alt="{{partner.name}}"/>
     </div>
 </div>
 {% endif %}
@@ -60,7 +60,8 @@
             {% if page_from != None %}                
             <a href="{{page_from}}" class="btn btn-md btn-danger">Go Back</a>
             {% endif %}
-            <a href="#" class="btn btn-md btn-warning">Save</a>
+            <a href="#" class="btn btn-md btn-warning d-none">Save</a>
+            <div id="view_map" class="btn btn-sm btn-success py-2 my-3">View Location</div>
             {% endif %}
         </div>
     </div>
@@ -71,11 +72,11 @@
 
 {% if partner.gmap %}
 <section class="map" style="margin-top: 10px; margin-bottom: 50p">
-    <div class="container-fluid fw-bold my-3 text-center">
+    <div class="container-fluid fw-bold my-3 text-center" hidden>
         {{partner.name}}<br>
         <div id="view_map" class="btn btn-sm btn-success py-2 my-3">Click to View Map</div>
     </div>
-    {{partner.gmap|safe}}
+    <iframe src="{{partner.gmap|safe}}" width="100%" height="520" style="border:0;" allowfullscreen="" loading="lazy" id="map" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
 {% endif %}
 

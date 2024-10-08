@@ -2,16 +2,15 @@
 
 {% block title %} {% endblock %}
 
-
 {% block content %}
     <div class="container justify-content-center align-content-center align-items-center" 
-        style="height:50vh; overflow:hidden;">
+        style="height:100%; overflow:hidden;">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <div class="logo_container me-auto text-center mb-2">
+                <div class="logo_container me-auto text-center">
                     <img src="{{request.user.institution.logo.url}}" alt="Logo">
                 </div>
-                <h1 class="text-dark text-center mb-4">{{request.user.institution}}</h1>
+                <h1 class="text-dark text-center mb-4">{{request.user.institution.name}}</h1>
             </div>
         </div>
     </div>
