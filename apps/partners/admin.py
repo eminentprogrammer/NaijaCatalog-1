@@ -19,7 +19,7 @@ class InstitutionAdmin(admin.ModelAdmin):
 
 
 @admin.register(Student)
-class StudentAdmin(ModelAdmin):
+class StudentAdmin(admin.ModelAdmin):
     list_display = ['user', 'institution']
     fieldsets = (
         ('User Credentials', {'fields': ('user',)}),

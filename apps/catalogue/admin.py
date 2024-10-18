@@ -11,7 +11,7 @@ from import_export.admin import ImportExportModelAdmin
 # from unfold.contrib.import_export.forms import ExportForm, ImportForm, SelectableFieldsExportForm
 
 @admin.register(Book)
-class CatalogAdmin(admin.ModelAdmin, ImportExportModelAdmin):
+class CatalogAdmin(admin.ModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
