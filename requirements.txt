@@ -22,7 +22,6 @@ django-filter
 django-health-check
 django-import-export
 django-jazzmin
-django-unfold
 djangorestframework
 dulwich
 et-xmlfile
