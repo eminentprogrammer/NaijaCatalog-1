@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import Institution, Student
-from unfold.admin import ModelAdmin
+# from unfold.admin import ModelAdmin
 # Register your models here.
 
 @admin.register(Institution)
-class InstitutionAdmin(ModelAdmin):
+class InstitutionAdmin(admin.ModelAdmin):
 
     fieldsets = (
     )

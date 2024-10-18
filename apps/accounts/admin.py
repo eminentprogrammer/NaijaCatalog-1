@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models import Account
-from unfold.admin import ModelAdmin
+# from unfold.admin import ModelAdmin
 # from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 from django.contrib.auth.admin import UserAdmin
 from django import forms
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 @admin.register(Account)
-class AccountAdmin(ModelAdmin, UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
+class AccountAdmin(UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
     email = forms.EmailField(label="", widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     list_display = ['email', 'date_joined','last_login']

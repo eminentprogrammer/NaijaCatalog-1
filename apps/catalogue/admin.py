@@ -6,12 +6,12 @@ from import_export.admin import ExportActionModelAdmin
 from django.utils.text import slugify
 from django.db.models import F
 
-from unfold.admin import ModelAdmin
+# from unfold.admin import ModelAdmin
 from import_export.admin import ImportExportModelAdmin
-from unfold.contrib.import_export.forms import ExportForm, ImportForm, SelectableFieldsExportForm
+# from unfold.contrib.import_export.forms import ExportForm, ImportForm, SelectableFieldsExportForm
 
 @admin.register(Book)
-class CatalogAdmin(ModelAdmin, ImportExportModelAdmin):
+class CatalogAdmin(admin.ModelAdmin, ImportExportModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
@@ -36,9 +36,9 @@ class CatalogAdmin(ModelAdmin, ImportExportModelAdmin):
 
     # Import/Export options
     resource_class    = BookResource
-    import_form_class = ImportForm
-    export_form_class = ExportForm
-    export_form_class = SelectableFieldsExportForm
+    # import_form_class = ImportForm
+    # export_form_class = ExportForm
+    # export_form_class = SelectableFieldsExportForm
 
 
     # Custom action
