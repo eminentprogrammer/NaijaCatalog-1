@@ -1,26 +1,16 @@
-import json
-import uuid
-import base64
-import time
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Account, Institution
-from .forms import UserRegistration, UpdateProfileForm, UpdatePasswords, Account, InstitutionRegistration, UpdateInstitutionForm
-from apps.catalogue.models import Book
-from django.db.models import Q, Count
-from django.core.paginator import Paginator
 
-from apps.emailApp.views import send_confirmation_email
+from apps.accounts.models import Account
+from apps.partners.models import Institution
+from .forms import UserRegistration, UpdateProfileForm, UpdatePasswords, Account, InstitutionRegistration, UpdateInstitutionForm
 
 # Create your views here.
 context = {
     'page_title' : 'Naija Catalog',
 }
-
-
 
 
 @login_required
@@ -61,56 +51,6 @@ def dashboard_view(request):
     user = request.user
     messages.success(request, 'Master Dashboard')
     return render(request, "users/__dashboard.html", locals())
-
-
-@login_required
-def dashboard_search(request):
-    user = request.user
-
-    start_time = time.time()
-    context['page_title'] = 'Dashboard'
-    search_term = request.GET.get('search')
-
-    # Retrieves all books from the database based on the Institution
-    all_books = Book.objects.filter(institution=user.institution).order_by("title")
-
-    if search_term is None:
-        search_term = ""
-
-    if (len(search_term) > 0):
-        # Clean Querying Data
-        query = request.GET.get('search').replace("'", "").replace('"','')
-        
-        # Define option mappings for different search options
-        selected_filter = Q(title__icontains=f"{query}") | Q(subject__icontains=f"{query}") | Q(author__icontains=f"{query}")
-
-        queryset = all_books.complex_filter(selected_filter)
-
-        # Create a paginator for the books and get the current page
-        paginator = Paginator(queryset, 10)  # Show 4 books per page
-
-        # Get Page
-        page = request.GET.get('page')
-
-        # Get the books for the current page
-        books = paginator.get_page(page)
-        context['queryset'] = books
-    else:
-        context['queryset'] = ""                 
-
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-
-    # Copy the GET parameters and remove the 'page' parameter to generate URL parameters
-    get_dict_copy = request.GET.copy()
-    params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
-    
-    context['query'] = search_term
-    context['elapsed_time'] = elapsed_time
-    # print(f"Location: {request.build_absolute_uri()}")
-    # print(f"Query Term: {get_dict_copy}")
-    return render(request, "users/dashboard/general_search.html", context)
-
 
 def institutionRegistration(request):
     logout(request)

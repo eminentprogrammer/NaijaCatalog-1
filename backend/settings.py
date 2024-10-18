@@ -15,14 +15,15 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-DEBUG           = False #env('DEBUG')
+DEBUG           = True
+
 SECRET_KEY      = env("SECRET_KEY")
 
 ALLOWED_HOSTS   = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
-    # 'jazzmin',
+    "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,21 +31,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
-
+    
     'whitenoise',
+    "crispy_forms",
+    "crispy_bootstrap5",
     'django.contrib.staticfiles',
+    'import_export',
 
     'frontend',
-    'apps.https',
-    'import_export',
+    'https',
+    'blog',
     'apps.accounts',
     'apps.catalogue',
     'apps.emailApp',
     'apps.partners',
-]
 
-# HEALTH CHECK
-INSTALLED_APPS += [
     # HEALTH CHECK SETTINGS
     'health_check',
     'health_check.contrib.psutil',
@@ -62,7 +63,6 @@ HEALTH_CHECK = {
 
 
 HEALTH_CHECK['DISK_USAGE_MAX'] = 5 * (1 << 30)   # 5GB in bytes
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,8 +94,24 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL  = 'accounts.Account'
-
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    } 
+else: 
+    DATABASES = {
+        'default': dj_database_url.config(
+            # Feel free to alter this value to suit your needs.
+            default=env("DB_URL"),
+            conn_max_age=600
+        )
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -137,14 +153,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'plugins/media')
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # CLOUDINARY SETTINGS FOR IMAGE STORAGE
 cloudinary.config(
@@ -162,24 +176,22 @@ EMAIL_USE_SSL       = False  # Set to False for TLS
 EMAIL_HOST_USER     = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-else:
-
-    DATABASES = {
-        'default': dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default=env("DB_URL"),
-            conn_max_age=600
-        )
-    }
-
 # ALLOWED HOST
 RENDER_EXTERNAL_HOSTNAME = env('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+UNFOLD = {
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇬🇧",
+                "fr": "🇫🇷",
+                "nl": "🇧🇪",
+            },
+        },
+    },
+}

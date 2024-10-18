@@ -1,0 +1,51 @@
+{% extends "users/__base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block styles %}
+<style>
+    *::-webkit-scrollbar{
+        display: none;
+    }
+    .errorlist{
+        color:red;
+    }
+</style>
+{% endblock  %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-10 px-md-5 mx-auto">
+        <div class="container">
+            <div class="row">
+                <div class="rounded-top text-dark fw-bold"></div>
+                <div class="container rounded-bottom g-4">
+                    {% if form %}
+                    <div class="row my-3 py-4 px-2 rounded shadow d-flex justify-content-center align-items-center">
+                        <form method="POST">{% csrf_token %}
+                            <div class="col">
+                                {% for field in form %}
+                                {% if field.errors %}   
+                                    <div class="errorlist">{{ field.errors }}</div>
+                                {% endif %}
+                                <div class="form-floating mb-3">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                </div>
+                                {% endfor %}
+                                <button type="submit" href="{% url 'catalog:edit_book_info' book.slug %}" class="text btn btn-success btn-left btn-md">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 
+
+{% block scripts %}{% endblock %}

@@ -1,8 +1,8 @@
 import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
-from .models import Account, Institution #StudentProfile
-
+from apps.accounts.models import Account
+from apps.partners.models import Institution
 
 class StudentRegistration(forms.Form):
      university = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name of Institution'}))
@@ -31,10 +31,10 @@ class InstitutionRegistration(forms.Form):
 
 
 class UserRegistration(UserCreationForm):
-     email      = forms.EmailField(max_length=250,help_text="The email field is required.")
+     email      = forms.EmailField(max_length=250, help_text="The email field is required.")
      class Meta:
           model = Account
-          fields = ('email', 'password1', 'password2')
+          fields = ['email', 'password1', 'password2']
 
 
      def clean_email(self):
@@ -67,6 +67,7 @@ class UpdatePasswords(PasswordChangeForm):
 
 class UpdateInstitutionForm(forms.ModelForm):
      name = forms.CharField(label='Name of Institution', widget=forms.TextInput(attrs={'class':'form-control', 'name':'institution'}))
+     short_name = forms.CharField(label='Shortname', widget=forms.TextInput(attrs={'class':'form-control'}))
      contact_email = forms.EmailField(label='Email', widget=forms.TextInput(attrs={'class':'form-control', 'name':'email'}))
      contact_phone = forms.CharField(label='Phone', widget=forms.TextInput(attrs={'class':'form-control', 'name':'phone'}))
      location = forms.CharField(label='Location', widget=forms.TextInput(attrs={'class':'form-control', 'name':'location'}))
@@ -95,4 +96,12 @@ class UpdateInstitutionForm(forms.ModelForm):
      
      class Meta:
           model = Institution
-          fields = ('name', 'contact_email', 'contact_phone', 'location')
+          fields = ['name','short_name', 'contact_email', 'contact_phone', 'location']
+
+
+class UploadInstitutionLogoForm(forms.ModelForm):
+     logo = forms.ImageField(label='logo', widget=forms.FileInput(attrs={'class':'form-control'}))
+
+     class Meta:
+          model = Institution
+          fields = ['logo',]

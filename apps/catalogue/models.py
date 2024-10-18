@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from apps.accounts.models import Account, Institution
+from apps.accounts.models import Account
+from apps.partners.models import Institution
 from django.utils.text import slugify
 
 
@@ -19,6 +20,7 @@ class Book(models.Model):
     is_available    = models.BooleanField(default=True)
     edited          = models.BooleanField(default=False)
     slug            = models.SlugField(blank=True, null=True, max_length=500)
+    
     institution     = models.ForeignKey(Institution, default=0,  on_delete=models.PROTECT)
     
     # CALL NO, TITLE, AUTHOR, SUBJECT, ISBN, PUBLISHER, SERIES, YEAR, LOCATION
@@ -47,7 +49,8 @@ class Book(models.Model):
         super().save(*args, *kwargs)
 
     class Meta:
-        verbose_name_plural = "Book Catalogue"
+        verbose_name_plural = "Library Books"
+        ordering = ['title']
     
 
 class ExcelUpLoad(models.Model):
@@ -57,7 +60,7 @@ class ExcelUpLoad(models.Model):
     date_uploaded = models.DateTimeField(auto_now=True, editable=True)
 
     class Meta:
-        verbose_name_plural = "Excel Upload"
+        verbose_name_plural = "Library Upload"
 
     def __str__(self):
         return str(self.owner)

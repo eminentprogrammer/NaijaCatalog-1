@@ -2,7 +2,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 from . import views
 from .sitemaps import Sitemap  # Import your sitemap class
-from apps.catalogue.views import search, advanced_search, google_scholar_search
+from apps.catalogue.api.views import search, advanced_search, google_scholar_search
 
 
 sitemaps = {

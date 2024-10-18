@@ -26,7 +26,10 @@ et-xmlfile
 fastjsonschema
 filelock
 gscholar
+django-unfold
 gunicorn
+django-crispy-forms
+crispy-bootstrap5
 idna
 importlib_metadata
 importlib_resources

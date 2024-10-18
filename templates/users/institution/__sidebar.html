@@ -3,54 +3,56 @@
     <ul class="nav  position-fixed">
       <li class="nav-item nav-category">Main</li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'homepage' %}">
-          <span class="icon-bg"><i class="mdi mdi-home menu-icon"></i></span>
-          <span class="menu-title">Homepage</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard' %}">
-          <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+          <span class="icon-bg"><i class="mdi mdi-home menu-icon"></i></span>
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <span class="icon-bg"><i class="mdi mdi-book menu-icon"></i></span>
+        <a class="nav-link" data-toggle="collapse" href="#ui-catalog" aria-expanded="false" aria-controls="ui-basic">
+          <span class="icon-bg"><i class="mdi mdi-notebook-multiple menu-icon"></i></span>
           <span class="menu-title">Catalog</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+
+        <div class="collapse" id="ui-catalog">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">View</a></li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'catalog:listBook' %}">
+                View
+              </a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'catalog:create_book' %}">
+                Upload
+              </a>
+          </li>
           </ul>
         </div>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#partners">
-          <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
-          <span class="menu-title">Partners</span>
+        <a class="nav-link" href="{% url 'student_view' %}">
+          <span class="icon-bg"><i class="mdi mdi-account-multiple menu-icon"></i></span>
+          <span class="menu-title">Students</span>
         </a>
       </li>
-      
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-          <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+          <span class="icon-bg"><i class="mdi mdi-account menu-icon"></i></span>
           <span class="menu-title">Profile</span>
           <i class="menu-arrow"></i>
         </a>
+        
         <div class="collapse" id="auth">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{% url 'update_profile' %}">Edit Profile </a></li>
-            <li class="nav-item"> <a class="nav-link" href="#pages/samples/login.html"> Upload Picture </a></li>
+            <li class="nav-item"> <a class="nav-link" href="#"> Upload Picture </a></li>
             <li class="nav-item"> <a class="nav-link" href="{% url 'update_password' %}"> Change Password </a></li>
             <li class="nav-item"> <a class="nav-link" href="{% url 'reset_password' %}"> Reset Password </a></li>
           </ul>
         </div>
       </li>
-
       <li class="nav-item sidebar-user-actions">
         <div class="sidebar-user-menu">
           <a href="#" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
@@ -58,12 +60,7 @@
           </a>
         </div>
       </li>
-      <li class="nav-item sidebar-user-actions">
-        <div class="sidebar-user-menu">
-          <a href="#" class="nav-link"><i class="mdi mdi-speedometer menu-icon"></i>
-            <span class="menu-title">Take Tour</span></a>
-        </div>
-      </li>
+
       <li class="nav-item sidebar-user-actions">
         <div class="sidebar-user-menu">
           <a href="{% url 'signout' %}" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
@@ -71,4 +68,4 @@
         </div>
       </li>
     </ul>
-  </nav>
+</nav>

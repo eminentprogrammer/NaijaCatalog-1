@@ -1,15 +1,17 @@
 # Register your models here.
 from django.contrib import admin
 from .models import Book, ExcelUpLoad, Institution
-from .resources import BookResource
-from import_export.admin import ImportExportModelAdmin
+from .api.resources import BookResource
 from import_export.admin import ExportActionModelAdmin
 from django.utils.text import slugify
 from django.db.models import F
 
+from unfold.admin import ModelAdmin
+from import_export.admin import ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm, SelectableFieldsExportForm
 
 @admin.register(Book)
-class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
+class CatalogAdmin(ModelAdmin, ImportExportModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author']
@@ -25,11 +27,19 @@ class CatalogAdmin(ImportExportModelAdmin, ExportActionModelAdmin):
         ('Book Access Information', {
             'fields': ('isbn', 'call_no',)
         }),
+        ('Others', {
+            'fields': ('is_available', 'slug')
+        }),
+
     )
     ordering = ['id']  # Sort by title in ascending order
 
     # Import/Export options
-    resource_class = BookResource
+    resource_class    = BookResource
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+    export_form_class = SelectableFieldsExportForm
+
 
     # Custom action
     def make_published(self, request, queryset):

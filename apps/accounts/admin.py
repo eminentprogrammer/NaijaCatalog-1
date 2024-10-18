@@ -2,42 +2,39 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ExportActionModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Account, Institution
-# Register your models here.
+from .models import Account
+from unfold.admin import ModelAdmin
+from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
+from django.contrib.auth.admin import UserAdmin
+from django import forms
 
 
 @admin.register(Account)
-class AccountAdmin(BaseUserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
+class AccountAdmin(UserAdmin, ModelAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
+    email = forms.EmailField(label="", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
     list_display = ['email', 'date_joined','last_login']
     ordering = ['email',"last_login"]
+
     fieldsets = (
         ('User Credentials', {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_librarian','is_active','is_admin','is_staff', 'is_superuser',)})
+        ('Permissions', {'fields': ('is_active','is_admin','is_staff', 'is_superuser','is_student','is_librarian',)})
     )
+    
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'password1', 'password2'),
         }),
     )
+
     search_fields       = ('email',)
-    ordering            = ('email','id')
+    ordering            = ('email',)
     filter_horizontal   = ()
-
-
-
-# @admin.register(StudentProfile)
-# class StudentAdmin(admin.ModelAdmin):
-#     list_display = ['user','firstname','lastname','contact_no', 'institution', 'institutionID', 'department']
-
-
-
-@admin.register(Institution)
-class InstitutionAdmin(admin.ModelAdmin):
-    list_display    = ['name', 'contact_email', 'contact_phone', 'location',"date_joined"]
-    fieldsets = (
-        ('Institutional', {'fields': ('logo','name', 'contact_email', 'contact_phone', 'location', 'gmap')}),
-        ('Additional Information',{'fields': ('admin',)}),
-    )
-    ordering        = ['name']
-    list_editable   = ['location']
+    ordering = ("email",)
+    
+    save_on_top = True
+    save_as     = True
+    form        = UserChangeForm
+    add_form    = UserCreationForm
+    change_password_form = AdminPasswordChangeForm

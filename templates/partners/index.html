@@ -1,4 +1,4 @@
-{% extends 'partner_portal/base.html' %}
+{% extends 'partners/base.html' %}
 {% load static %}
 
 {% block meta %}
@@ -19,9 +19,7 @@
                     {{ partner.name }} 
                 </div>
                 <div class="list" style="list-style: none;">
-                    <li>
-                        {{ partner.contact_email }}
-                    </li>
+                    <li>{{ partner.contact_email }}</li>
                     <li>
                         {{ partner.contact_phone }}
                     </li>
@@ -29,19 +27,16 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <canvas style="position: relative; height: 500px; width: 100%;" id="rive-canvas"></canvas>
-    </div>
 </div>
     {% if partner.gmap %}
-    <section class="map" style="margin-top: 100px; margin-bottom: 50p">
-        <div class="container-fluid fw-bold my-3">
-            {{partner.name}}
+    <section class="container-fluid map">
+        <canvas class="text-center d-none d-md-block" id="rive-canvas" width="200px"></canvas>
+        <div class="text-center">
+            <iframe src="{{ partner.gmap|safe }}" class="rounded" width="100%" height="450" style="border:0;" allowfullscreen="false" loading="lazy" id="map" referrerpolicy="no-referrer-when-downgrade">
+                Your browser does not support the HTML5 canvas tag. Please upgrade to a modern browser that supports canvas.
+                <a href="https://browsehappy.com/">Upgrade to a better browser</a>
+            </iframe>
         </div>
-        <iframe 
-            src="{{partner.gmap}}"
-                class="" width="100%" height="450" frameborder="0" style="margin-bottom:0px">
-        </iframe>
     </section>
     {% endif %}
 {% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
-from .models import Book
-
+from ..models import Book
+from crispy_bootstrap5.bootstrap5 import FloatingField
 
 class searchForm(forms.Form):
     title = forms.CharField(label='', widget=forms.TextInput(attrs={'class':'form-control', 'name':'article'}))
@@ -27,3 +27,24 @@ class BookForm(forms.ModelForm):
         self.fields['publisher'].widget.attrs.update({'class': 'form-control'})
         self.fields['place_of_publication'].widget.attrs.update({'class': 'form-control'})
         self.fields['year_published'].widget.attrs.update({'class': 'form-control', 'required': True})
+
+
+class EditBookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = [
+            "title",
+            "author",
+            "isbn",
+            "edition",
+            "call_no",
+            "subject",
+            "publisher",
+            "place_of_publication",
+            "year_published"
+        ]
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control', 'required': False})

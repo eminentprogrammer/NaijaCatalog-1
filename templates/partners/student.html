@@ -30,23 +30,22 @@
     <div class="col-12 col-md-12 px-md-5 mx-auto">
         <div class="container-fluid">
             <div class="row">
-                <div class="alert alert-info">{{request.user.institution}} Library Catalog</div>
-                <h4>All Books in {{ request.user.institution }} Catalog</h4>
-                {% if search_term %}
-                <div class="result-heading text-dark">
-                    <span class="text-end fw-bold">Search Duration: {{elapsed_time | truncatechars:7}}</span>
-                </div>    
-                {% endif %}
+                <div class="alert alert-info">{{request.user.institution}}'s Student</div>
+                <h4>All Registered Student in {{ request.user.institution }}</h4>
+
                 <div class="rounded-bottom g-4">
                     <div class="row">
                         <div class="col-12 col-md-2 my-auto">
-                            <a href="{% url 'catalog:create_book' %}" class="text btn btn-success btn-block btn-md">Add New Book</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="text btn btn-success btn-block btn-md" data-bs-toggle="modal" data-bs-target="#addStudent">
+                                Create Student Login
+                            </button>
                         </div>
 
                         <div class="col-12 col-md-10 mt-2 mt-md-0">
-                            <form method="GET" action="{% url 'catalog:search_book_title' %}">
+                            <form method="GET">
                                 <div class="input-group">
-                                    <input type="text" name="title" {% if search_term %} value="{{search_term}}" {% else %} autofocus {% endif %} class="form-control border border-success" placeholder="Search for books..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <input type="text" name="student" {% if search_term %} value="{{search_term}}" {% else %} autofocus {% endif %} class="form-control border border-success" placeholder="Search for student..." aria-label="Search" aria-describedby="basic-addon2">
                                     <button class="btn btn-success" type="submit">Search</button>
                                 </div>
                             </form>
@@ -85,63 +84,82 @@
                         </div>
                     </div>
 
-                    {% if not books %}
-                    <div class="row my-3 py-3 px-2 rounded shadow d-flex justify-content-center align-items-center">
-                        <h5 class="my-auto">No Record Found!</h5>
-                    </div>
-                    {% else %}
                     <!-- Large Screen Display -->
                     <table id="catalog" class="table table-responsive table-striped table-bordered d-none d-lg-table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Published</th>
-                                <th>ISBN</th>
-                                <th>Action</th>
+                                <th>#</th>
+                                <th>Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Matric No</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if books %}
-                            {% for book in books %}
+                            {% if students %}
+                            {% for student in students %}
                             <tr>
-                                <td>{{ book.title }}</td>
-                                <td>{{ book.author }}</td>
-                                <td>{{ book.year_published }}</td>
-                                <td>{{ book.isbn }}</td>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ student.user.email }}</td>
+                                <td>{{ student.profile.first_name }}</td>
+                                <td>{{ student.profile.last_name }}</td>
+                                <td>{{ student.profile.matric_no }}</td>
                                 <td>
-                                    <a href="{% url 'catalog:single_book_info' book.slug %}" class="text btn btn-success btn-left btn-md">View Details</a>
-                                    <a href="{% url 'catalog:edit_book_info' book.slug %}" class="text btn btn-danger btn-left btn-md">Edit</a>
+                                    <a href="#{{student.slug}}" class="text btn btn-danger btn-left btn-md">Edit</a>
+                                    <a href="#{{student.slug}}" class="text btn btn-success btn-left btn-md">Delete</a>        
                                 </td>
                             </tr>
                             {% endfor %}
                             {% else %}
                             <tr>
-                                <td colspan="5">No books found.</td>
+                                <td colspan="5">No student record found.</td>
                             </tr>
                             {% endif %}
                         </tbody>
                     </table>
+
                     <!-- Mobile Screen Display -->
-                    {% for book in books %}
+                    {% if students %}
+                    {% for student in students %}
                     <div class="row my-3 py-4 px-2 rounded shadow justify-content-center align-items-center d-flex d-md-none">
-                        <h5>{{ book.title }}</h5>
-                        <small>Author(s): {{ book.author }}</small>
-                        <small>Published: {{ book.year_published }}</small>
+                        <h5>{{ student.profile.first_name }} {{ student.profile.last_name }}</h5>
                         <div class="col mt-2">
-                            <a href="{% url 'catalog:single_book_info' book.slug %}" class="text btn btn-success btn-left btn-md">View Details</a>
-                            <a href="{% url 'catalog:edit_book_info' book.slug %}" class="text btn btn-danger btn-left btn-md">Edit</a>
+                            <a href="#" class="text btn btn-danger btn-left btn-md">Edit</a>
+                            <a href="#" class="text btn btn-success btn-left btn-md">Delete</a>
                         </div>
                     </div>
                     {% endfor %}                    
                     <div class="footer">
                         <div class="d-flex flex-row h5 gap-4 justify-content-center">
-                            <span>Total Books: {{ books.paginator.count }}</span>
-                            <span>Books per Page: {{ books.paginator.per_page }}</span>
+                            <span>Total Students: {{ students.paginator.count }}</span>
+                            <span>Student per Page: {{ students.paginator.per_page }}</span>
                         </div>
                     </div>
                     {% endif %}
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- Modal -->
+<div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="addStudentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addStudentLabel">
+                    Create Student Login for {{ request.user.institution }}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action=""> {% csrf_token %}
+                    {{form}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>            
+                </form>
             </div>
         </div>
     </div>

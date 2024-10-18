@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from apps.accounts.models import Institution
+from apps.partners.models import Institution
 from apps.catalogue.models import Book
-from apps.catalogue.forms import searchForm
-from apps.accounts.forms import StudentRegistration, InstitutionRegistration
-# Create your views here.
+from apps.catalogue.api.forms import searchForm
+from apps.accounts.api.forms import StudentRegistration, InstitutionRegistration
 
+# Create your views here.
 
 
 def support(request):
