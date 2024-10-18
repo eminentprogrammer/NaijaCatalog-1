@@ -93,7 +93,8 @@ for line in lines:
     if '=' in line:
         result.append(line.split('=')[0].strip())
     else:
-        result.append(line)
+        if "rpds-py" not in line :
+            result.append(line)
 
 print('\n'.join(result))
 print(result)
