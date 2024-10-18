@@ -10,7 +10,7 @@ from django import forms
 
 
 @admin.register(Account)
-class AccountAdmin(UserAdmin, ModelAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
+class AccountAdmin(UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
     email = forms.EmailField(label="", widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     list_display = ['email', 'date_joined','last_login']
