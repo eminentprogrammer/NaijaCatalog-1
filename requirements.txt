@@ -1,4 +1,4 @@
-asgiref==3.8.1
+asgiref
 attrs==24.2.0
 build==1.2.2
 CacheControl==0.14.0
