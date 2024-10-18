@@ -22,7 +22,7 @@ django-filter
 django-health-check
 django-import-export
 django-jazzmin
-django-unfold==0.40.0
+django-unfold==0.50.0
 djangorestframework
 dulwich
 et-xmlfile
