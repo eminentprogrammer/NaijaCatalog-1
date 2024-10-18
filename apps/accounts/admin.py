@@ -1,15 +1,13 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
-from import_export.admin import ExportActionModelAdmin
 from .models import Account
 from unfold.admin import ModelAdmin
-from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
+# from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 from django.contrib.auth.admin import UserAdmin
 from django import forms
-
+from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 @admin.register(Account)
-class AccountAdmin(UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
+class AccountAdmin(ModelAdmin, UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
     email = forms.EmailField(label="", widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     list_display = ['email', 'date_joined','last_login']
@@ -34,6 +32,6 @@ class AccountAdmin(UserAdmin, ImportExportModelAdmin, ExportActionModelAdmin):
     
     save_on_top = True
     save_as     = True
-    form        = UserChangeForm
-    add_form    = UserCreationForm
-    change_password_form = AdminPasswordChangeForm
+    # form        = UserChangeForm
+    # add_form    = UserCreationForm
+    # change_password_form = AdminPasswordChangeForm
