@@ -31,13 +31,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+
+    'import_export',
     
     'whitenoise',
     "crispy_forms",
     "crispy_bootstrap5",
 
     'django.contrib.staticfiles',
-    'import_export',
 
     'frontend',
     'https',

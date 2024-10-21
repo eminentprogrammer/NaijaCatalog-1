@@ -5,13 +5,12 @@ from .api.resources import BookResource
 from django.utils.text import slugify
 from django.db.models import F
 
-
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ExportActionMixin, ImportExportMixin
 # from unfold.admin import ModelAdmin
 # from unfold.contrib.import_export.forms import ExportForm, ImportForm, SelectableFieldsExportForm
 
 @admin.register(Book)
-class CatalogAdmin(admin.ModelAdmin, ImportExportModelAdmin):
+class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
     list_filter    = ['institution','author']
     search_fields  = ['title', 'subject', 'author', 'slug']
@@ -81,6 +80,6 @@ class CatalogAdmin(admin.ModelAdmin, ImportExportModelAdmin):
     actions = [make_published, generate_slug, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
 
 
+@admin.register(ExcelUpLoad)
 class ExcelUploadAdmin(admin.ModelAdmin):
     list_display = ['id','owner','file','date_uploaded']
-admin.site.register(ExcelUpLoad, ExcelUploadAdmin)
