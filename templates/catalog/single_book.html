@@ -1,8 +1,10 @@
-{% extends 'catalog/base.html' %}
+{% extends "users/__base.html" %}
+{% comment %} {% extends 'catalog/base.html' %} {% endcomment %}
+
 
 {% block title %}{{book.title}} | {{book.institution}}{% endblock %}
-{% block content %}
 
+{% block styles %}
 <style>
     body::-webkit-scrollbar{
         display: none;
@@ -33,7 +35,9 @@
         align-content: center;
     }
 </style>
+{% endblock %}
 
+{% block content %}
 <div class="banner"></div>
 
 {% if partner.logo %}
@@ -85,6 +89,9 @@
 </section>
 {% endif %}
 
+{% endblock %}
+
+{% block scripts %}
 <script>
     const showMap = document.getElementById("view_map");
     const map = document.getElementById("map");
