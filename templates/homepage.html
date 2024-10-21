@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block extrahead %}
 <style>
@@ -24,8 +25,40 @@
                 </form>
             </div>
 
-            <div class="container">
-                <div class="row">
+            <div class="container mt-4">
+                <div class="row text-dark my-5 p-3">
+                    {% for institution in institutions %}
+                    <div class="col-md-4 my-2 my-md-0 transition-all">
+                        <div class="card d-flex justify-content-center" style="max-width:450px;">
+                            {% if institution.logo.url %}
+                            <div class="card-img text-center">
+                                <img 
+                                    src="{{ institution.logo.url }}" 
+                                    style="max-width:200px;"
+                                    class="card-img-top" alt="#{{institution.name}}">
+                            </div>
+                            {% endif %}
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">
+                                    {{ institution.name }}
+                                </h5>
+                                <p class="card-text">
+                                    {% if institution.location %}
+                                        <span>Address: {{institution.location}}<span><br>
+                                    {% endif %}
+                        
+                                    {% if institution.books %}
+                                    <span class="fw-bold">
+                                        {{ institution.books.count|intcomma }} books available.
+                                    </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row" hidden>
                     {% for i in  '123' %}
                     <div class="col-md-4 mx-auto">
                         <div class="card-container country-card shadow">
@@ -278,52 +311,15 @@
 
                 <div class="shadow my-2 p-3 mb-5 bg-secondary-c rounded-bottom"></div>
 
-                {% if books %}
-                <div class="table-responsive">
-                    <table class="table table-hover table-dark align-middle shadow-lg">
-                        <thead class="text-light">
-                            <caption>Catalogue Collections</caption>
-                            <tr>
-                                <th class="text-light">#</th>
-                                <th class="text-light">Institution</th>
-                                <th class="text-light d-flex justify-content-end">Total Materials</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr class="table-success" >
-                                <td scope="row">1</td>
-                                <td>Augustine University</td>
-                                <td class="d-flex justify-content-end">135,892</td>
-                            </tr>
-                            <tr class="table-dark" >
-                                <td scope="row">2</td>
-                                <td>Covenant University</td>
-                                <td class="d-flex justify-content-end">132,502</td>
-                            </tr>
-                            <tr class="table-success" >
-                                <td scope="row">3</td>
-                                <td>Caleb University</td>
-                                <td class="d-flex justify-content-end">125,892</td>
-                            </tr>
-                            <tr class="table-dark" >
-                                <td scope="row">4</td>
-                                <td>Babcock University</td>
-                                <td class="d-flex justify-content-end">132,502</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
-                </div>
+                {% if institutions %}
                 <div class="table-responsive">
                     <table class="table table-hover table-dark align-middle shadow-lg">
                         <thead class="text-light">
                             <caption>Updated 20th October, 2023</caption>
                             <tr>
                                 <th class="text-light">#</th>
-                                <th class="text-light">Title</th>
-                                <th class="text-light">Author(s)</th>
-                                <th class="text-light">Publisher</th>
+                                <th class="text-light">Book Title</th>
+                                <th class="text-light">Institution</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -331,8 +327,7 @@
                             <tr class="table-success" >
                                 <td scope="row">{{ forloop.counter }}</td>
                                 <td>{{book.title}}</td>
-                                <td>{{book.author}}</td>
-                                <td>{{book.publisher}}</td>
+                                <td>{{book.institution}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

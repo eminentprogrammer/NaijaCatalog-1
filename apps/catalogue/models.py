@@ -21,7 +21,7 @@ class Book(models.Model):
     edited          = models.BooleanField(default=False)
     slug            = models.SlugField(blank=True, null=True, max_length=500)
     
-    institution     = models.ForeignKey(Institution, default=0,  on_delete=models.PROTECT)
+    institution     = models.ForeignKey(Institution, default=0,  on_delete=models.PROTECT, related_name="books")
     
     # CALL NO, TITLE, AUTHOR, SUBJECT, ISBN, PUBLISHER, SERIES, YEAR, LOCATION
     
@@ -32,10 +32,8 @@ class Book(models.Model):
     
 
     def get_slug(self):
-        if not self.slug:
-            self.slug = slugify(self.title)
-            self.save()
-        return slugify(self.title)
+        slug = slugify(self.title)
+        return slugify(slug)
     
     def get_absolute_url(self):
         return reverse('catalog:single_book_info', args=[str(slugify(self.title))])
@@ -44,8 +42,7 @@ class Book(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.get_slug()
+        self.slug = self.get_slug()
         super().save(*args, *kwargs)
 
     class Meta:

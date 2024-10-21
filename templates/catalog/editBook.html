@@ -35,7 +35,7 @@
                                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 </div>
                                 {% endfor %}
-                                <button type="submit" href="{% url 'catalog:edit_book_info' book.slug %}" class="text btn btn-success btn-left btn-md">Update</button>
+                                <button type="submit" href="{% url 'catalog:edit_book_info' book.pk %}" class="text btn btn-success btn-left btn-md">Update</button>
                             </div>
                         </form>
                     </div>

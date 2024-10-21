@@ -23,7 +23,7 @@ ALLOWED_HOSTS   = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
-    # "unfold",
+    "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'whitenoise',
     "crispy_forms",
     "crispy_bootstrap5",
+
     'django.contrib.staticfiles',
     'import_export',
 
@@ -60,7 +61,6 @@ HEALTH_CHECK = {
     'DISK_USAGE_MAX': 90, #Percent
     'MEMORY_MIN': 100, # in MB
 }
-
 
 HEALTH_CHECK['DISK_USAGE_MAX'] = 5 * (1 << 30)   # 5GB in bytes
 

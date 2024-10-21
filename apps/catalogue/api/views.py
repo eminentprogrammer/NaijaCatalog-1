@@ -50,12 +50,19 @@ def list_books(request):
     """List all books in a user's institution's catalog."""
     context = {}
     user = request.user
+
     page_number = request.GET.get("page")
     search_term = request.GET.get("title")
 
     start_time = time.time()
-    catalog = Book.objects.filter(institution=user.institution)
-    
+
+    try:
+        catalog = Book.objects.filter(institution=user.institution).order_by("title")
+    except:
+        if not user.is_superuser:
+            raise ValueError("Invalid institution") 
+        catalog = Book.objects.all()
+
     if search_term:
         messages.add_message(
             request,
@@ -67,29 +74,47 @@ def list_books(request):
         end_time = time.time()
         elapsed_time = end_time - start_time
         context['elapsed_time'] = elapsed_time
-    
-    paginator = Paginator(catalog, 20)
-    books = paginator.get_page(page_number)
+
+    paginator  = Paginator(catalog, 10)
+
+    if page_number:
+        books     = paginator.get_page(page_number)    
+    else: books   = paginator.page(1) 
+
     context["books"] = books
     context["catalog"] = catalog
-    context["search_term"] =search_term
+    context['paginator'] = paginator
+    context["search_term"] = search_term
+
     return render(request, "catalog/listBook.html", context)
 
 
-def edit_book_info(request, slug):
+def edit_book_info(request, pk):
     """
     Edit a book in the user's institution's catalog.
     """
     try:
-        book = Book.objects.get(slug=slug)
+        book = Book.objects.get(pk=pk)
     except Book.DoesNotExist:
         messages.info(request, "No book found")
         return redirect("catalog:listBook")
 
+    if not request.user == book.institution.admin:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            extra_tags="alert alert-danger",
+            message="You do not have permission to edit this book",
+        )
+        return redirect("catalog:single_book_info", slug=book.slug)
+
     if request.method == "POST":
         form = EditBookForm(request.POST, instance=book)
+
         if form.is_valid():
-            form.save()
+            book = form.save(commit=False)
+            book.slug = slugify(book.title)
+            book.save()
             title = form.cleaned_data["title"]
             messages.add_message(
                 request,
@@ -97,10 +122,9 @@ def edit_book_info(request, slug):
                 extra_tags="alert alert-success",
                 message=f"Book: \"{title}\" has been updated successfully",
             )
-            return redirect("catalog:listBook")
-    else:
-        form = EditBookForm(instance=book)
+            return redirect("catalog:single_book_info", slug=book.slug)
 
+    form = EditBookForm(instance=book)
     context = {
         "form": form,
         "book": book,
@@ -108,18 +132,19 @@ def edit_book_info(request, slug):
     }
     return render(request, "catalog/editBook.html", context)
 
-def delete_book(request, slug):
+
+def delete_book(request, pk):
     """
     Delete a book in the user's institution's catalog.
     """
     try:
-        book = Book.objects.get(slug=slug)
+        book = Book.objects.get(pk=pk)
     except Book.DoesNotExist:
         messages.info(request, "No book found")
         return redirect("catalog:listBook")
-
-    if request.method == "POST":
-        title = book.title
+    
+    title = book.title
+    if request.user == book.institution and request.user.is_superuser:
         book.delete()
         messages.add_message(
             request,
@@ -127,7 +152,15 @@ def delete_book(request, slug):
             extra_tags="alert alert-success",
             message=f"Book: \"{title}\" has been deleted successfully",
         )
-    return redirect("catalog:listBook")
+        return redirect("catalog:listBook")
+    else:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            extra_tags="alert alert-danger",
+            message="You do not have permission to delete this book",
+        )
+    return redirect("catalog:single_book_info", slug=book.slug)
 
 
 def single_book_info(request, slug):
@@ -188,7 +221,13 @@ def advanced_search(request):
     user = request.user
     search_term = request.GET.get("search")
     start_time = time.time()
-    books = Book.objects.filter(institution=user.institution).order_by("title")
+
+    try:
+        books = Book.objects.filter(institution=user.institution).order_by("id","title")
+    except:
+        if not user.is_superuser:
+            raise ValueError("Invalid institution") 
+        books = Book.objects.all()
 
     if search_term:
         query = search_term.replace("'", "").replace('"', "")
