@@ -81,4 +81,4 @@ whitenoise
 xlrd
 xlwt
 zipp
-django-unfold==0.40.0
+django-unfold
