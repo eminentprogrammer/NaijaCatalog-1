@@ -15,7 +15,7 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-DEBUG           = True
+DEBUG           = False
 
 SECRET_KEY      = env("SECRET_KEY")
 
@@ -97,14 +97,21 @@ TEMPLATES = [
 AUTH_USER_MODEL  = 'accounts.Account'
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default=env("DB_URL"),
-        conn_max_age=600
-    )
-}
-
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    } 
+else: 
+    DATABASES = {
+        'default': dj_database_url.config(
+            # Feel free to alter this value to suit your needs.
+            default=env("DB_URL"),
+            conn_max_age=600
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
