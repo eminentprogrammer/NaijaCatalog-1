@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'apps.catalogue',
     'apps.emailApp',
     'apps.partners',
-
+    'apps.student',
     # HEALTH CHECK SETTINGS
     'health_check',
     'health_check.contrib.psutil',
@@ -97,21 +97,13 @@ TEMPLATES = [
 AUTH_USER_MODEL  = 'accounts.Account'
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    } 
-else: 
-    DATABASES = {
-        'default': dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default=env("DB_URL"),
-            conn_max_age=600
-        )
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default=env("DB_URL"),
+        conn_max_age=600
+    )
+}
 
 
 # Password validation

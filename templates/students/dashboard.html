@@ -1,0 +1,25 @@
+{% extends 'users/__base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+    <div class="container justify-content-center align-content-center align-items-center" 
+        style="height:100%; overflow:hidden;">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="logo_container me-auto text-center">
+                    <img src="{{institution.logo.url}}" alt="Logo">
+                </div>
+                <h1 class="text-dark text-center mb-4">{{institution.name}}</h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="map" style="margin-top: 10px; margin-bottom: 50p">
+        <div class="container-fluid fw-bold my-3 text-center">Google Map</div>
+        <iframe src="{{institution.gmap|safe}}" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" id="map" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+    
+{% endblock %}
+
+{% block scripts %}{% endblock %}

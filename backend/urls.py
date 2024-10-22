@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('user/', include('apps.accounts.api.urls')),
+    path('student/', include("apps.student.api.urls")),
     path('partners/', include("apps.partners.api.urls")),
     path('catalog/', include("apps.catalogue.api.urls")),
 
@@ -36,4 +37,4 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-settings.DEBUG = False
+# settings.DEBUG = False

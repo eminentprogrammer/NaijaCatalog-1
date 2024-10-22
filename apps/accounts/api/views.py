@@ -17,40 +17,22 @@ context = {
 def dashboard(request):
     return render(request, 'users/institution/dashboard.html', context)
 
-
-@login_required
-def dashboard_redirect(request):
-    user = request.user
-    if user.is_librarian:
-        return redirect('library_dashboard')
-    # elif user.is_superuser:
-        # return redirect('admin:index')
-    else:
-        return redirect('student_dashboard')
-
-@login_required
-def institutionDashboard(request):
-    user = request.user
-    context = {
-
-    }
-    return render(request, 'users/institution/dashboard.html', context)
-
-
-@login_required
-def studentDashboard(request):
-    user = request.user
-    context = {
-
-    }
-    return render(request, 'users/student/dashboard.html', context)
-
-
 @login_required
 def dashboard_view(request):
     user = request.user
     messages.success(request, 'Master Dashboard')
     return render(request, "users/__dashboard.html", locals())
+
+
+@login_required
+def dashboard_redirect(request):
+    user = request.user
+
+    if user.is_student:
+        return redirect('student:dashboard')
+
+    return redirect('dashboard_view')
+    
 
 def institutionRegistration(request):
     logout(request)

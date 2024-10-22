@@ -1,50 +1,119 @@
 import time
 import requests
 import gscholar
-from django.db.models import Q, Count
-from django.contrib import messages
-from django.utils.text import slugify
-from django.shortcuts import render, redirect
 
 from ..models import Book
+from django.views import View
+from django.contrib import messages
+from django.utils.text import slugify
+from django.db.models import Q, Count
 from .forms import BookForm, EditBookForm
 from apps.partners.models import Institution
 from django.core.paginator import Paginator
+from django.shortcuts import render, redirect
 
 
-def upload_book(request):
-    """Upload a book to the user's institution's catalog."""
-    form = BookForm()
-    user = request.user
+def get_catalog(user):
+    try:
+        catalog = Book.objects.filter(institution=user.institution).order_by("title")
+    except:
+        catalog = Book.objects.all()
+        if user.is_student:
+            catalog = catalog.filter(institution=user.student.institution).order_by("id","title")
+    return catalog
 
-    if request.method == "POST":
-        form = BookForm(request.POST)
-        if form.is_valid():
-            institution = Institution.objects.get(admin=user)
+
+class UploadBook(View):
+    form = BookForm
+
+    def get(self, request, format=None):
+        """Upload a book to the user's institution's catalog."""
+        user = request.user
+        form = self.form
+        context = {"form": form, "user": user}
+        return render(request, "catalog/createBook.html", context)
+
+    def post(self, request, format=None):
+        form = self.form(request.POST)
+        form.is_valid(raise_exception=True)
+        institution = Institution.objects.get(admin=request.user)
+
+        book = form.save(commit=False)
+        book.institution = institution
+        book.slug = slugify(book.title)
+        book.save()
+        messages.success(request, "Book has been added successfully")
+        return redirect("catalog:listBook")
+
+class EditBook(View):
+    form  = EditBookForm
+    books = Book.objects.all()
+
+    def get(self, request, pk):
+        """
+        Edit a book in the user's institution's catalog.
+        """
+        try:
+            book = self.books.get(pk=pk)
+        except Book.DoesNotExist:
+            messages.info(request, "No book found")
+            return redirect("catalog:listBook")
+                
+        if not request.user == book.institution.admin:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                extra_tags="alert alert-danger",
+                message="You do not have permission to edit this book",
+            )
+            return redirect("catalog:single_book_info", slug=book.slug)
+        
+        form = self.form(instance=book)
+        context = {"book": book, "form": form}
+        return render(request, "catalog/editBook.html", context)    
+
+    def post(self, request, pk):
+        book = self.books.get(pk=pk)
+        try:
+            form = self.form(request.POST, instance=book)
             book = form.save(commit=False)
-            book.institution = institution
             book.slug = slugify(book.title)
             book.save()
-            messages.success(request, "Book has been added successfully")
-            return redirect("catalog:listBook")
-        messages.error(request, "Invalid form submitted")
+        except Exception as e:
+            raise ValueError(e)
+        
+        title = form.cleaned_data["title"]
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            extra_tags="alert alert-success",
+            message=f"Book: \"{title}\" has been updated successfully",
+        )
+        return redirect("catalog:single_book_info", slug=book.slug)
 
-    context = {
-        "form": form,
-    }
-    return render(request, "catalog/createBook.html", context)
 
-def catalog_view(request):
-    """View of all books in the user's institution's catalog."""
-    user = request.user
-    institution = Institution.objects.get(admin=user)
-    books = Book.objects.filter(institution=institution)
-    context = {
-        "user": user,
-        "institution": institution,
-        "books": books,
-    }
-    return render(request, "catalog/list.html", context)
+
+class viewCatalog(View):
+    form = BookForm
+    books = Book.objects.all()
+
+    def get_institution(user):
+        institution = Institution.objects.get(admin=user)
+        return institution
+    
+    def get(self, request, format=None):
+        """View of all books in the user's institution's catalog."""
+        user = request.user
+        institution = self.get_institution(user)
+        books = self.books.filter(institution=institution)
+        response = self.form(instance=books, many=True)
+        context = {
+            "user": user,
+            "institution": institution,
+            "books": response,
+        }
+        return render(request, "catalog/list.html", context)
+
 
 def list_books(request):
     """List all books in a user's institution's catalog."""
@@ -55,14 +124,7 @@ def list_books(request):
     search_term = request.GET.get("title")
 
     start_time = time.time()
-
-    try:
-        catalog = Book.objects.filter(institution=user.institution).order_by("title")
-    except:
-        if not user.is_superuser:
-            raise ValueError("Invalid institution") 
-        catalog = Book.objects.all()
-
+    catalog    = get_catalog(user)    
     if search_term:
         messages.add_message(
             request,
@@ -76,7 +138,6 @@ def list_books(request):
         context['elapsed_time'] = elapsed_time
 
     paginator  = Paginator(catalog, 10)
-
     if page_number:
         books     = paginator.get_page(page_number)    
     else: books   = paginator.page(1) 
@@ -87,50 +148,6 @@ def list_books(request):
     context["search_term"] = search_term
 
     return render(request, "catalog/listBook.html", context)
-
-
-def edit_book_info(request, pk):
-    """
-    Edit a book in the user's institution's catalog.
-    """
-    try:
-        book = Book.objects.get(pk=pk)
-    except Book.DoesNotExist:
-        messages.info(request, "No book found")
-        return redirect("catalog:listBook")
-
-    if not request.user == book.institution.admin:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            extra_tags="alert alert-danger",
-            message="You do not have permission to edit this book",
-        )
-        return redirect("catalog:single_book_info", slug=book.slug)
-
-    if request.method == "POST":
-        form = EditBookForm(request.POST, instance=book)
-
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.slug = slugify(book.title)
-            book.save()
-            title = form.cleaned_data["title"]
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                extra_tags="alert alert-success",
-                message=f"Book: \"{title}\" has been updated successfully",
-            )
-            return redirect("catalog:single_book_info", slug=book.slug)
-
-    form = EditBookForm(instance=book)
-    context = {
-        "form": form,
-        "book": book,
-        "page_title": "Edit Book",
-    }
-    return render(request, "catalog/editBook.html", context)
 
 
 def delete_book(request, pk):
@@ -205,30 +222,13 @@ def search(request):
         print(e)
         return render(request, 'search/general_search.html', {'error': str(e)})
 
+
 def advanced_search(request):
-    """
-    Perform an advanced search on the user's institution's catalog.
-
-    The search will query the title, subject, and author fields of the books in the
-    user's institution's catalog.
-
-    Args:
-        request (HttpRequest): The request object
-
-    Returns:
-        HttpResponse: The rendered page with the search results
-    """
     user = request.user
     search_term = request.GET.get("search")
     start_time = time.time()
 
-    try:
-        books = Book.objects.filter(institution=user.institution).order_by("id","title")
-    except:
-        if not user.is_superuser:
-            raise ValueError("Invalid institution") 
-        books = Book.objects.all()
-
+    books = get_catalog(user)
     if search_term:
         query = search_term.replace("'", "").replace('"', "")
         selected_filter = (

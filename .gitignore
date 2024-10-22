@@ -10,6 +10,8 @@ package.json
 *.so
 plugins/assets
 */migrations/
+*db.sqlite3
+db.sqlite3
 # Distribution / packaging
 .Python
 build/

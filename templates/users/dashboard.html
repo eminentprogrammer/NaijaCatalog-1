@@ -5,8 +5,6 @@
 {% block content %}
     <div class="container justify-content-center align-content-center align-items-center" 
         style="height:100%; overflow:hidden;">
-        
-        {% if request.user.is_librarian %}
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="logo_container me-auto text-center">
@@ -15,6 +13,5 @@
                 <h1 class="text-dark text-center mb-4">{{request.user.institution.name}}</h1>
             </div>
         </div>
-        {% endif %}
     </div>
 {% endblock %}

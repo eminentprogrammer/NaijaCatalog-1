@@ -7,19 +7,22 @@ from django.utils.text import slugify
 
 class Book(models.Model):
     title           = models.CharField(max_length=200, blank=True)
-    author          = models.CharField(max_length=200, blank=True)
-    edition         = models.CharField(max_length=200, blank=True)
-    subject         = models.CharField(max_length=200, blank=True)
+    author          = models.CharField(max_length=200, blank=True, null=True, default="Nil")
+    edition         = models.CharField(max_length=200, blank=True, null=True, default="Nil")
+    subject         = models.CharField(max_length=200, blank=True, null=True, default="Nil")
     
-    publisher       = models.CharField(max_length=200, blank=True)
-    isbn            = models.CharField(max_length=200, blank=True, verbose_name="ISBN")
-    call_no                 = models.CharField(max_length=200, blank=True, verbose_name="Call Number")
-    place_of_publication    = models.CharField(max_length=200, blank=True, verbose_name="Publisher Location")    
+    publisher       = models.CharField(max_length=200, blank=True, null=True)
+    isbn            = models.CharField(max_length=200, null=True, blank=True, verbose_name="ISBN", default="Nil")
 
-    year_published  = models.CharField(max_length=4, blank=True)
-    is_available    = models.BooleanField(default=True)
+    call_no                 = models.CharField(max_length=200, null=True, blank=True, verbose_name="Call Number", default="Nil")
+    place_of_publication    = models.CharField(max_length=200, blank=True, null=True, verbose_name="Publisher Location", default="Nil")   
+    # location              = models.CharField(max_length=200, blank=True)
+
+    year_published  = models.CharField(max_length=4, blank=True, null=True, default="Nil")
+    is_available    = models.BooleanField(default=True) #not needed
+
     edited          = models.BooleanField(default=False)
-    slug            = models.SlugField(blank=True, null=True, max_length=500)
+    slug            = models.SlugField(blank=True, null=True, max_length=500, default="Nil")
     
     institution     = models.ForeignKey(Institution, default=0,  on_delete=models.PROTECT, related_name="books")
     

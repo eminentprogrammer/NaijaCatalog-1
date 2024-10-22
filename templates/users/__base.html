@@ -181,9 +181,9 @@
         {% if request.user.is_librarian %}
           {% include 'users/institution/__sidebar.html' %}
         {% elif request.user.is_student %}
-          {% include 'users/student/__sidebar.html' %}
+          {% include 'students/__sidebar.html' %}
         {% else %}
-          {% include 'users/__dashboard/__sidebar.html' %}
+          {% include 'users/__admin/__sidebar.html' %}
         {% endif %}
 
         <!-- partial -->

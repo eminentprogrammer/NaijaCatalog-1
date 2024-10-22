@@ -16,14 +16,24 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <span class="icon-bg"><i class="mdi mdi-book menu-icon"></i></span>
+        <a class="nav-link" data-toggle="collapse" href="#ui-catalog" aria-expanded="false" aria-controls="ui-basic">
+          <span class="icon-bg"><i class="mdi mdi-notebook-multiple menu-icon"></i></span>
           <span class="menu-title">Catalog</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+
+        <div class="collapse" id="ui-catalog">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">View</a></li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'catalog:listBook' %}">
+                View
+              </a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{% url 'catalog:create_book' %}">
+                Upload
+              </a>
+          </li>
           </ul>
         </div>
       </li>

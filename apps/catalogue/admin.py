@@ -12,7 +12,7 @@ from import_export.admin import ExportActionMixin, ImportExportMixin
 @admin.register(Book)
 class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
-    list_filter    = ['institution','author']
+    list_filter    = ['institution']
     search_fields  = ['title', 'subject', 'author', 'slug']
 
     fieldsets = (
