@@ -31,7 +31,7 @@ class BookResource(resources.ModelResource):
     
     class Meta:
         model = Book
-        # skip_unchanged = True
+        # skip_unchanged = True 
         # report_skipped = True
         fields = ['id', 'title', 'author', 'isbn', 'call_no', 'subject', 'publisher', 'place_of_publication', 'year_published', 'institution']
-        exclude = ['is_available', 'edition', 'subject', 'edited', 'slug']
+        exclude = ['edition', 'subject', 'edited', 'slug']

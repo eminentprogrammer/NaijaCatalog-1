@@ -187,7 +187,7 @@ def single_book_info(request, slug):
         fields_dict = {}
         
         for field in book._meta.fields:
-            if field.name not in ['title','id', 'is_available', 'institution', 'slug'] and getattr(book, field.name) != None:
+            if field.name not in ['title','id', 'institution', 'slug'] and getattr(book, field.name) != None:
                 fields_dict[field.name] = getattr(book, field.name)
 
         context["fields_dict"] = fields_dict

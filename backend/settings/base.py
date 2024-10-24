@@ -6,7 +6,7 @@ import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -15,7 +15,7 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-DEBUG           = False
+DEBUG           = env("DEBUG")
 
 SECRET_KEY      = env("SECRET_KEY")
 
@@ -23,7 +23,6 @@ ALLOWED_HOSTS   = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
-    # "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,22 +96,6 @@ TEMPLATES = [
 AUTH_USER_MODEL  = 'accounts.Account'
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    } 
-else: 
-    DATABASES = {
-        'default': dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default=env("DB_URL"),
-            conn_max_age=600
-        )
-    }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
@@ -166,19 +149,6 @@ cloudinary.config(
     api_key    = env("CLOUDINARY_API_KEY"),
     api_secret = env("CLOUDINARY_API_SECRET"),
 )
-
-# GMAIL CONFIGURATIONS
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587  # For TLS
-EMAIL_USE_TLS       = True
-EMAIL_USE_SSL       = False  # Set to False for TLS
-EMAIL_HOST_USER     = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
-# ALLOWED HOST
-RENDER_EXTERNAL_HOSTNAME = env('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

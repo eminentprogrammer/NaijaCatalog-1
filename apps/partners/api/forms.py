@@ -1,7 +1,7 @@
 from django import forms
-from ..models import Student, Institution
+from apps.student.models import Student
+from ..models import Institution
 from apps.accounts.models import Account
-
 
 class StudentRegistration(forms.ModelForm):
     email = forms.EmailField(label="Email", widget=forms.EmailInput(attrs={'class':'form-control form-control-sm rounded-0'}))

@@ -12,7 +12,7 @@ from import_export.admin import ExportActionMixin, ImportExportMixin
 @admin.register(Book)
 class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display   = ["title", 'subject', 'author', 'isbn', 'edition','call_no', 'publisher', 'place_of_publication', 'institution']
-    list_filter    = ['institution']
+    list_filter    = ['institution', 'author']
     search_fields  = ['title', 'subject', 'author', 'slug']
 
     fieldsets = (
@@ -27,7 +27,7 @@ class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
             'fields': ('isbn', 'call_no',)
         }),
         ('Others', {
-            'fields': ('is_available', 'slug')
+            'fields': ('slug',)
         }),
 
     )
@@ -58,15 +58,7 @@ class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
     def mark_pending(self, request, queryset):
         updated_count = queryset.update(status='pending')
         self.message_user(request, f'{updated_count} books were marked as pending.')
-          
-    def mark_available(self, request, queryset):
-        updated_count = queryset.update(is_available=True)
-        self.message_user(request, f'{updated_count} books were set available')
-          
-    def mark_unavailable(self, request, queryset):
-        updated_count = queryset.update(is_available=False)
-        self.message_user(request, f'{updated_count} books were set unavailable')
-          
+                          
     def mark_augustineUniversity(self, request, queryset):
         updated_count = queryset.update(institution=Institution.objects.get(id=1).name)
         self.message_user(request, f'{updated_count} books were stored in Augustine University Library Catalog')
@@ -74,10 +66,8 @@ class CatalogAdmin(ImportExportMixin, admin.ModelAdmin):
     mark_pending.short_description = "Mark selected books as pending"
     generate_slug.short_description = "Generate Slugs for Selected Books"
     make_published.short_description = "Mark selected books as published"
-    mark_available.short_description = "Mark selected books as available"
-    mark_unavailable.short_description = "Mark selected books as unavailable"
     mark_augustineUniversity.short_description = "Mark selected books as Augustine University Materials"
-    actions = [make_published, generate_slug, mark_pending, mark_available, mark_unavailable, mark_augustineUniversity]
+    actions = [make_published, generate_slug, mark_pending, mark_augustineUniversity]
 
 
 @admin.register(ExcelUpLoad)

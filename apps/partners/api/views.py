@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from apps.partners.models import Institution
 from .forms import StudentRegistration
-from ..models import Student
+from apps.student.models import Student
 from django.contrib import messages
 from apps.accounts.models import Account
 
