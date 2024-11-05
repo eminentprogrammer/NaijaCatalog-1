@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/search-custom.min.css' %}">
+{% endblock %}
+
+{% block HERO %}
+    <div class="row py-5"></div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row alert shadow bg-success">
+        <form class="text-light" method="GET" action="/search/">
+            <h4 class="text-center fw-bold mb-4">Search Form</h4>
+            <ul class="my-2 d-flex flex-row justify-content-center gap-4 list-unstyled">
+                <li class="text-content">
+                    <input type="text" class="form-control rounded" name="title" placeholder="Title" {% if title %} value={{title}} {% endif %}>
+                </li>
+                <li class="text-content">
+                    <input type="text" class="form-control rounded" name="author" placeholder="Author" {% if author %} value={{author}} {% endif %}>
+                </li>
+                <li class="text-content">
+                    <input type="text" class="form-control rounded" name="institution" placeholder="Institution" {% if institution %} value={{institution}} {% endif %}>
+                </li>
+                <input type="submit" class="btn btn-light" value="Search">
+            </ul>
+        </form>
+    </div>
+</div>
+
+<div class="container my-5 text-dark">            
+    {% if response %}
+    <div class="list-group result-ul">
+        {% for data in response %}
+        <li class="card result-item p-4 shadow mb-3">
+            <a href="#{{data.get_absolute_url}}" class="nav-link">
+                <h5 class="result-title" style="font-size: 12px;">
+                    {{forloop.counter|safe}})
+                    {{ data.title|safe }} 
+                </h5>
+            </a>
+            
+            <p class="institution fw-bold m-0" style="font-size: 10px;">
+                <iconify-icon icon="mingcute:location-2-line"></iconify-icon>
+                {{ data.institution|safe }}
+            </p>
+            <p style="font-size: 10px;" class="p-0">
+                <iconify-icon icon="solar:user-bold-duotone"></iconify-icon> 
+                {{ data.author }}
+            </p>
+        </li>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="my-2">
+            <a class="btn btn-primary-c">Previous</a>
+            <a class="btn btn-primary-c">Next</a>
+        </div>
+    </div>    
+
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <p class="alert alert-info">No result found!!!</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}{% endblock %}

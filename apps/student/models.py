@@ -6,6 +6,7 @@ from apps.partners.models import Institution
 from uuid import uuid4
 
 class Student(models.Model):
+    
     institution = models.OneToOneField(Institution, on_delete=models.CASCADE, related_name='student')
     user        = models.OneToOneField("accounts.Account", on_delete=models.CASCADE, related_name='student')
     slug        = models.SlugField(blank=True, null=True)

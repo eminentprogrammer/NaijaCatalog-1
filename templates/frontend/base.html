@@ -52,41 +52,7 @@
           {% include "components/navbar.html" %}
         </nav>
         <!-- NAV END CONTAINER -->
-         
-        {% block HERO %}
-        <!-- HERO CONTAINER -->
-        <div class="hero-container">
-          <div class="image-container">
-            <span>
-              <h4 class="animate__animated animate__bounce heading-text">
-                NAIJA CATALOG
-              </h4>
-              <p class="hero-des">
-                Top Library Catalogue in Nigeria, providing Nigerians access to
-                Collections in Libraries across the country.
-                <img class="img-fluid d-none"
-                  src="{% static 'images/naijacatalog.png' %}"
-                  alt="Naija Catalog"
-                  srcset="{% static 'images/naijacatalog.png' %}"
-                />
-              </p>
-              {% if not request.user.is_authenticated %}
-              <div class="hero-auth justify-content-around">
-                <a class="btn sign-in-btn" href="{% url 'signup' %}">
-                  <i class="fa fa-users"></i>
-                  Student
-                </a>
-                <a class="btn sign-in-btn" href="{% url 'institution_registration' %}">
-                  <i class="fas fa-institution" style="padding-top: 5px"></i>
-                  University
-                </a>
-              </div>
-              {% endif %}
-            </span>
-          </div>
-        </div>
-        <!-- HERO END CONTAINER -->
-        {% endblock %} {% if messages %} {% include "components/message.html" %}{% endif %}
+        {% if messages %} {% include "components/message.html" %}{% endif %}
       </header>
 
       <main class="main">{% block content %}{% endblock %}</main>

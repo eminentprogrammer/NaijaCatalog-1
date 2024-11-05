@@ -1,7 +1,4 @@
 import time
-import requests
-import gscholar
-
 from ..models import Book
 from django.views import View
 from django.contrib import messages
@@ -247,7 +244,3 @@ def advanced_search(request):
         "elapsed_time": time.time() - start_time,
     }
     return render(request, "catalog/listBook.html", context)
-
-
-def google_scholar_search(request):
-    return render(request, 'search/google_scholar_search.html')

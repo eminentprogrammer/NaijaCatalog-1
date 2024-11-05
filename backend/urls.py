@@ -21,6 +21,7 @@ handler500 = views.handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', include('frontend.urls')),
     path('user/', include('apps.accounts.api.urls')),
     path('student/', include("apps.student.api.urls")),
